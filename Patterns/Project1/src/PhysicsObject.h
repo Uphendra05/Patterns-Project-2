@@ -2,7 +2,7 @@
 #include "model.h"
 #include "PhysicsCollisionTypes.h"
 #include <functional>
-#include "BvhTree.h"
+
 
 enum PhysicsType
 {
@@ -57,7 +57,7 @@ public:
 
 	cAABB aabb;
 	cSphere sphereShape;
-	BvhTree* BvhAABBTree;
+
 	bool isBvhActive = true;
 
 	cAABB CalculateModelAABB();

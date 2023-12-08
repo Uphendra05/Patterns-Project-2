@@ -8,6 +8,8 @@ ApplicationRenderer::ApplicationRenderer()
 
 ApplicationRenderer::~ApplicationRenderer()
 {
+
+    //delete m_luaRequisites;
 }
 
 
@@ -151,6 +153,8 @@ std::vector<ModelData> ApplicationRenderer::loadModelDataFromFile(const std::str
 
 void ApplicationRenderer::Start()
 {
+   // m_luaRequisites->Start();
+
    // GLCALL(glEnable(GL_DEPTH_TEST));
     GLCALL(glDepthFunc(GL_LESS));
     GLCALL(glEnable(GL_STENCIL_TEST));
@@ -159,7 +163,6 @@ void ApplicationRenderer::Start()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    brain.LuaTestInit();
     skybox = new Skybox(); 
     
     skybox->AssignSkyboxShader(SkyboxShader);
@@ -170,14 +173,13 @@ void ApplicationRenderer::Start()
 
     Model* Sphere = new Model((char*)"Models/DefaultSphere/Sphere_1_unit_Radius.ply", true);
 
+   // Sphere->transform.position = brain.m_transform->position;
 
     //render.AddModelsAndShader(CamPlaceholder, defaultShader);
      defaultBox = new Model("Models/Box/DefaultCube.fbx");
 
 
-     Sphere->transform.position.x += 2;
 
-    
 
 
      Model* directionLightModel = new Model(*Sphere);
@@ -211,8 +213,26 @@ void ApplicationRenderer::Start()
 
   //   //////////////////////////////////////////////////////////
   //   //////SPACE SHIP ENTITY
-  //   spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
-  //   spaceshipEntity->LoadModel();
+      spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
+      spaceshipEntity->LoadModel();
+
+
+      Model* waypointOne = new Model(*Sphere);
+      waypointOne->transform.position = spaceshipEntity->waypoints[0].position;
+      render.AddModelsAndShader(waypointOne, defaultShader);
+
+      Model* waypointTwo = new Model(*Sphere);
+      waypointTwo->transform.position = spaceshipEntity->waypoints[1].position;
+      render.AddModelsAndShader(waypointTwo, defaultShader);
+
+
+      Model* waypointThree = new Model(*Sphere);
+      waypointThree->transform.position = spaceshipEntity->waypoints[2].position;
+      render.AddModelsAndShader(waypointThree, defaultShader);
+
+      Model* waypointFour = new Model(*Sphere);
+      waypointFour->transform.position = spaceshipEntity->waypoints[3].position;
+      render.AddModelsAndShader(waypointFour, defaultShader);
 
 
 #pragma region Lights
@@ -250,7 +270,7 @@ directionLight.intensity = 0.5f;
      defaultShader->setInt("skybox", 0);
 
      moveCam.AssignCam(&camera);
-
+     camera.Position = glm::vec3(0, 0, -75);
     
 }
 
@@ -329,11 +349,11 @@ void ApplicationRenderer::Render()
          render.Draw();
        
 
-         if (cameraMoveToTarget)
+        /* if (cameraMoveToTarget)
          {
              camera.UpdateCameraPosition(deltaTime);
 
-         }
+         }*/
        
     
         
@@ -353,8 +373,9 @@ void ApplicationRenderer::PostRender()
    // glDisable(GL_BLEND);
 
     PhysicsEngine.Update(deltaTime);
+   // m_luaRequisites->Update(deltaTime);
 
-    //spaceshipEntity->Update(deltaTime);
+    spaceshipEntity->Update(deltaTime);
  
     //DrawDebugModelAABB(spaceshipEntity->SpaceShipPhysics->UpdateAABB());
 }
@@ -370,24 +391,24 @@ void ApplicationRenderer::ProcessInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    float cameraSpeed=2;
+    float cameraSpeed= 20;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
-       // camera.ProcessKeyboard(FORWARD, deltaTime * cameraSpeed);
+        camera.ProcessKeyboard(FORWARD, deltaTime * cameraSpeed);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
     {
-     //   camera.ProcessKeyboard(BACKWARD, deltaTime * cameraSpeed);
+        camera.ProcessKeyboard(BACKWARD, deltaTime * cameraSpeed);
     }
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
     {
-      //  camera.ProcessKeyboard(LEFT, deltaTime * cameraSpeed);
+        camera.ProcessKeyboard(LEFT, deltaTime * cameraSpeed);
 
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     {
-      //  camera.ProcessKeyboard(RIGHT, deltaTime * cameraSpeed);
+        camera.ProcessKeyboard(RIGHT, deltaTime * cameraSpeed);
 
     }
 
@@ -418,25 +439,25 @@ void ApplicationRenderer::DrawDebugModelAABB( const cAABB& aabb)
 
 void ApplicationRenderer::DrawDebugBvhNodeAABB(BvhNode* node)
 {
-    if (node ==nullptr)
-    {
-        return;
-    }
-    //if (node->nodeIndex == recusiveCount)
+    //if (node ==nullptr)
     //{
-    //    DrawDebugModelAABB(node->GetModelAABB());
-    //   return;
+    //    return;
+    //}
+    ////if (node->nodeIndex == recusiveCount)
+    ////{
+    ////    DrawDebugModelAABB(node->GetModelAABB());
+    ////   return;
+    ////}
+
+    //if (node->trianglesIndex.size() != 0)
+    //{
+    //    DrawDebugModelAABB(node->UpdateAABB());
     //}
 
-    if (node->trianglesIndex.size() != 0)
-    {
-        DrawDebugModelAABB(node->UpdateAABB());
-    }
+    //if (node->leftChild == nullptr) return;
 
-    if (node->leftChild == nullptr) return;
-
-    DrawDebugBvhNodeAABB(node->leftChild);
-    DrawDebugBvhNodeAABB(node->rightChild);
+    //DrawDebugBvhNodeAABB(node->leftChild);
+    //DrawDebugBvhNodeAABB(node->rightChild);
 
 
 }

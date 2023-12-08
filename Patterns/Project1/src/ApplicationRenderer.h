@@ -17,7 +17,7 @@
 #include "GraphicsRender.h"
 #include "CameraMovement.h"
 #include "SpaceShip.h"
-#include "LuaBrain.h"
+#include "LuaRequisites.h"
 
 struct ModelData
 {
@@ -78,7 +78,7 @@ private:
 
 	Skybox* skybox;
 
-	LuaBrain brain;
+	//LuaRequisites* m_luaRequisites = new LuaRequisites();
 
 	Model* defaultBox;
 	Model* CityModel;
@@ -89,7 +89,7 @@ private:
 	PhysicsObject* cityPhysics;
 
 
-	//SpaceShip* spaceshipEntity;
+	SpaceShip* spaceshipEntity;
 
 	 int windowWidth;
 	 int  WindowHeight;

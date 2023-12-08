@@ -1,25 +1,25 @@
 #include "PhysicsCollisionTypes.h"
-#include "BvhNode.h"
 
 
-void CollisionAABBvsHAABB(const cAABB& sphereAabb, BvhNode* rootNode, std::set<int>& triangleIndices)
-{
-	if (CheckCOllisionAABBvsAABB(sphereAabb, rootNode->UpdateAABB()))
-	{
-		if (rootNode->trianglesIndex.empty())
-		{
-			if (rootNode->leftChild != nullptr)
-			{
-				CollisionAABBvsHAABB(sphereAabb, rootNode->leftChild, triangleIndices);
-				CollisionAABBvsHAABB(sphereAabb, rootNode->rightChild, triangleIndices);
-			}
-		}
-		else
-		{
-			triangleIndices.insert(rootNode->trianglesIndex.begin(), rootNode->trianglesIndex.end());
-		}
-	}
-}
+
+//void CollisionAABBvsHAABB(const cAABB& sphereAabb, BvhNode* rootNode, std::set<int>& triangleIndices)
+//{
+//	if (CheckCOllisionAABBvsAABB(sphereAabb, rootNode->UpdateAABB()))
+//	{
+//		if (rootNode->trianglesIndex.empty())
+//		{
+//			if (rootNode->leftChild != nullptr)
+//			{
+//				CollisionAABBvsHAABB(sphereAabb, rootNode->leftChild, triangleIndices);
+//				CollisionAABBvsHAABB(sphereAabb, rootNode->rightChild, triangleIndices);
+//			}
+//		}
+//		else
+//		{
+//			triangleIndices.insert(rootNode->trianglesIndex.begin(), rootNode->trianglesIndex.end());
+//		}
+//	}
+//}
 
 
 bool CollisionSphereVsMeshOfTriangles(const cAABB& sphereAabb, cSphere* sphere, BvhNode* rootNode,
@@ -32,7 +32,7 @@ bool CollisionSphereVsMeshOfTriangles(const cAABB& sphereAabb, cSphere* sphere, 
 
 	std::set<int> triangleIndices;
 
-	CollisionAABBvsHAABB(sphereAabb, rootNode, triangleIndices);
+	//CollisionAABBvsHAABB(sphereAabb, rootNode, triangleIndices);
 
 	if (triangleIndices.empty()) return false;
 
@@ -70,7 +70,7 @@ bool CollisionAABBVsMeshOfTriangles(const cAABB& aabb, BvhNode* rootNode, const 
 
 	std::set<int> triangleIndices;
 
-	CollisionAABBvsHAABB(aabb, rootNode, triangleIndices);
+	//CollisionAABBvsHAABB(aabb, rootNode, triangleIndices);
 
 	if (triangleIndices.empty()) return false;
 

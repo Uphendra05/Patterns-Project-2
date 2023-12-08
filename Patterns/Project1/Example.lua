@@ -7,24 +7,13 @@ function MoveTo(a , b, c)
 
   print("Inside moveto ("..a..","..b.." ,"..c..") Function call")
 
-    MoveTransform(a ,b ,c )
+    local temp1 , temp2 , temp3  = MoveTransform(a ,b ,c )
+    temp1 = a + 100
+    temp2 = b + 10
+    temp3 = c + 10
 
-  return  a, b, c ;
+  return  temp1 , temp2 , temp3
 
 end
 
-function RotateTo(physicObj, rotation, easein, easeout)
 
-  print("Inside RotateTo Function call")
-    easein = easein or 0.2
-    easeout = easeout or 0.1
-    
-
-    return {
-        physicObj = physicObj,
-        rotation = rotation,
-        easein = easein,
-        easeout = easeout,
-      
-    }
-end
