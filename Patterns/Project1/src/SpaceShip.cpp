@@ -1,4 +1,6 @@
 #include"SpaceShip.h"
+#include <algorithm>
+
 
 SpaceShip::SpaceShip(GraphicsRender& render, Shader* shader, PhysicsEngine& engine, Camera& camera)
 {
@@ -8,6 +10,8 @@ SpaceShip::SpaceShip(GraphicsRender& render, Shader* shader, PhysicsEngine& engi
 	this->camera = &camera;
 	model = new Model("Models/Spaceship/Spaceship.obj");
 	this->startPos = model->transform.position;
+
+	
 }
 
 SpaceShip::SpaceShip()
@@ -38,6 +42,15 @@ void SpaceShip:: LoadModel()
 
 	engine->AddPhysicsObjects(SpaceShipPhysics);
 
+	this->m_startPos = model->transform.position;
+
+	easeInRatio = easeInTime / time;
+	easeOutRatio = easeOutTime / time;
+
+	easeOutStart = 1 - easeOutRatio;
+
+	timeStep = 0;
+
 
 	
 	//this->startRot = model->transform.rotation;
@@ -47,8 +60,8 @@ void SpaceShip::Update(float deltaTime)
 {
 
 	SpaceShipPhysics->velocity = Direction * speed;
-	//CalculateNextWaypoint(deltaTime);
-	CalculateBezierCurve(deltaTime);
+	CalculateNextWaypoint(deltaTime);
+	//CalculateBezierCurve(deltaTime);
 	//camera->Position = model->transform.position -  cameraOffset;
 }
 
@@ -96,8 +109,7 @@ void SpaceShip::SpaceShipInputs(GLFWwindow* window, float deltaTime)
 void SpaceShip::MoveSpaceShip(const glm::vec3& targetPosition, const glm::vec3& targetRotation, float deltaTime)
 {
 
-	model->transform.position = LerpWithSpeed(model->transform.position, targetPosition, movementSpeed , deltaTime);
-	model->transform.rotation = LerpObject(model->transform.rotation, targetRotation, movementSpeed * deltaTime);
+	model->transform.position = LerpObject(model->transform.position, targetPosition, movementSpeed * deltaTime);
 }
 
 void SpaceShip::CalculateBezierCurve(float deltaTime)
@@ -110,7 +122,7 @@ void SpaceShip::CalculateBezierCurve(float deltaTime)
 		const Waypoint& p3 = waypoints[waypointIndex + 3];
 
 		float t = elapsedTime / 15.0f;
-		glm::vec3 curvePosition = cubicBezier(t, p0.position, p1.position, p2.position, p3.position);
+		glm::vec3 curvePosition = CalculateCubicBezier(t, p0.position, p1.position, p2.position, p3.position);
 
 		
 		MoveSpaceShip(curvePosition, model->transform.rotation, deltaTime);
@@ -137,14 +149,45 @@ void SpaceShip::CalculateBezierCurve(float deltaTime)
 
 }
 
+
+
+
 void SpaceShip::CalculateNextWaypoint(float deltaTime)
 {
 	if (waypointIndex < waypoints.size())
 	{
 		const Waypoint& CurWaypoint = waypoints[waypointIndex];
 		
-		MoveSpaceShip(CurWaypoint.position, model->transform.rotation, deltaTime);
+		timeStep += deltaTime / time;
 
+		if (time == 0)
+		{
+			lerpValue = 1;
+			timeStep = 1;
+		}
+		else if (easeInTime != 0 && timeStep <= easeInRatio)
+		{
+			lerpValue = EaseIn(timeStep / easeInRatio);
+			lerpValue *= easeInRatio;
+		}
+		else if (easeOutTime != 0 && timeStep >= easeOutStart)
+		{
+			lerpValue = EaseOut((timeStep - easeOutStart) / easeOutRatio);
+			lerpValue *= easeOutRatio;
+			lerpValue += easeOutStart;
+		}
+		else
+		{
+			lerpValue = timeStep;
+		}
+	
+
+
+		model->transform.SetPosition(LerpObject(m_startPos, waypoints[2].position, lerpValue));
+
+
+		//MoveSpaceShip(CurWaypoint.position, model->transform.rotation, deltaTime);
+		 
 		glm::vec3 currentPosition = model->transform.position;
 		if (glm::distance(currentPosition, CurWaypoint.position) < 1.5f) 
 		{
@@ -163,10 +206,60 @@ void SpaceShip::CalculateNextWaypoint(float deltaTime)
 
 glm::vec3 SpaceShip::LerpObject(const glm::vec3& a, const glm::vec3& b, float t)
 {
-	 return a + (b - a) * t;
+	t = glm::clamp(t, 0.0f, 1.0f);
+
+	return a + t * (b - a);
 }
 
-glm::vec3 SpaceShip::cubicBezier(float t, glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec3 p3)
+glm::vec3 SpaceShip::LerpWithTime(float currentTime, const glm::vec3& startValue, const glm::vec3& endValue, float totalDuration)
+{
+	
+		// Ensure currentTime is within the valid range [0, totalDuration]
+		currentTime = std::clamp(currentTime, 0.0f, totalDuration);
+
+		// Normalize currentTime to the range [0, 1]
+		float t = currentTime / totalDuration;
+
+		// Perform linear interpolation
+		glm::vec3 lerpedValue = startValue + (endValue - startValue) * t;
+
+		return lerpedValue;
+	
+}
+
+float SpaceShip::EaseIn(float time)
+{
+	if (time < 0.0f)
+	{
+		time = 0;
+	}
+	else if (time > 1.0f)
+	{
+		time = 1.0f;
+	}
+
+	return 1 - std::cos((time * 3.14) / 2);
+		
+}
+
+float SpaceShip::EaseOut(float time)
+{
+	if (time < 0.0f)
+	{
+		time = 0;
+	}
+	else if (time > 1.0f)
+	{
+		time = 1.0f;
+	}
+
+	
+    return std::sin((time * 3.14) / 2);
+}
+
+
+
+glm::vec3 SpaceShip::CalculateCubicBezier(float t, glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec3 p3)
 {
 	glm::vec3 result;
 	float u = 1 - t;

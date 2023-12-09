@@ -2,6 +2,8 @@
 #include"PhysicsEngine.h"
 #include "GraphicsRender.h"
 
+#include "../../Commands/MoveTo.h"
+
 struct Waypoint {
 	glm::vec3 position;
 	glm::vec3 rotation;
@@ -17,6 +19,7 @@ public:
 
 	Model* model;
 	PhysicsObject* SpaceShipPhysics;
+	
 
 	std::vector<Waypoint> waypoints = {
 	{glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -90.0f, 0.0f)},  // Waypoint 0
@@ -41,17 +44,33 @@ public:
 	glm::vec3 startPos;
 	glm::vec3 startRot;
 
-	glm::vec3 LerpObject(const glm::vec3& a , const glm::vec3& b, float t);
-
-	template <typename T>
-	T LerpWithSpeed(const T& current, const T& target, float speed, float deltaTime) 
-	{
-		float t = glm::min(speed * deltaTime, 1.0f);
-		return LerpObject(current, target, t);
-	}
-
-	glm::vec3 cubicBezier(float t, glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec3 p3);
+	glm::vec3 LerpObject(const glm::vec3& a, const glm::vec3& b, float t);
+	glm::vec3 LerpWithTime(float currentTime, const glm::vec3& startValue, const glm::vec3& endValue, float totalDuration);
 	
+	static float EaseIn(float time);
+	static float EaseOut(float time);
+
+
+	glm::vec3 CalculateCubicBezier(float t, glm::vec3 p0, glm::vec3 p1, glm::vec3 p2, glm::vec3 p3);
+
+
+
+
+
+
+	float easeInTime = 0.0f;
+	float easeOutTime = 5.0f;
+
+	float easeInRatio = 0;
+	float easeOutRatio = 0;
+
+	float easeInStart = 0;
+	float easeOutStart = 0;
+
+	float time = 15;
+	float timeStep = 0;
+	float lerpValue = 0;
+	glm::vec3 m_startPos;
 
 private:
 	GraphicsRender* render;
