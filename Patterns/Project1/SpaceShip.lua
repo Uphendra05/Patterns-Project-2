@@ -2,14 +2,19 @@
 
 
 
-BeginCommand(1)  
+BeginCommand("SERIAL",1)  -- First param as string ->(SERIAL or PARALLEL) |  second param ->  A unique group ID required
 MoveTo(0,1,3)
 MoveTo(0,2,3)
 MoveTo(0,3,3)
 MoveTo(0,4,3)
 Endcommand(1)
 
-
+BeginCommand("PARALLEL",2)  -- First param as string ->(SERIAL or PARALLEL) |  second param ->  A unique group ID required
+MoveTo(7,1,3)
+MoveTo(6,7,3)
+MoveTo(8,3,3)
+MoveTo(4,4,3)
+Endcommand(2) -- Always need to end with the Group ID specified in BeginCommand
 
 
 

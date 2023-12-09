@@ -21,9 +21,9 @@ CommandManager& CommandManager::GetInstance()
 
 
 
-void CommandManager::AddCommands(bool isSerialType, Command* command)
+void CommandManager::AddCommands( Command* command)
 {
-	if (isSerialType)
+	if (currentCommandGroup->groupType == SERIES)
 	{
 		currentCommandGroup->AddSerialCommand(command);
 	}

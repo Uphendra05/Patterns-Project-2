@@ -67,41 +67,41 @@ bool LuaManager::CheckLua(lua_State* L, int r)
 }
 
 
-int LuaManager::LuaMoveToWrapper(lua_State* L)
-{
-	int paramLength = lua_gettop(L);
 
-	std::cout << "Length : " << paramLength << std::endl;
-
-
-	float x = static_cast<float>(lua_tonumber(L, 1));
-	float y = static_cast<float>(lua_tonumber(L, 2));
-	float z = static_cast<float>(lua_tonumber(L, 3));
-
-	std::cout << "x : " << x
-		<< " y: " << y
-		<< " z: " << z << std::endl;
-	// Need to send a command 
-	// Command* newCmd = new MoveTo(model);
-	// CommandManager.Add(newCmd);
-	glm::vec3 target(x, y, z);
-	Command* command = new MoveTo(GetInstance().model, target);
-	CommandManager::GetInstance().AddCommands(true, command); // sending Serial command as of now
-
-	return 0;
-}
 
 int LuaManager::LuaBeginCommand(lua_State* L)
 {
 	int paramLength = lua_gettop(L);
-	int goupdId = lua_tonumber(L, 1);
-	//int groupType = lua_tonumber(L, 2);    // TO DO:
+
+	if (paramLength == 2)
+	{
+		std::string groupTypeStr = lua_tostring(L, 1); // Serial or Parallel
+		int goupdId = lua_tonumber(L, 2); // Group ID
+		int groupType = 0;
 
 
-	std::cout << "BeginCommandGroup id: " << goupdId << std::endl;
-	CommandManager::GetInstance().BeginCommandGroup(SERIES, goupdId);
+		if (groupTypeStr == "SERIAL")
+		{
+			groupType = 0;
+		}
+		else if (groupTypeStr == "PARALLEL")
+		{
+			groupType = 1;
+		}
+		std::cout << "BeginCommandGroup id: " << goupdId << std::endl;
+		std::cout << "BeginCommandGroup Type: " << groupTypeStr << std::endl;
 
+		CommandManager::GetInstance().BeginCommandGroup((CommandGroupType)groupType, goupdId);
+	}
+	else if(paramLength == 1)
+	{
+		int goupdId = lua_tonumber(L, 1); // Group ID
 
+		std::cout << "BeginCommandGroup id: " << goupdId << std::endl;
+		std::cout << "BeginCommandGroup Type: " << "SERIAL" << std::endl;
+
+		CommandManager::GetInstance().BeginCommandGroup(SERIES, goupdId);
+	}
 
 	return 0;
 }
@@ -113,6 +113,25 @@ int LuaManager::LuaEndCommand(lua_State* L)
 
 	std::cout << "EndCommandGroup id: " << goupdId << std::endl;
 	CommandManager::GetInstance().EndCommandGroup(goupdId);
+
+	return 0;
+}
+
+
+int LuaManager::LuaMoveToWrapper(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	float x = static_cast<float>(lua_tonumber(L, 1));
+	float y = static_cast<float>(lua_tonumber(L, 2));
+	float z = static_cast<float>(lua_tonumber(L, 3));
+
+	std::cout << "x : " << x << " y: " << y << " z: " << z << std::endl;
+
+	glm::vec3 target(x, y, z);
+	Command* command = new MoveTo(GetInstance().model, target);
+
+	CommandManager::GetInstance().AddCommands(command); // sending Serial command as of now
 
 	return 0;
 }
