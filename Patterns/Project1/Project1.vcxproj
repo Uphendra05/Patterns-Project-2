@@ -143,6 +143,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependencies\glad\src\glad.c" />
+    <ClCompile Include="src\Command.cpp" />
+    <ClCompile Include="src\MoveTo.cpp" />
+    <ClCompile Include="src\CommandManager.cpp" />
+    <ClCompile Include="src\CommandGroup.cpp" />
+    <ClCompile Include="src\LuaManager.cpp" />
+    <ClCompile Include="src\LuaHandler.cpp" />
     <ClCompile Include="src\LuaBrain.cpp" />
     <ClCompile Include="src\SpaceShip.cpp" />
     <ClCompile Include="src\PhysicsCollisionTypes.cpp" />
@@ -181,6 +187,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="src\LuaManager.h" />
+    <ClInclude Include="src\MoveTo.h" />
+    <ClInclude Include="src\Command.h" />
+    <ClInclude Include="src\CommandManager.h" />
+    <ClInclude Include="src\CommandGroup.h" />
+    <ClInclude Include="src\iCommand.h" />
+    <ClInclude Include="src\LuaHandler.h" />
     <ClInclude Include="src\LuaBrain.h" />
     <ClInclude Include="src\SpaceShip.h" />
     <ClInclude Include="src\BvhTree.h" />
@@ -222,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Example.lua" />
+    <None Include="SpaceShip.lua" />
     <None Include="Shaders\color.frag" />
     <None Include="Shaders\color.vert" />
     <None Include="Shaders\lighting.frag" />

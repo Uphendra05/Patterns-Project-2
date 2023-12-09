@@ -1,6 +1,8 @@
 #pragma once
 #include"PhysicsEngine.h"
 #include "GraphicsRender.h"
+#include "LuaManager.h"
+#include "LuaHandler.h"
 
 class SpaceShip
 {
@@ -18,6 +20,8 @@ public:
 	void Update(float deltaTime);
 	void UpdateCamera();
 	void SpaceShipInputs(GLFWwindow* window, float deltaTime);
+
+	LuaHandler* m_LuaHandler;
 
 private:
 	GraphicsRender* render;

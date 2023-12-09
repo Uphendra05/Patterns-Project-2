@@ -6,6 +6,10 @@ SpaceShip::SpaceShip(GraphicsRender& render, Shader* shader, PhysicsEngine& engi
 	this->defaultshader = shader;
 	this->engine = &engine;
 	this->camera = &camera;
+
+	this->m_LuaHandler = new LuaHandler("SpaceShip.lua");
+	m_LuaHandler->RegisterFunctionInScript(m_LuaHandler->GetScript());
+
 }
 
 SpaceShip::SpaceShip()
@@ -18,7 +22,7 @@ SpaceShip::~SpaceShip()
 
 void SpaceShip:: LoadModel()
 {
-	model = new Model("Models/Spaceship/Spaceship.obj");
+	model = new Model("Models/Spaceship/Ship2.obj");
 	model->id = "SpaceShip";
 	model->transform.SetPosition(glm::vec3(0, 0, 2));
 	render->AddModelsAndShader(model, defaultshader);
@@ -37,7 +41,7 @@ void SpaceShip:: LoadModel()
 	engine->AddPhysicsObjects(SpaceShipPhysics);
 
 
-
+	m_LuaHandler->ExecuteScirpt(m_LuaHandler->GetScript(), model);  // Executing Lua 
 }
 
 void SpaceShip::Update(float deltaTime)

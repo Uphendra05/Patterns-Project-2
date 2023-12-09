@@ -22,6 +22,18 @@
     <Filter Include="SpaceShip">
       <UniqueIdentifier>{2fc45378-e64d-4b0e-9815-745775789b9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lua">
+      <UniqueIdentifier>{23033d8c-4189-49bb-8c53-3444c18d920e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{1a70f3d1-a44d-4e48-aadf-3486808ea55b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lua\Lua Scripts">
+      <UniqueIdentifier>{12a3b8f7-d4dd-40a9-9e08-f3f544300270}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{b27b67c5-4b35-4b60-b925-e3f2849cb149}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependencies\glad\src\glad.c">
@@ -131,6 +143,24 @@
     </ClCompile>
     <ClCompile Include="src\LuaBrain.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaHandler.cpp">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaManager.cpp">
+      <Filter>Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CommandGroup.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CommandManager.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MoveTo.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Command.cpp">
+      <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -251,24 +281,80 @@
     <ClInclude Include="src\LuaBrain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\LuaHandler.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\iCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CommandGroup.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CommandManager.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Command.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MoveTo.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaManager.h">
+      <Filter>Lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Source.frag" />
-    <None Include="Shaders\lighting.vert" />
-    <None Include="Shaders\lighting.frag" />
-    <None Include="Shaders\Light_FragmentShader.frag" />
-    <None Include="Shaders\Light_VertexShader.vert" />
-    <None Include="Shaders\Shader.frag" />
-    <None Include="Shaders\Shader.vert" />
-    <None Include="Shaders\color.vert" />
-    <None Include="Shaders\color.frag" />
-    <None Include="Shaders\StencilOutline.vert" />
-    <None Include="Shaders\StencilOutline.frag" />
-    <None Include="Shaders\ScrollTexture.vert" />
-    <None Include="Shaders\ScrollTexture.frag" />
-    <None Include="Shaders\SkyboxShader.vert" />
-    <None Include="Shaders\SkyboxShader.frag" />
-    <None Include="Shaders\Light_FragmentShader2.frag" />
     <None Include="Example.lua" />
+    <None Include="SpaceShip.lua">
+      <Filter>Lua\Lua Scripts</Filter>
+    </None>
+    <None Include="Shaders\Light_FragmentShader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Light_FragmentShader2.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Light_VertexShader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\lighting.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\lighting.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ScrollTexture.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\ScrollTexture.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\Shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\SkyboxShader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\SkyboxShader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Source.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\StencilOutline.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\StencilOutline.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\color.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\color.frag">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

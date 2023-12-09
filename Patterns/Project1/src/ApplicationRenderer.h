@@ -89,7 +89,7 @@ private:
 	PhysicsObject* cityPhysics;
 
 
-	//SpaceShip* spaceshipEntity;
+	SpaceShip* spaceshipEntity;
 
 	 int windowWidth;
 	 int  WindowHeight;

@@ -159,7 +159,7 @@ void ApplicationRenderer::Start()
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    brain.LuaTestInit();
+   // brain.LuaTestInit();
     skybox = new Skybox(); 
     
     skybox->AssignSkyboxShader(SkyboxShader);
@@ -211,8 +211,8 @@ void ApplicationRenderer::Start()
 
   //   //////////////////////////////////////////////////////////
   //   //////SPACE SHIP ENTITY
-  //   spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
-  //   spaceshipEntity->LoadModel();
+     spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
+     spaceshipEntity->LoadModel();
 
 
 #pragma region Lights
