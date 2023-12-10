@@ -7,6 +7,7 @@ MoveTo(0,5,0)
 MoveTo(0,7,0)
 MoveTo(0,11,0)
 MoveTo(0,2,0)
+MoveTo(0,0,0)
 Endcommand(1)
 
 --BeginCommand("PARALLEL",2)  -- First param as string ->(SERIAL or PARALLEL) |  second param ->  A unique group ID required

@@ -16,10 +16,11 @@
 #include "LoadModelsExternal.h"
 #include "GraphicsRender.h"
 #include "CameraMovement.h"
-#include "SpaceShip.h"
 #include "LuaBrain.h"
 
 #include "CommandManager.h"
+#include "SpaceShip.h"
+#include "Ball.h"
 struct ModelData
 {
 
@@ -91,6 +92,7 @@ private:
 
 
 	SpaceShip* spaceshipEntity;
+	Ball* m_Ball;
 
 	 int windowWidth;
 	 int  WindowHeight;

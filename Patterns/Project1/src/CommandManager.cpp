@@ -56,21 +56,23 @@ void CommandManager::Start()
 	{
 		for (size_t i = 0; i < commandGroupList.size(); i++)
 		{
-			(*commandGroupList.begin())->Start();  // Start for firstSerial command and All the parallel commands list.
+			commandGroupList[i]->Start();  // Start for firstSerial command and All the parallel commands list.
 		}
-	}
-	
+	}	
 }
 
 void CommandManager::Update(float deltatime)
 {
 	if (!commandGroupList.empty())
 	{
-		(*commandGroupList.begin())->Update(deltatime);
-
-		if ((*commandGroupList.begin())->isDone())
+		for (size_t i = 0; i < commandGroupList.size(); i++)
 		{
-			commandGroupList.erase(commandGroupList.begin());
+			commandGroupList[i]->Update(deltatime);
+
+			if (commandGroupList[i]->isDone())
+			{
+				 // Remove commandGroup from list after done
+			}
 		}
 	}
 }

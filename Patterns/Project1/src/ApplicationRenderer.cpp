@@ -211,8 +211,14 @@ void ApplicationRenderer::Start()
 
   //   //////////////////////////////////////////////////////////
   //   //////SPACE SHIP ENTITY
+
+     this->m_Ball = new Ball(render, defaultShader, PhysicsEngine);
+     m_Ball->LoadModel();
+
      spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
      spaceshipEntity->LoadModel();
+
+
 
 
 #pragma region Lights

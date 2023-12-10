@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependencies\glad\src\glad.c" />
+    <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\Command.cpp" />
     <ClCompile Include="src\MoveTo.cpp" />
     <ClCompile Include="src\CommandManager.cpp" />
@@ -187,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\LuaManager.h" />
     <ClInclude Include="src\MoveTo.h" />
     <ClInclude Include="src\Command.h" />
@@ -252,6 +254,7 @@
     <None Include="Source.frag" />
     <None Include="Shaders\Light_FragmentShader.frag" />
     <None Include="Shaders\Light_VertexShader.vert" />
+    <None Include="Sphere.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

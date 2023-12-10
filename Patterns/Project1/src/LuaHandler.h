@@ -16,8 +16,8 @@ public:
 	~LuaHandler();
 
 	void SetScript(const std::string& LuaScript);
-	void RegisterFunctionInScript(const std::string& commandName);
-	void ExecuteScirpt(const std::string& script,  Model*& model );
+	void RegisterFunctionInScript();
+	void ExecuteScirpt(Model*& model);
 
 	lua_State* GetLuaState() const;
 

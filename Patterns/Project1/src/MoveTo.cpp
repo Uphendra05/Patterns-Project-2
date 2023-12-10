@@ -42,7 +42,7 @@ void MoveTo::Update(float deltaTime)
         float distance = glm::distance(GetModelPosition(), endPosition);
 
 
-        const float epsilon = 0.5f;
+        const float epsilon = 0.1f;
         if (distance < epsilon)
         {
             isAnimationCompleted = true;

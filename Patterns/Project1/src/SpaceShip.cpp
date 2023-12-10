@@ -8,7 +8,7 @@ SpaceShip::SpaceShip(GraphicsRender& render, Shader* shader, PhysicsEngine& engi
 	this->camera = &camera;
 
 	this->m_LuaHandler = new LuaHandler("SpaceShip.lua");
-	m_LuaHandler->RegisterFunctionInScript(m_LuaHandler->GetScript());
+	m_LuaHandler->RegisterFunctionInScript();
 
 }
 
@@ -41,7 +41,7 @@ void SpaceShip:: LoadModel()
 	engine->AddPhysicsObjects(SpaceShipPhysics);
 
 
-	m_LuaHandler->ExecuteScirpt(m_LuaHandler->GetScript(), model);  // Executing Lua 
+	m_LuaHandler->ExecuteScirpt(model);  // Executing Lua 
 }
 
 void SpaceShip::Update(float deltaTime)

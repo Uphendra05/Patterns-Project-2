@@ -19,9 +19,6 @@
     <Filter Include="BVH aabb">
       <UniqueIdentifier>{4560d9e5-d148-4397-a8cb-28d7e9b00738}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SpaceShip">
-      <UniqueIdentifier>{2fc45378-e64d-4b0e-9815-745775789b9a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Lua">
       <UniqueIdentifier>{23033d8c-4189-49bb-8c53-3444c18d920e}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,15 @@
     </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{b27b67c5-4b35-4b60-b925-e3f2849cb149}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{78937b8b-1518-4943-b9ff-21900a3e4d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\SpaceShip">
+      <UniqueIdentifier>{2fc45378-e64d-4b0e-9815-745775789b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities\Sphere">
+      <UniqueIdentifier>{b682a238-983a-44a6-b257-bacc8be99f35}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -139,7 +145,7 @@
       <Filter>Physics</Filter>
     </ClCompile>
     <ClCompile Include="src\SpaceShip.cpp">
-      <Filter>SpaceShip</Filter>
+      <Filter>Entities\SpaceShip</Filter>
     </ClCompile>
     <ClCompile Include="src\LuaBrain.cpp">
       <Filter>Source Files</Filter>
@@ -161,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="src\Command.cpp">
       <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ball.cpp">
+      <Filter>Entities\Sphere</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -276,7 +285,7 @@
       <Filter>BVH aabb</Filter>
     </ClInclude>
     <ClInclude Include="src\SpaceShip.h">
-      <Filter>SpaceShip</Filter>
+      <Filter>Entities\SpaceShip</Filter>
     </ClInclude>
     <ClInclude Include="src\LuaBrain.h">
       <Filter>Header Files</Filter>
@@ -301,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="src\LuaManager.h">
       <Filter>Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ball.h">
+      <Filter>Entities\Sphere</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +367,9 @@
     </None>
     <None Include="Shaders\color.frag">
       <Filter>Shaders</Filter>
+    </None>
+    <None Include="Sphere.lua">
+      <Filter>Lua\Lua Scripts</Filter>
     </None>
   </ItemGroup>
 </Project>

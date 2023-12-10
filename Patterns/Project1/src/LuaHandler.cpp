@@ -28,14 +28,14 @@ void LuaHandler::SetScript(const std::string& LuaScript)
     this->Script = LuaScript;
 }
 
-void LuaHandler::RegisterFunctionInScript(const std::string& scriptName) 
+void LuaHandler::RegisterFunctionInScript() 
 {
     LuaManager::GetInstance().RegisterCommands(L);
 }
 
-void LuaHandler::ExecuteScirpt(const std::string& script ,  Model*& model)
+void LuaHandler::ExecuteScirpt(Model*& model)
 {
-    LuaManager::GetInstance().ExecuteStateWithFile(L, script, model);
+    LuaManager::GetInstance().ExecuteStateWithFile(L, Script, model);
 }
 
 lua_State* LuaHandler::GetLuaState() const
