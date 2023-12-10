@@ -21,19 +21,30 @@ public:
 
 	void UpdateSerialCommands(float deltaTime);
 	void UpdateParallelCommands(float deltaTime);
+	void Update(float deltaTime);
+
+
+	void Start();
+	void StartForParallelCommands();
+	void StartForSerialCommand();
 
 	void SetGroupID(const int& groupID);
 
-	CommandGroupType groupType = SERIES;
+	
 
 	int GetGroupID() const;
 
+	bool isDone();
+
+	CommandGroupType groupType = SERIES;
 	
 private:
 
+	int serialIndex = 0;
 	std::vector<Command*> serialCommandsList;
 	std::vector<Command*> parallelCommandsList;
 	std::vector<CommandGroup> commandGroupsList;
+
 
 	int groupId;
 };

@@ -14,7 +14,11 @@ public:
 
 	 void Start() override;
 	 void Update(float deltatime) override;
+	 void SetStarted(bool isStarted) override;
+
 	 bool IsComplete() override;
+	 bool IsStarted() override;
+
 
 	 glm::vec3 GetModelPosition();
 

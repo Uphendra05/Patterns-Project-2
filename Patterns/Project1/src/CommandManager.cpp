@@ -50,6 +50,31 @@ void CommandManager::EndCommandGroup(const int& groupId)
 	currentCommandGroup = nullptr;
 }
 
+void CommandManager::Start()
+{
+	if (!commandGroupList.empty())
+	{
+		for (size_t i = 0; i < commandGroupList.size(); i++)
+		{
+			(*commandGroupList.begin())->Start();  // Start for firstSerial command and All the parallel commands list.
+		}
+	}
+	
+}
+
+void CommandManager::Update(float deltatime)
+{
+	if (!commandGroupList.empty())
+	{
+		(*commandGroupList.begin())->Update(deltatime);
+
+		if ((*commandGroupList.begin())->isDone())
+		{
+			commandGroupList.erase(commandGroupList.begin());
+		}
+	}
+}
+
 bool CommandManager::isCommandExists(Command* command)
 {
 

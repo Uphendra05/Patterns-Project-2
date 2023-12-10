@@ -252,6 +252,7 @@ directionLight.intensity = 0.5f;
      moveCam.AssignCam(&camera);
 
     
+     CommandManager::GetInstance().Start();
 }
 
 void ApplicationRenderer::PreRender()
@@ -335,7 +336,7 @@ void ApplicationRenderer::Render()
 
          }
        
-    
+        
         
       
      
@@ -355,7 +356,7 @@ void ApplicationRenderer::PostRender()
     PhysicsEngine.Update(deltaTime);
 
     //spaceshipEntity->Update(deltaTime);
- 
+    CommandManager::GetInstance().Update(deltaTime);
     //DrawDebugModelAABB(spaceshipEntity->SpaceShipPhysics->UpdateAABB());
 }
 
@@ -370,24 +371,24 @@ void ApplicationRenderer::ProcessInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
-    float cameraSpeed=2;
+    float cameraSpeed=20;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
-       // camera.ProcessKeyboard(FORWARD, deltaTime * cameraSpeed);
+       camera.ProcessKeyboard(FORWARD, deltaTime * cameraSpeed);
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
     {
-     //   camera.ProcessKeyboard(BACKWARD, deltaTime * cameraSpeed);
+        camera.ProcessKeyboard(BACKWARD, deltaTime * cameraSpeed);
     }
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
     {
-      //  camera.ProcessKeyboard(LEFT, deltaTime * cameraSpeed);
+        camera.ProcessKeyboard(LEFT, deltaTime * cameraSpeed);
 
     }
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     {
-      //  camera.ProcessKeyboard(RIGHT, deltaTime * cameraSpeed);
+        camera.ProcessKeyboard(RIGHT, deltaTime * cameraSpeed);
 
     }
 

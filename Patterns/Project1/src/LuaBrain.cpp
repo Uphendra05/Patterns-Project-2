@@ -10,7 +10,7 @@ LuaBrain::LuaBrain()
 
 LuaBrain::~LuaBrain()
 {
-	lua_close(this->L_state);
+	//lua_close(this->L_state);
 }
 
 

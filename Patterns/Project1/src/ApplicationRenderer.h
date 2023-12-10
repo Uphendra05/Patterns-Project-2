@@ -19,6 +19,7 @@
 #include "SpaceShip.h"
 #include "LuaBrain.h"
 
+#include "CommandManager.h"
 struct ModelData
 {
 

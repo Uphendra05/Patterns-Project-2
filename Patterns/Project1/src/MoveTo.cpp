@@ -13,6 +13,7 @@ MoveTo::MoveTo( Model*& model , const glm::vec3& targetPosition)
 	this->model = model;
 	this->StartPosition = glm::vec3(0);
 	this->endPosition = targetPosition;
+
 }
 
 MoveTo::~MoveTo()
@@ -31,22 +32,46 @@ void MoveTo::Start()
 	isAnimationCompleted = false;
 }
 
-void MoveTo::Update(float deltatime)
+void MoveTo::Update(float deltaTime)
 {
-	glm::vec3 direction = glm::normalize(StartPosition - endPosition);
-	if (glm::distance(StartPosition, endPosition) > 0.1f)
-	{
-		model->transform.position += direction * deltatime;
-	}
-	else
-	{
-		isAnimationCompleted = true;
-	}
+    if (isAnimationCompleted)
+    {
+        return;
+    }
+        glm::vec3 direction = glm::normalize(endPosition - StartPosition);
+        float distance = glm::distance(GetModelPosition(), endPosition);
+
+
+        const float epsilon = 0.5f;
+        if (distance < epsilon)
+        {
+            isAnimationCompleted = true;
+        }
+        else
+        {
+            // Move the object along the direction
+            model->transform.position += direction * deltaTime;
+        }
+    
+}
+
+void MoveTo::SetStarted(bool isStarted)
+{
+    isStart = isStarted;
 }
 
 bool MoveTo::IsComplete()
 {
-	return isAnimationCompleted;
+
+    
+       return isAnimationCompleted;
+    
+
+}
+
+bool MoveTo::IsStarted()
+{
+    return isStart;
 }
 
 glm::vec3 MoveTo::GetModelPosition()

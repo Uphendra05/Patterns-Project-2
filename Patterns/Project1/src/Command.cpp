@@ -16,9 +16,19 @@ void Command::Update(float deltatime)
 {
 }
 
+void Command::SetStarted(bool isStarted)
+{
+	isStart = isStarted;
+}
+
 bool Command::IsComplete()
 {
 	return false;
+}
+
+bool Command::IsStarted()
+{
+	return isStart;
 }
 
 std::string Command::GetCommandID()
