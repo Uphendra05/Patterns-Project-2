@@ -49,7 +49,7 @@ void SpaceShip::Update(float deltaTime)
 
 	SpaceShipPhysics->velocity = Direction * speed;
 
-	camera->Position = model->transform.position -  cameraOffset;
+	camera->transform.position = model->transform.position -  cameraOffset;
 }
 
 void SpaceShip::SpaceShipInputs(GLFWwindow* window, float deltaTime)
