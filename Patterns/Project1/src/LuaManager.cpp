@@ -1,6 +1,7 @@
 #include "LuaManager.h"
 #include "MoveTo.h"
 #include "OrientTo.h"
+#include "FollowObject.h"
 
 LuaManager::LuaManager()
 {
@@ -23,6 +24,7 @@ void LuaManager::RegisterCommands(lua_State* L)
 	lua_register(L, "MoveTo", LuaMoveToWrapper);
 	lua_register(L, "Endcommand", LuaEndCommand);
 	lua_register(L, "OrientTo", LuaOrientToWrapper);
+	lua_register(L, "FollowObject", LuaFollowObject);
 
 }
 
@@ -74,6 +76,20 @@ void LuaManager::FindModelBasedOnName(const std::string& name)
 	{
 		model = modelMap[name];
 	}
+}
+
+Model* LuaManager::FindModel(const std::string& name)
+{
+	if (!name.empty())
+	{
+		return modelMap[name];
+	}
+	else
+	{
+		std::cout << "Follow model is null" << std::endl;
+		return nullptr;
+	}
+	
 }
 
 bool LuaManager::CheckLua(lua_State* L, int r)
@@ -225,6 +241,35 @@ int LuaManager::LuaSetGameObject(lua_State* L)
 	std::string gameObjectName = lua_tostring(L, 1);
 	std::cout << "GameObject name :" << gameObjectName << std::endl;
 	GetInstance().FindModelBasedOnName(gameObjectName);
+
+	return 0;
+}
+
+int LuaManager::LuaFollowObject(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	std::string followObjectName = lua_tostring(L, 1);
+
+	float speed = static_cast<float>(lua_tonumber(L, 2));
+	float acceleration = static_cast<float>(lua_tonumber(L, 3));
+	float deceleration = static_cast<float>(lua_tonumber(L, 4));
+	float distance = static_cast<float>(lua_tonumber(L, 5));
+
+	float x = static_cast<float>(lua_tonumber(L, 6));
+	float y = static_cast<float>(lua_tonumber(L, 7));
+	float z = static_cast<float>(lua_tonumber(L, 8));
+
+	glm::vec3 followOffset{ x,y,z };
+
+	Model* targetModel = GetInstance().FindModel(followObjectName);
+
+	Command* command = nullptr;
+
+	command = new FollowObject(GetInstance().model, targetModel, speed, acceleration, deceleration, distance, followOffset);
+
+	CommandManager::GetInstance().AddCommands(command);
+
 
 	return 0;
 }

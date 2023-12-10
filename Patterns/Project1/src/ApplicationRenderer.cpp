@@ -192,6 +192,11 @@ void ApplicationRenderer::Start()
      Model* Sphere3 = new Model(*Sphere);
      Sphere3->id = "Sphere3";
 
+
+     Model* Sphere4 = new Model(*Sphere);
+     Sphere4->id = "Sphere4";
+     Sphere4->transform.SetPosition(glm::vec3(0, -1, 0));
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
   //   modelData = loadModelDataFromFile("Model.txt");
@@ -248,6 +253,7 @@ directionLight.intensity = 0.5f;
      render.AddModelsAndShader(directionLightModel, lightShader);
      render.AddModelsAndShader(Sphere2, defaultShader);
      render.AddModelsAndShader(Sphere3, defaultShader);
+     render.AddModelsAndShader(Sphere4, defaultShader);
 
 
      

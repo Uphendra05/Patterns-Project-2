@@ -11,6 +11,7 @@
 
 class MoveTo;
 class OrientTo;
+class FollowObject;
 
 class LuaManager
 {
@@ -26,7 +27,10 @@ public:
 
 	void SetModel(Model*& model);
 	void SetModelList(const std::vector<Model*>& modelList);
+
+
 	void FindModelBasedOnName(const std::string& name);
+	Model* FindModel(const std::string& name);
 
 	bool CheckLua(lua_State* L, int r);
 
@@ -46,6 +50,8 @@ private:
 	static int LuaOrientToWrapper(lua_State* L);
 
 	static int LuaSetGameObject(lua_State* L);
+
+	static int LuaFollowObject(lua_State* L);
 
 	Model* model;
 	
