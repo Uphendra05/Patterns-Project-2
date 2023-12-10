@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependencies\glad\src\glad.c" />
+    <ClCompile Include="src\OrientTo.cpp" />
     <ClCompile Include="src\Ball.cpp" />
     <ClCompile Include="src\Command.cpp" />
     <ClCompile Include="src\MoveTo.cpp" />
@@ -188,6 +189,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="src\OrientTo.h" />
     <ClInclude Include="src\Ball.h" />
     <ClInclude Include="src\LuaManager.h" />
     <ClInclude Include="src\MoveTo.h" />

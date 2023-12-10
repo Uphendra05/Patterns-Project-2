@@ -171,6 +171,9 @@
     <ClCompile Include="src\Ball.cpp">
       <Filter>Entities\Sphere</Filter>
     </ClCompile>
+    <ClCompile Include="src\OrientTo.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Shader.h">
@@ -313,6 +316,9 @@
     </ClInclude>
     <ClInclude Include="src\Ball.h">
       <Filter>Entities\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OrientTo.h">
+      <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

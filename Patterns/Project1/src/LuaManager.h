@@ -10,6 +10,7 @@
 
 
 class MoveTo;
+class OrientTo;
 
 class LuaManager
 {

@@ -1,5 +1,7 @@
 #include "LuaManager.h"
 #include "MoveTo.h"
+#include "OrientTo.h"
+
 LuaManager::LuaManager()
 {
 }
@@ -20,7 +22,7 @@ void LuaManager::RegisterCommands(lua_State* L)
 	lua_register(L, "BeginCommand", LuaBeginCommand);
 	lua_register(L, "MoveTo", LuaMoveToWrapper);
 	lua_register(L, "Endcommand", LuaEndCommand);
-//	lua_register(L, "_OrientTo", LuaOrientToWrapper);
+	lua_register(L, "OrientTo", LuaOrientToWrapper);
 
 }
 
@@ -188,6 +190,31 @@ int LuaManager::LuaOrientToWrapper(lua_State* L)
 	float y = static_cast<float>(lua_tonumber(L, 2));
 	float z = static_cast<float>(lua_tonumber(L, 3));
 
+	glm::vec3 targetRotation(x, y, z);
+
+	float time = static_cast<float>(lua_tonumber(L, 4));
+	float easeInTime;
+	float easeOutTime;
+
+	Command* command = nullptr;
+
+	switch (paramLength)
+	{
+	case 4:
+		command = new OrientTo(GetInstance().model, targetRotation, time);
+		break;
+	case 5:
+		easeInTime = static_cast<float>(lua_tonumber(L, 5));
+		command = new OrientTo(GetInstance().model, targetRotation, time, easeInTime);
+		break;
+	case 6:
+		easeInTime = static_cast<float>(lua_tonumber(L, 5));
+		easeOutTime = static_cast<float>(lua_tonumber(L, 6));
+		command = new OrientTo(GetInstance().model, targetRotation, time, easeInTime, easeOutTime);
+		break;
+	}
+
+	CommandManager::GetInstance().AddCommands(command);
 	return 0;
 }
 
