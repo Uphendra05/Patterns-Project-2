@@ -273,7 +273,6 @@ directionLight.intensity = 0.5f;
      defaultShader->setInt("skybox", 0);
 
      moveCam.AssignCam(&camera);
-     camera.Position = glm::vec3(0, 0, -75);
 
 
      follow = new FollowObject(5.0f, 10.0f, 20.0f, 2.0f, glm::vec3(-1.0f, 2.0f, 0.0f));
@@ -329,7 +328,7 @@ void ApplicationRenderer::Render()
 
          defaultShader->setMat4("projection", _projection);
          defaultShader->setMat4("view", _view);
-         defaultShader->setVec3("viewPos", camera.Position.x, camera.Position.y, camera.Position.z);
+         defaultShader->setVec3("viewPos", camera.transform.position.x, camera.transform.position.y, camera.transform.position.z);
          defaultShader->setFloat("time", scrollTime);
          defaultShader->setBool("isDepthBuffer", false);
 
@@ -384,7 +383,7 @@ void ApplicationRenderer::PostRender()
     spaceshipEntity->Update(deltaTime);
    
     follow->Update(SampleFollow->transform.position, spaceshipEntity->model->transform.position, deltaTime);
- 
+
     //DrawDebugModelAABB(spaceshipEntity->SpaceShipPhysics->UpdateAABB());
 }
 

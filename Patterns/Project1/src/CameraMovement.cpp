@@ -12,7 +12,7 @@ void CameraMovement::LookAt(glm::vec3& target)
 {
    
 
-    camera->Position = target - glm::vec3(2,2,2);
+   // camera->Position = target - glm::vec3(2,2,2);
     
 
    
@@ -31,9 +31,9 @@ void CameraMovement::AssignCam(Camera* cam)
 
 void CameraMovement::moveTo(glm::vec3 target, float speed)
 {
-    
+    /*
        glm::vec3 direction = glm::normalize(target - camera->Position);
-       camera->Position += direction * speed;
+       camera->Position += direction * speed;*/
     
 }
 
