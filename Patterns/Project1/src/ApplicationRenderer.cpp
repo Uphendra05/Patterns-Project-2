@@ -216,7 +216,6 @@ void ApplicationRenderer::Start()
       spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
       spaceshipEntity->LoadModel();
 
-
       Model* waypointOne = new Model(*Sphere);
       waypointOne->transform.position = spaceshipEntity->waypoints[0].position;
       render.AddModelsAndShader(waypointOne, defaultShader);
@@ -233,6 +232,10 @@ void ApplicationRenderer::Start()
       Model* waypointFour = new Model(*Sphere);
       waypointFour->transform.position = spaceshipEntity->waypoints[3].position;
       render.AddModelsAndShader(waypointFour, defaultShader);
+
+      SampleFollow = new Model(*Sphere);
+      SampleFollow->transform.SetPosition(glm::vec3(-12, 0, 0));
+      render.AddModelsAndShader(SampleFollow, defaultShader);
 
 
 #pragma region Lights
@@ -271,6 +274,9 @@ directionLight.intensity = 0.5f;
 
      moveCam.AssignCam(&camera);
      camera.Position = glm::vec3(0, 0, -75);
+
+
+     follow = new FollowObject(5.0f, 10.0f, 20.0f, 2.0f, glm::vec3(-1.0f, 2.0f, 0.0f));
     
 }
 
@@ -376,6 +382,8 @@ void ApplicationRenderer::PostRender()
    // m_luaRequisites->Update(deltaTime);
 
     spaceshipEntity->Update(deltaTime);
+   
+    follow->Update(SampleFollow->transform.position, spaceshipEntity->model->transform.position, deltaTime);
  
     //DrawDebugModelAABB(spaceshipEntity->SpaceShipPhysics->UpdateAABB());
 }

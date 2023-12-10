@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "Transform.h"
+
 #include <vector>
 
 enum Camera_Movement {
@@ -61,6 +63,8 @@ public:
     }
 
 
+    Transform transform;
+
         // returns the view matrix calculated using Euler Angles and the LookAt Matrix
         glm::mat4 GetViewMatrix();
   
@@ -77,6 +81,9 @@ public:
    
         void updateCameraVectors();
 
+
+        Transform* GetTransform();
+
         void SetTargetPosition(const glm::vec3& targetPos) {
             targetPosition = targetPos;
         }
@@ -89,6 +96,10 @@ public:
             updateCameraVectors();
 
         }
+
+       
+        
+
 private:
     // calculates the front vector from the Camera's (updated) Euler Angles
    // void updateCameraVectors();

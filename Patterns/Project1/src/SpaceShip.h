@@ -59,7 +59,7 @@ public:
 
 
 	float easeInTime = 0.0f;
-	float easeOutTime = 5.0f;
+	float easeOutTime = 0.0f;
 
 	float easeInRatio = 0;
 	float easeOutRatio = 0;
@@ -67,7 +67,7 @@ public:
 	float easeInStart = 0;
 	float easeOutStart = 0;
 
-	float time = 15;
+	float time = 5;
 	float timeStep = 0;
 	float lerpValue = 0;
 	glm::vec3 m_startPos;

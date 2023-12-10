@@ -19,7 +19,7 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
     if (direction == BACKWARD)
         Position -= Front * velocity;
     if (direction == LEFT)
-        Position -= Right * velocity;
+        Position -= Right * velocity; 
     if (direction == RIGHT)
         Position += Right * velocity;
 }
@@ -71,4 +71,9 @@ void Camera::updateCameraVectors()
     Up = glm::normalize(glm::cross(Right, Front));
 
     
+}
+
+Transform* Camera::GetTransform()
+{
+    return &transform;
 }

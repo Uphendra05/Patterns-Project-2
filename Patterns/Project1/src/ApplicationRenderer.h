@@ -18,6 +18,7 @@
 #include "CameraMovement.h"
 #include "SpaceShip.h"
 #include "LuaRequisites.h"
+#include "../../Commands/FollowObject.h"
 
 struct ModelData
 {
@@ -68,6 +69,8 @@ private:
 	Camera camera;
 	CameraMovement moveCam;
 
+	FollowObject* follow;
+
 	GraphicsRender render;
 	LightManager lightManager;
 
@@ -82,6 +85,8 @@ private:
 
 	Model* defaultBox;
 	Model* CityModel;
+
+	Model* SampleFollow;
 
 	LoadModelsExternal m_loadModels;
 
