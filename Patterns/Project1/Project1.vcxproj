@@ -255,6 +255,7 @@
     <None Include="Shaders\Light_FragmentShader.frag" />
     <None Include="Shaders\Light_VertexShader.vert" />
     <None Include="Sphere.lua" />
+    <None Include="World.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

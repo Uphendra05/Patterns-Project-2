@@ -18,6 +18,7 @@ public:
 	void SetScript(const std::string& LuaScript);
 	void RegisterFunctionInScript();
 	void ExecuteScirpt(Model*& model);
+	void ExecuteScirpt();
 
 	lua_State* GetLuaState() const;
 

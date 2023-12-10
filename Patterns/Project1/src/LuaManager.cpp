@@ -16,6 +16,7 @@ LuaManager& LuaManager::GetInstance()
 
 void LuaManager::RegisterCommands(lua_State* L)
 {
+	lua_register(L, "SetGameObject", LuaSetGameObject);
 	lua_register(L, "BeginCommand", LuaBeginCommand);
 	lua_register(L, "MoveTo", LuaMoveToWrapper);
 	lua_register(L, "Endcommand", LuaEndCommand);
@@ -40,13 +41,37 @@ void LuaManager::ExecuteStateWithFile(lua_State* L, const std::string& scriptNam
 		}
 
 		model = nullptr;
-		
+}
+
+void LuaManager::ExecuteStateWithFile(lua_State* L, const std::string& scriptName)
+{
+	if (CheckLua(L, luaL_dofile(L, scriptName.c_str())))
+	{
+
+	}
+	//	model = nullptr;
 }
 
 void LuaManager::SetModel( Model*& model)
 {
 	this->model = model;
 	
+}
+
+void LuaManager::SetModelList(const std::vector<Model*>& modelList)
+{
+	for (Model* model : modelList)
+	{
+		modelMap[model->id] = model;
+	}
+}
+
+void LuaManager::FindModelBasedOnName(const std::string& name)
+{
+	if (!name.empty())
+	{
+		model = modelMap[name];
+	}
 }
 
 bool LuaManager::CheckLua(lua_State* L, int r)
@@ -126,12 +151,31 @@ int LuaManager::LuaMoveToWrapper(lua_State* L)
 	float y = static_cast<float>(lua_tonumber(L, 2));
 	float z = static_cast<float>(lua_tonumber(L, 3));
 
-	std::cout << "x : " << x << " y: " << y << " z: " << z << std::endl;
-
 	glm::vec3 target(x, y, z);
-	Command* command = new MoveTo(GetInstance().model, target);
 
-	CommandManager::GetInstance().AddCommands(command); // sending Serial command as of now
+	float time = static_cast<float>(lua_tonumber(L, 4));
+	float easeInTime;
+	float easeOutTime;
+
+	Command* command = nullptr;
+
+	switch (paramLength)
+	{
+	case 4: 
+		command = new MoveTo(GetInstance().model, target, time);
+		break;
+	case 5:
+		easeInTime = static_cast<float>(lua_tonumber(L, 5));
+		command = new MoveTo(GetInstance().model, target, time, easeInTime);
+		break;
+	case 6:
+		easeInTime = static_cast<float>(lua_tonumber(L, 5));
+		easeOutTime = static_cast<float>(lua_tonumber(L, 6));
+		command = new MoveTo(GetInstance().model, target, time, easeInTime, easeOutTime);
+		break;
+	}
+
+	CommandManager::GetInstance().AddCommands(command);  
 
 	return 0;
 }
@@ -143,6 +187,17 @@ int LuaManager::LuaOrientToWrapper(lua_State* L)
 	float x = static_cast<float>(lua_tonumber(L, 1));
 	float y = static_cast<float>(lua_tonumber(L, 2));
 	float z = static_cast<float>(lua_tonumber(L, 3));
+
+	return 0;
+}
+
+int LuaManager::LuaSetGameObject(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	std::string gameObjectName = lua_tostring(L, 1);
+	std::cout << "GameObject name :" << gameObjectName << std::endl;
+	GetInstance().FindModelBasedOnName(gameObjectName);
 
 	return 0;
 }

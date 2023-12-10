@@ -371,5 +371,6 @@
     <None Include="Sphere.lua">
       <Filter>Lua\Lua Scripts</Filter>
     </None>
+    <None Include="World.lua" />
   </ItemGroup>
 </Project>

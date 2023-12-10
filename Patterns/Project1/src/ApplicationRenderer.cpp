@@ -168,7 +168,7 @@ void ApplicationRenderer::Start()
 
     render.AssignCamera(&camera);
 
-    Model* Sphere = new Model((char*)"Models/DefaultSphere/Sphere_1_unit_Radius.ply", true);
+    Model* Sphere = new Model((char*)"Models/DefaultSphere/Sphere.ply", true);
 
 
     //render.AddModelsAndShader(CamPlaceholder, defaultShader);
@@ -185,8 +185,12 @@ void ApplicationRenderer::Start()
      directionLightModel->transform.SetRotation(glm::vec3(-60, 0, 0));
      directionLightModel->transform.SetScale(glm::vec3(0.1f));
 
+     Model* Sphere2 = new Model(*Sphere);
+     Sphere2->id = "Sphere2";
 
 
+     Model* Sphere3 = new Model(*Sphere);
+     Sphere3->id = "Sphere3";
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -212,8 +216,8 @@ void ApplicationRenderer::Start()
   //   //////////////////////////////////////////////////////////
   //   //////SPACE SHIP ENTITY
 
-     this->m_Ball = new Ball(render, defaultShader, PhysicsEngine);
-     m_Ball->LoadModel();
+     //this->m_Ball = new Ball(render, defaultShader, PhysicsEngine);
+     //m_Ball->LoadModel();
 
      spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
      spaceshipEntity->LoadModel();
@@ -242,6 +246,8 @@ directionLight.intensity = 0.5f;
      render.selectedModel = nullptr;
 
      render.AddModelsAndShader(directionLightModel, lightShader);
+     render.AddModelsAndShader(Sphere2, defaultShader);
+     render.AddModelsAndShader(Sphere3, defaultShader);
 
 
      
@@ -258,6 +264,14 @@ directionLight.intensity = 0.5f;
      moveCam.AssignCam(&camera);
 
     
+     
+
+     LuaManager::GetInstance().SetModelList(render.GetModelList()); // Setting All the game objects
+
+     WorldLuaHandler = new LuaHandler("World.lua");
+     WorldLuaHandler->RegisterFunctionInScript();
+     WorldLuaHandler->ExecuteScirpt();
+
      CommandManager::GetInstance().Start();
 }
 
@@ -298,7 +312,7 @@ void ApplicationRenderer::Render()
         SkyboxShader->setMat4("view", _skyboxview);
         SkyboxShader->setMat4("projection", _projection);
 
-        skybox->Skyboxrender();
+       // skybox->Skyboxrender();
         glDepthFunc(GL_LESS); 
 
 

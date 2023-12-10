@@ -38,6 +38,11 @@ void LuaHandler::ExecuteScirpt(Model*& model)
     LuaManager::GetInstance().ExecuteStateWithFile(L, Script, model);
 }
 
+void LuaHandler::ExecuteScirpt()
+{
+    LuaManager::GetInstance().ExecuteStateWithFile(L, Script);
+}
+
 lua_State* LuaHandler::GetLuaState() const
 {
     return L;

@@ -81,6 +81,7 @@ private:
 	Skybox* skybox;
 
 	LuaBrain brain;
+	LuaHandler* WorldLuaHandler;
 
 	Model* defaultBox;
 	Model* CityModel;
