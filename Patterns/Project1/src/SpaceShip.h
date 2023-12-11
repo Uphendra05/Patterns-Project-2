@@ -28,7 +28,7 @@ public:
 	{glm::vec3(10.0f, 10.0f, 0.0f), glm::vec3(0.0f, 90.0f, 0.0f)}    // Waypoint 3
 	};
 
-	float movementSpeed = .5f;
+	float movementSpeed = 15.0f;
 	int waypointIndex;
 	float elapsedTime;
 	void LoadModel();
@@ -67,7 +67,7 @@ public:
 	float easeInStart = 0;
 	float easeOutStart = 0;
 
-	float time = 5;
+	float time = 7.0f;
 	float timeStep = 0;
 	float lerpValue = 0;
 	glm::vec3 m_startPos;

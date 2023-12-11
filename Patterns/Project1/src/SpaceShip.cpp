@@ -60,7 +60,7 @@ void SpaceShip::Update(float deltaTime)
 {
 
 	SpaceShipPhysics->velocity = Direction * speed;
-	 //CalculateNextWaypoint(deltaTime);
+	// CalculateNextWaypoint(deltaTime);
 	 CalculateBezierCurve(deltaTime);
 	//camera->Position = model->transform.position -  cameraOffset;
 }
@@ -121,7 +121,7 @@ void SpaceShip::CalculateBezierCurve(float deltaTime)
 		const Waypoint& p2 = waypoints[waypointIndex + 2];
 		const Waypoint& p3 = waypoints[waypointIndex + 3];
 
-		float t = elapsedTime / 15.0f;
+		float t = elapsedTime / time;
 		glm::vec3 curvePosition = CalculateCubicBezier(t, p0.position, p1.position, p2.position, p3.position);
 
 		
@@ -208,7 +208,7 @@ void SpaceShip::CalculateNextWaypoint(float deltaTime)
 	
 
 
-		model->transform.SetPosition(LerpObject(m_startPos, glm::vec3(95,0,0), lerpValue));
+		model->transform.SetPosition(LerpObject(m_startPos, glm::vec3(95,95,0), lerpValue));
 
 
 		//MoveSpaceShip(CurWaypoint.position, model->transform.rotation, deltaTime);

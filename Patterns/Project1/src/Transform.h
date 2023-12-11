@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <string>
 
 class Transform 
 {
@@ -16,6 +17,7 @@ public:
     glm::vec3 scale;
     glm::vec3 rotation;
     glm::quat quaternionRotation;
+    std::string frinedlyName;
 
     void SetPosition(const glm::vec3& translation);
     void SetScale(const glm::vec3& scaling);

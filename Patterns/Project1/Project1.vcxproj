@@ -150,6 +150,7 @@
     <ClCompile Include="Commands\MoveInBezier.cpp" />
     <ClCompile Include="Commands\OrientTo.cpp" />
     <ClCompile Include="Commands\FollowObject.cpp" />
+    <ClCompile Include="Commands\LookAt.cpp" />
     <ClCompile Include="src\LuaRequisites.cpp" />
     <ClCompile Include="src\LuaBrain.cpp" />
     <ClCompile Include="src\SpaceShip.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Commands\MoveInBezier.h" />
     <ClInclude Include="Commands\OrientTo.h" />
     <ClInclude Include="Commands\FollowObject.h" />
+    <ClInclude Include="Commands\LookAt.h" />
     <ClInclude Include="src\LuaRequisites.h" />
     <ClInclude Include="src\LuaBrain.h" />
     <ClInclude Include="src\SpaceShip.h" />

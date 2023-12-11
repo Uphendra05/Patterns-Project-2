@@ -19,6 +19,7 @@
 #include "SpaceShip.h"
 #include "LuaRequisites.h"
 #include "../../Commands/FollowObject.h"
+#include "../../Commands/LookAt.h"
 
 struct ModelData
 {
@@ -70,6 +71,7 @@ private:
 	CameraMovement moveCam;
 
 	FollowObject* follow;
+	LookAt* lookat;
 
 	GraphicsRender render;
 	LightManager lightManager;

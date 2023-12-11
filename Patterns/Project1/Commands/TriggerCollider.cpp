@@ -16,7 +16,7 @@ TriggerCollider::~TriggerCollider()
 void TriggerCollider::Start()
 {
 	m_PlaneModel = new Model("..");
-	m_PlaneModel->id = "SpaceShip";
+	m_PlaneModel->id = "Plane";
 	m_PlaneModel->transform.SetPosition(glm::vec3(0, 0, 2));
 	m_Renderer->AddModelsAndShader(m_PlaneModel, m_Shader);
 
