@@ -195,7 +195,7 @@ void ApplicationRenderer::Start()
 
      Model* Sphere4 = new Model(*Sphere);
      Sphere4->id = "Sphere4";
-     Sphere4->transform.SetPosition(glm::vec3(0, -1, 0));
+   //  Sphere4->transform.SetPosition(glm::vec3(0, -1, 0));
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 

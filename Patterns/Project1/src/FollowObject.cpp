@@ -33,26 +33,29 @@ FollowObject::~FollowObject()
 
 void FollowObject::Start()
 {
-    currentPosition = model->transform.position;
-    targetPosition = FollowModel->transform.position;
+    glm::vec3 direction = (FollowModel->transform.position - model->transform.position);
+    model->transform.SetPosition(followOffset + direction * followDistance);
 }
 
 void FollowObject::Update(float deltatime)
 {
     if (!isStart) {
-        return;  // Stop updating if not started
+        return; 
     }
 
-    float distanceToTarget = glm::distance(model->transform.position, FollowModel->transform.position);
+    glm::vec3 direction = glm::normalize(FollowModel->transform.position - model->transform.position);
+    float distanceToTarget = glm::length(FollowModel->transform.position - model->transform.position);
     float followSpeed = CalculateFollowSpeed(distanceToTarget);
 
-    glm::vec3 direction = glm::normalize(FollowModel->transform.position - model->transform.position);
     glm::vec3 newPosition = model->transform.position + direction * followSpeed * deltatime;
 
-    glm::vec3 followPosition = FollowModel->transform.position - glm::normalize(direction) * followDistance + followOffset;
-    newPosition = glm::mix(newPosition, followPosition, deltatime * 0.2f);
+    glm::vec3 followPosition = FollowModel->transform.position - direction * followDistance + followOffset;
 
-    model->transform.position = newPosition;
+  //float smoothingFactor = glm::clamp(deltatime * 1, 0.0f, 1.0f);
+
+    newPosition = glm::mix(newPosition, followPosition, deltatime * 1);
+
+    model->transform.SetPosition(newPosition);
 }
 
 void FollowObject::SetStarted(bool isStarted)
@@ -72,18 +75,19 @@ bool FollowObject::IsStarted()
 
 float FollowObject::CalculateFollowSpeed(float distanceToTarget)
 {
-    if (distanceToTarget > decelerationRange) 
+    const float rangeDifference = decelerationRange - accelerationRange;
+
+    if (distanceToTarget > decelerationRange)
     {
         return maxFollowSpeed;
     }
-    else if (distanceToTarget < accelerationRange) 
+    else if (distanceToTarget < accelerationRange)
     {
-        
         return 0.0f;
     }
-    else 
+    else
     {
-        float t = 1.0f - (distanceToTarget - accelerationRange) / (decelerationRange - accelerationRange);
+        float t = 1.0f - (distanceToTarget - accelerationRange) / rangeDifference;
         return maxFollowSpeed * t;
     }
 }

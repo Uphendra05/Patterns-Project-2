@@ -18,5 +18,5 @@ Endcommand(2)
 
 SetGameObject("Sphere4")
 BeginCommand("PARALLEL",3) 
-FollowObject("SpaceShip", 3, 2, 1, 2, 0,-10,0)   --(targetName, speed, acceleration, deceleration, distance, follow offset[x,y,z])
+FollowObject("Sphere2", 3, 1, 1, 5, 0,-2,0)   --(targetName, speed, acceleration, deceleration, distance, follow offset[x,y,z])
 Endcommand(3)
