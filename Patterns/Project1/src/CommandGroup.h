@@ -38,6 +38,8 @@ public:
 
 	CommandGroupType groupType = SERIES;
 	
+
+	CommandGroup* parentCommandGroup = nullptr;
 private:
 
 	int serialIndex = 0;
@@ -47,6 +49,7 @@ private:
 
 
 	int groupId;
+
 };
 
 

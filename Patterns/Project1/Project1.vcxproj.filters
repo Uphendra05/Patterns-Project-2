@@ -40,6 +40,12 @@
     <Filter Include="Entities\Sphere">
       <UniqueIdentifier>{b682a238-983a-44a6-b257-bacc8be99f35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lua\Lua Handler">
+      <UniqueIdentifier>{521665ea-c7f0-41c8-bcf1-a17525a557e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{0ffb7bfd-032e-4278-b865-d679a0b8f32c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependencies\glad\src\glad.c">
@@ -150,12 +156,6 @@
     <ClCompile Include="src\LuaBrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\LuaHandler.cpp">
-      <Filter>Lua</Filter>
-    </ClCompile>
-    <ClCompile Include="src\LuaManager.cpp">
-      <Filter>Lua</Filter>
-    </ClCompile>
     <ClCompile Include="src\CommandGroup.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
@@ -176,6 +176,24 @@
     </ClCompile>
     <ClCompile Include="src\FollowObject.cpp">
       <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaManager.cpp">
+      <Filter>Lua\Lua Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaHandler.cpp">
+      <Filter>Lua\Lua Handler</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpawnObject.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Singleton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sphere.cpp">
+      <Filter>Entities\Sphere</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -296,9 +314,6 @@
     <ClInclude Include="src\LuaBrain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\LuaHandler.h">
-      <Filter>Lua</Filter>
-    </ClInclude>
     <ClInclude Include="src\iCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
@@ -314,9 +329,6 @@
     <ClInclude Include="src\MoveTo.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="src\LuaManager.h">
-      <Filter>Lua</Filter>
-    </ClInclude>
     <ClInclude Include="src\Ball.h">
       <Filter>Entities\Sphere</Filter>
     </ClInclude>
@@ -325,6 +337,24 @@
     </ClInclude>
     <ClInclude Include="src\FollowObject.h">
       <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaManager.h">
+      <Filter>Lua\Lua Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaHandler.h">
+      <Filter>Lua\Lua Handler</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpawnObject.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Singleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sphere.h">
+      <Filter>Entities\Sphere</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

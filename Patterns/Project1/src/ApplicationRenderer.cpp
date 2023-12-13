@@ -1,5 +1,5 @@
 #include"ApplicationRenderer.h"
-
+#include "Singleton.h"
 
 
 ApplicationRenderer::ApplicationRenderer()
@@ -168,6 +168,10 @@ void ApplicationRenderer::Start()
 
     render.AssignCamera(&camera);
 
+    Singleton::GetInstance().SetRendererPhysicsEngineAndDefaultShader(render, defaultShader, PhysicsEngine);
+
+
+
     Model* Sphere = new Model((char*)"Models/DefaultSphere/Sphere.ply", true);
 
 
@@ -221,8 +225,8 @@ void ApplicationRenderer::Start()
   //   //////////////////////////////////////////////////////////
   //   //////SPACE SHIP ENTITY
 
-     //this->m_Ball = new Ball(render, defaultShader, PhysicsEngine);
-     //m_Ball->LoadModel();
+     this->m_Ball = new Ball(render, defaultShader, PhysicsEngine);
+     m_Ball->LoadModel();
 
      spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
      spaceshipEntity->LoadModel();
@@ -318,7 +322,7 @@ void ApplicationRenderer::Render()
         SkyboxShader->setMat4("view", _skyboxview);
         SkyboxShader->setMat4("projection", _projection);
 
-       // skybox->Skyboxrender();
+        skybox->Skyboxrender();
         glDepthFunc(GL_LESS); 
 
 

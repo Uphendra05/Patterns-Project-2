@@ -7,11 +7,17 @@
 #include <iostream>
 #include "CommandManager.h"
 #include "model.h"
+#include "GraphicsRender.h"
+#include "PhysicsEngine.h"
 
 
 class MoveTo;
 class OrientTo;
 class FollowObject;
+
+class GameObject;
+
+class SphereTest;
 
 class LuaManager
 {
@@ -27,16 +33,22 @@ public:
 
 	void SetModel(Model*& model);
 	void SetModelList(const std::vector<Model*>& modelList);
+	void SetGameObjectList(const std::vector<GameObject*>& GameobjectList);
 
+
+	
 
 	void FindModelBasedOnName(const std::string& name);
-	Model* FindModel(const std::string& name);
+	void AddModelsInMap(Model* model);
 
 	bool CheckLua(lua_State* L, int r);
 
+	Model* FindModel(const std::string& name);
 	 Model* GetModel();
 
 	 std::map<std::string, Model*> modelMap;
+
+	 std::map<std::string, GameObject* > gameObjectMap;
 private:
 
 	LuaManager();
@@ -53,8 +65,13 @@ private:
 
 	static int LuaFollowObject(lua_State* L);
 
+	static int LuaSpawnGameObject(lua_State* L);
+
 	Model* model;
-	
+
+	GraphicsRender* renderer;
+	Shader* shader;
+	PhysicsEngine* engine;
 
 };
 

@@ -3,6 +3,10 @@
 #include "OrientTo.h"
 #include "FollowObject.h"
 
+#include "GameObject.h"
+
+#include "Sphere.h"
+
 LuaManager::LuaManager()
 {
 }
@@ -25,6 +29,7 @@ void LuaManager::RegisterCommands(lua_State* L)
 	lua_register(L, "Endcommand", LuaEndCommand);
 	lua_register(L, "OrientTo", LuaOrientToWrapper);
 	lua_register(L, "FollowObject", LuaFollowObject);
+	lua_register(L, "SpawnObject", LuaSpawnGameObject);
 
 }
 
@@ -70,11 +75,31 @@ void LuaManager::SetModelList(const std::vector<Model*>& modelList)
 	}
 }
 
+void LuaManager::SetGameObjectList(const std::vector<GameObject*>& GameobjectList)
+{
+	for (GameObject* gameObject : GameobjectList)
+	{
+		gameObjectMap[gameObject->id] = gameObject;
+	}
+}
+
+
+
+
+
 void LuaManager::FindModelBasedOnName(const std::string& name)
 {
 	if (!name.empty())
 	{
 		model = modelMap[name];
+	}
+}
+
+void LuaManager::AddModelsInMap(Model* model)
+{
+	if (model!=nullptr)
+	{
+		modelMap[model->id] = model;
 	}
 }
 
@@ -108,6 +133,8 @@ bool LuaManager::CheckLua(lua_State* L, int r)
 	
 	return model;
 }
+
+
 
 
 
@@ -270,6 +297,27 @@ int LuaManager::LuaFollowObject(lua_State* L)
 
 	CommandManager::GetInstance().AddCommands(command);
 
+
+	return 0;
+}
+
+int LuaManager::LuaSpawnGameObject(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+	std::string GameObjectName = lua_tostring(L, 1);
+
+	if (GameObjectName =="SphereTest")
+	{
+		GameObject* gameObject = new SphereTest();
+		
+
+		GetInstance().AddModelsInMap(gameObject->model);
+	}
+
+
+	
+
+	
 
 	return 0;
 }

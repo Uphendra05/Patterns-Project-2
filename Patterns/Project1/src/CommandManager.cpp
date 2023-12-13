@@ -40,14 +40,21 @@ void CommandManager::BeginCommandGroup()
 
 void CommandManager::BeginCommandGroup( const CommandGroupType& type,  const int& groupId)
 {
+	CommandGroup* group = new CommandGroup(type, groupId);
+	if (currentCommandGroup != nullptr)
+	{
+		
+		group->parentCommandGroup = currentCommandGroup;
+	}
 	
-	currentCommandGroup = new CommandGroup(type, groupId);
+		currentCommandGroup = group;
 }
 
 void CommandManager::EndCommandGroup(const int& groupId)
 {
 	commandGroupList.push_back(currentCommandGroup);
-	currentCommandGroup = nullptr;
+	currentCommandGroup = currentCommandGroup->parentCommandGroup;;
+
 }
 
 void CommandManager::Start()
