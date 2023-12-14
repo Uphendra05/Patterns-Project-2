@@ -279,8 +279,10 @@ directionLight.intensity = 0.5f;
      spaceshipEntity->model->transform.frinedlyName = "SpaeShip";
      waypointTwo->transform.frinedlyName = "Ball";
      spaceshipEntity->model->transform.SetPosition(glm::vec3(10, 0, 0));
-     lookat = new LookAt(spaceshipEntity->model, waypointOne);
-     lookat->lookAtOffset = glm::vec3(1, 1, 1);
+     //lookat = new LookAt(spaceshipEntity->model, waypointTwo);
+
+
+
     
 }
 
@@ -389,7 +391,9 @@ void ApplicationRenderer::PostRender()
      spaceshipEntity->Update(deltaTime);
    
     follow->Update(SampleFollow->transform.position, spaceshipEntity->model->transform.position, deltaTime);
-    lookat->Update();
+    lookat = new LookAt(camera.transform, spaceshipEntity->model);
+
+    lookat->CameraLookAt();
     //DrawDebugModelAABB(spaceshipEntity->SpaceShipPhysics->UpdateAABB());
 }
 

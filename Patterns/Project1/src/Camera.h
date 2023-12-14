@@ -43,7 +43,7 @@ public:
 
         //Initial Values
         transform.SetPosition(glm::vec3(3.0f, 0.0f, -33.0f));
-        transform.SetOrientationFromDirections(glm::vec3(0, 1, 0), glm::vec3(0, 1, 0));
+       // transform.SetOrientationFromDirections(glm::vec3(0, 1, 0), glm::vec3(0, 1, 0));
         transform.SetRotation(glm::vec3(0.0f, 180.0f, 0.0f));
 
 
@@ -59,9 +59,9 @@ public:
        // Pitch = pitch;
 
         //Initial Values
-        transform.SetPosition(glm::vec3(3.0f, 0.0f, -33.0f));
+        /*transform.SetPosition(glm::vec3(3.0f, 0.0f, -33.0f));
         transform.SetOrientationFromDirections(glm::vec3(0, 1, 0), glm::vec3(0, 1, 0));
-        transform.SetRotation(glm::vec3(0.0f, 180.0f, 0.0f));
+        transform.SetRotation(glm::vec3(0.0f, 180.0f, 0.0f));*/
 
 
     }

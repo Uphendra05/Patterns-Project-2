@@ -60,7 +60,7 @@ void SpaceShip::Update(float deltaTime)
 {
 
 	SpaceShipPhysics->velocity = Direction * speed;
-	// CalculateNextWaypoint(deltaTime);
+	 //CalculateNextWaypoint(deltaTime);
 	 CalculateBezierCurve(deltaTime);
 	//camera->Position = model->transform.position -  cameraOffset;
 }
@@ -179,36 +179,29 @@ void SpaceShip::CalculateBezierCurve(float deltaTime)
 
 void SpaceShip::CalculateNextWaypoint(float deltaTime)
 {
+
+	timeStep += deltaTime / time;
+
+	if (time == 0)
+	{
+		lerpValue = 1;
+		timeStep = 1;
+	}
+	
+	else
+	{
+		lerpValue = timeStep;
+	}
+
+
+
+	model->transform.SetPosition(LerpObject(m_startPos, glm::vec3(95, 95, 0), lerpValue));
+
 	if (waypointIndex < waypoints.size())
 	{
 		const Waypoint& CurWaypoint = waypoints[waypointIndex];
 		
-		timeStep += deltaTime / time;
-
-		if (time == 0)
-		{
-			lerpValue = 1;
-			timeStep = 1;
-		}
-		else if (easeInTime != 0 && timeStep <= easeInRatio)
-		{
-			lerpValue = EaseIn(timeStep / easeInRatio);
-			lerpValue *= easeInRatio;
-		}
-		else if (easeOutTime != 0 && timeStep >= easeOutStart)
-		{
-			lerpValue = EaseOut((timeStep - easeOutStart) / easeOutRatio);
-			lerpValue *= easeOutRatio;
-			lerpValue += easeOutStart;
-		}
-		else
-		{
-			lerpValue = timeStep;
-		}
-	
-
-
-		model->transform.SetPosition(LerpObject(m_startPos, glm::vec3(95,95,0), lerpValue));
+		
 
 
 		//MoveSpaceShip(CurWaypoint.position, model->transform.rotation, deltaTime);
