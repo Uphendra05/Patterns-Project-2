@@ -109,5 +109,7 @@ private:
 
 	 bool firstMouse;
 	 bool cameraMoveToTarget;
+
+	 bool updateCommands = false;
 };
 

@@ -6,8 +6,8 @@ SphereTest::SphereTest()
 {
 	this->renderer = Singleton::GetInstance().GetRenderer();
 	this->shader = Singleton::GetInstance().GetDefaultShader();
-	luaHandler = new LuaHandler("Sphere.lua");
-	luaHandler->RegisterFunctionInScript();
+
+	
 	LoadModel();
 }
 
@@ -28,6 +28,8 @@ void SphereTest::LoadModel()
 
 	renderer->AddModelsAndShader(model, shader);
 
+	luaHandler = new LuaHandler("Sphere.lua");
+	luaHandler->RegisterFunctionInScript();
 	luaHandler->ExecuteScirpt(model);
 
 }

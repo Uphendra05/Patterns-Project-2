@@ -225,11 +225,11 @@ void ApplicationRenderer::Start()
   //   //////////////////////////////////////////////////////////
   //   //////SPACE SHIP ENTITY
 
-     this->m_Ball = new Ball(render, defaultShader, PhysicsEngine);
-     m_Ball->LoadModel();
+    // this->m_Ball = new Ball(render, defaultShader, PhysicsEngine);
+   //  m_Ball->LoadModel();
 
-     spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
-     spaceshipEntity->LoadModel();
+    // spaceshipEntity = new SpaceShip(render, defaultShader, PhysicsEngine,camera);
+   //  spaceshipEntity->LoadModel();
 
 
 
@@ -386,8 +386,12 @@ void ApplicationRenderer::PostRender()
     PhysicsEngine.Update(deltaTime);
 
     //spaceshipEntity->Update(deltaTime);
-    CommandManager::GetInstance().Update(deltaTime);
     //DrawDebugModelAABB(spaceshipEntity->SpaceShipPhysics->UpdateAABB());
+
+    if (updateCommands)
+    {
+        CommandManager::GetInstance().Update(deltaTime);
+    }
 }
 
 void ApplicationRenderer::Clear()
@@ -505,80 +509,11 @@ void ApplicationRenderer::DrawDebugBvhNodeAABB(BvhNode* node)
 
          }
 
-         if (key == GLFW_KEY_X && action == GLFW_PRESS)
-         {
-             render.selectedModel = nullptr;
-
-         }
-         if (key == GLFW_KEY_C && action == GLFW_PRESS)
-         {
-             cameraMoveToTarget = !cameraMoveToTarget;
-
-             if (cameraMoveToTarget)
-             {
-                 //camera.Position = glm::vec3(0);
-             }
-         }
-         if (key == GLFW_KEY_1 && action == GLFW_PRESS)
-         {
-             
-
-              
-         }
-
-         if (key == GLFW_KEY_2 && action == GLFW_PRESS)
-         {
-
-
-             //cameraMoveToTarget = !cameraMoveToTarget;
-
-         }
-
-         if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
-         {
-             recusiveCount--;
-         }
-         if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
-         {
-             recusiveCount++;
-         }
-      /*   if (key == GLFW_KEY_R && action == GLFW_PRESS)
-         {
-             
-            spaceshipEntity->model->transform.SetRotation(glm::vec3(spaceshipEntity->model->transform.rotation.x, spaceshipEntity->model->transform.rotation.y + 20, spaceshipEntity->model->transform.rotation.z));
-             
-         }
-         if (key == GLFW_KEY_T && action == GLFW_PRESS)
-         {
-
-             spaceshipEntity->model->transform.SetRotation(glm::vec3(spaceshipEntity->model->transform.rotation.x, spaceshipEntity->model->transform.rotation.y - 20, spaceshipEntity->model->transform.rotation.z));
-
-         }
-         if (key == GLFW_KEY_Y && action == GLFW_PRESS)
-         {
-
-             spaceshipEntity->model->transform.SetRotation(glm::vec3(spaceshipEntity->model->transform.rotation.x + 20, spaceshipEntity->model->transform.rotation.y , spaceshipEntity->model->transform.rotation.z));
-
-         }
-         if (key == GLFW_KEY_U && action == GLFW_PRESS)
-         {
-
-             spaceshipEntity->model->transform.SetRotation(glm::vec3(spaceshipEntity->model->transform.rotation.x - 20, spaceshipEntity->model->transform.rotation.y , spaceshipEntity->model->transform.rotation.z));
-
-         }
-
-         if (key == GLFW_KEY_I && action == GLFW_PRESS)
-         {
-
-             spaceshipEntity->model->transform.SetRotation(glm::vec3(spaceshipEntity->model->transform.rotation.x , spaceshipEntity->model->transform.rotation.y, spaceshipEntity->model->transform.rotation.z + 20));
-
-         }
          if (key == GLFW_KEY_O && action == GLFW_PRESS)
          {
+             updateCommands = !updateCommands;
+         }
 
-             spaceshipEntity->model->transform.SetRotation(glm::vec3(spaceshipEntity->model->transform.rotation.x , spaceshipEntity->model->transform.rotation.y, spaceshipEntity->model->transform.rotation.z - 20));
-
-         }*/
          
  }
 

@@ -67,6 +67,8 @@ private:
 
 	static int LuaSpawnGameObject(lua_State* L);
 
+	static  int LuaWaitForSeconds(lua_State* L);
+
 	Model* model;
 
 	GraphicsRender* renderer;

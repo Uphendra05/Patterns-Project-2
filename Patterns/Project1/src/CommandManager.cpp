@@ -3,7 +3,7 @@
 
 CommandManager::CommandManager()
 {
-	currentCommandGroup = new CommandGroup(SERIES,1);
+	//currentCommandGroup = new CommandGroup(SERIES,1);
 }
 
 CommandManager::~CommandManager()
@@ -74,6 +74,7 @@ void CommandManager::Update(float deltatime)
 	{
 		for (size_t i = 0; i < commandGroupList.size(); i++)
 		{
+
 			commandGroupList[i]->Update(deltatime);
 
 			if (commandGroupList[i]->isDone())

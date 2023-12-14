@@ -191,6 +191,7 @@
     <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\VertexArray.cpp" />
     <ClCompile Include="src\VertexBuffer.cpp" />
+    <ClCompile Include="src\WaitForSecond.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
@@ -246,6 +247,7 @@
     <ClInclude Include="src\VertexArray.h" />
     <ClInclude Include="src\VertexBuffer.h" />
     <ClInclude Include="src\VertexBufferLayout.h" />
+    <ClInclude Include="src\WaitForSeconds.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Example.lua" />

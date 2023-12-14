@@ -195,6 +195,9 @@
     <ClCompile Include="src\Sphere.cpp">
       <Filter>Entities\Sphere</Filter>
     </ClCompile>
+    <ClCompile Include="src\WaitForSecond.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Shader.h">
@@ -355,6 +358,9 @@
     </ClInclude>
     <ClInclude Include="src\Sphere.h">
       <Filter>Entities\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WaitForSeconds.h">
+      <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

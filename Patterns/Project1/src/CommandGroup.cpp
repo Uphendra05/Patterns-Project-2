@@ -34,7 +34,7 @@ void CommandGroup::UpdateSerialCommands(float deltaTime)
 {
 	if (!serialCommandsList.empty())
 	{
-		Command* currentCommand = *serialCommandsList.begin();
+		Command* currentCommand = *this->serialCommandsList.begin();
 
 		if (!currentCommand->IsStarted())
 		{
@@ -45,8 +45,8 @@ void CommandGroup::UpdateSerialCommands(float deltaTime)
 
 		if (currentCommand->IsComplete())
 		{
-			serialCommandsList.erase(serialCommandsList.begin());
-			currentCommand->SetStarted(false);
+			this->serialCommandsList.erase(this->serialCommandsList.begin());
+			
 			delete currentCommand;
 		}
 	}
@@ -55,8 +55,16 @@ void CommandGroup::UpdateSerialCommands(float deltaTime)
 void CommandGroup::UpdateParallelCommands(float deltaTime)
 {
 
-	for (size_t i = 0; i < parallelCommandsList.size(); i++)
+	for (size_t i = 0; i < this->parallelCommandsList.size(); i++)
 	{
+		//If Wait
+
+		//if wait is complete
+		//continue
+		//else 
+			// wait for secons update update
+
+			return;
 		parallelCommandsList[i]->Update(deltaTime);
 	}
 }

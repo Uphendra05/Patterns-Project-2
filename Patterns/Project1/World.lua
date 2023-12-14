@@ -16,12 +16,11 @@
 --MoveTo(-3,-2,1,2)
 --Endcommand(2)
 
-SetGameObject("Sphere4")
 BeginCommand("SERIAL",3) 
 
 SpawnObject("SphereTest")
 SetGameObject("SphereTest")
-MoveTo(0,15,0,3)
+OrientTo(0,50,0,3)
 --MoveTo()
 --FollowObject("Sphere2", 3, 1, 1, 5, 0,-2,0)   --(targetName, speed, acceleration, deceleration, distance, follow offset[x,y,z])
 Endcommand(3)
