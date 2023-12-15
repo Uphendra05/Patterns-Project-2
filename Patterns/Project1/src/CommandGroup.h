@@ -7,6 +7,8 @@ enum CommandGroupType
 	SERIES=0,
 	PARALLEL=1
 };
+
+class WaitForSeconds;
 class CommandGroup
 {
 public:

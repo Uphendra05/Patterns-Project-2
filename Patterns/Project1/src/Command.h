@@ -17,7 +17,8 @@ public:
 	 std::string GetCommandID();
 	 std::string commandId;
 
-
+	 bool updatedOnce = false;
+	 bool isinprogress = false;
 protected:
 
 	bool isStart = false;

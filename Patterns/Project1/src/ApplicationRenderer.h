@@ -21,6 +21,9 @@
 #include "CommandManager.h"
 #include "SpaceShip.h"
 #include "Ball.h"
+#include "AsteroidGroups.h"
+#include "Asteroid.h"
+#include "FighterJet.h"
 struct ModelData
 {
 
@@ -58,8 +61,7 @@ public:
 
 	void ProcessInput(GLFWwindow* window);
 	
-	void DrawDebugModelAABB(const cAABB& aabb);
-	void DrawDebugBvhNodeAABB(BvhNode* node);
+
 
 	int recusiveCount = 0;
 
@@ -77,6 +79,8 @@ private:
 	Shader* lightShader;
 	Shader* StencilShader;
 	Shader* SkyboxShader;
+	Shader* DestroyShader;
+	Shader* DestroyShader2;
 
 	Skybox* skybox;
 
@@ -106,6 +110,7 @@ private:
 	 float lastFrame;
 
 	 float scrollTime;
+	 float explosionOffset = 0;
 
 	 bool firstMouse;
 	 bool cameraMoveToTarget;

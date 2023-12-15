@@ -2,12 +2,12 @@
 
 #include "Command.h"
 
-class WaitForSecond  : public Command
+class WaitForSeconds  : public Command
 {
 public:
 
-	WaitForSecond(float time);
-	~WaitForSecond();
+	WaitForSeconds(float time);
+	~WaitForSeconds();
 
 	 void Start() override;
 	 void Update(float deltatime) override;

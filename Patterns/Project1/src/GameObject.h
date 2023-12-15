@@ -11,6 +11,7 @@ public:
 	void SetGameObjectId(const std::string& id);
 
 	Model* model = nullptr;
+	Model* copyModel = nullptr;
 private:
 
 };

@@ -234,6 +234,7 @@ void LightManager::AddNewLight(Light& light)
 
 void LightManager::UpdateUniformValues(GLuint shaderID)
 {
+    SetUniforms(shaderID);
     for (unsigned int index = 0;index <lightList.size(); index++)
     {
         if (lightList.size()>LightManager::MAX_LIGHT)

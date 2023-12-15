@@ -57,7 +57,7 @@ public:
 
 	cAABB aabb;
 	cSphere sphereShape;
-	BvhTree* BvhAABBTree;
+	//BvhTree* BvhAABBTree;
 	bool isBvhActive = true;
 
 	cAABB CalculateModelAABB();

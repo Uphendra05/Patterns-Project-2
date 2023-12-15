@@ -24,7 +24,7 @@
     <ProjectGuid>{c65d6234-3971-4803-b746-e75e47b920d8}</ProjectGuid>
     <RootNamespace>Project1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Patterns_Project_2</ProjectName>
+    <ProjectName>Question1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -143,7 +143,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependencies\glad\src\glad.c" />
+    <ClCompile Include="src\Asteroid.cpp" />
+    <ClCompile Include="src\AsteroidGroups.cpp" />
+    <ClCompile Include="src\FighterJet.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
+    <ClCompile Include="src\MoveAlongOneAxisWithTime.cpp" />
+    <ClCompile Include="src\RotateAlongAxisWithTime.cpp" />
+    <ClCompile Include="src\ScaleTo.cpp" />
     <ClCompile Include="src\Singleton.cpp" />
     <ClCompile Include="src\SpawnObject.cpp" />
     <ClCompile Include="src\FollowObject.cpp" />
@@ -195,7 +201,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="src\Asteroid.h" />
+    <ClInclude Include="src\AsteroidGroups.h" />
+    <ClInclude Include="src\FighterJet.h" />
     <ClInclude Include="src\GameObject.h" />
+    <ClInclude Include="src\MoveAlongOneAxisWithTime.h" />
+    <ClInclude Include="src\RotateAlongAxisWithTime.h" />
+    <ClInclude Include="src\ScaleTo.h" />
     <ClInclude Include="src\Singleton.h" />
     <ClInclude Include="src\SpawnObject.h" />
     <ClInclude Include="src\FollowObject.h" />
@@ -251,6 +263,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Example.lua" />
+    <None Include="Shaders\StarDestroyer.frag" />
+    <None Include="Shaders\StarDestroyer.vert" />
     <None Include="SpaceShip.lua" />
     <None Include="Shaders\color.frag" />
     <None Include="Shaders\color.vert" />

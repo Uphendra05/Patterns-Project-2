@@ -66,14 +66,25 @@ void Skybox::SkyboxPrerender()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
 
+    //std::vector<std::string> faces
+    //{
+    //   ("Textures/skybox/right.jpg"),
+    //   ("Textures/skybox/left.jpg"),
+    //   ("Textures/skybox/top.jpg"),
+    //   ("Textures/skybox/bottom.jpg"),
+    //   ("Textures/skybox/front.jpg"),
+    //   ("Textures/skybox/back.jpg")
+    //};
+
+
     std::vector<std::string> faces
     {
-       ("Textures/skybox/right.jpg"),
-       ("Textures/skybox/left.jpg"),
-       ("Textures/skybox/top.jpg"),
-       ("Textures/skybox/bottom.jpg"),
-       ("Textures/skybox/front.jpg"),
-       ("Textures/skybox/back.jpg")
+       ("Textures/skybox/RIGHT.jpg"),
+       ("Textures/skybox/LEFT.jpg"),
+       ("Textures/skybox/TOP.jpg"),
+       ("Textures/skybox/BOTTOM.jpg"),
+       ("Textures/skybox/FRONT.jpg"),
+       ("Textures/skybox/BACK.jpg")
     };
 
     cubemapTexture = skyboxTexture->loadCubemap(faces);

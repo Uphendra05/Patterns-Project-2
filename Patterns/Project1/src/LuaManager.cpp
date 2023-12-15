@@ -2,10 +2,12 @@
 #include "MoveTo.h"
 #include "OrientTo.h"
 #include "FollowObject.h"
-
+#include "WaitForSeconds.h"
+#include "MoveAlongOneAxisWithTime.h"
 #include "GameObject.h"
-
+#include "ScaleTo.h"
 #include "Sphere.h"
+#include "RotateAlongAxisWithTime.h"
 
 LuaManager::LuaManager()
 {
@@ -26,10 +28,14 @@ void LuaManager::RegisterCommands(lua_State* L)
 	lua_register(L, "SetGameObject", LuaSetGameObject);
 	lua_register(L, "BeginCommand", LuaBeginCommand);
 	lua_register(L, "MoveTo", LuaMoveToWrapper);
-	lua_register(L, "Endcommand", LuaEndCommand);
 	lua_register(L, "OrientTo", LuaOrientToWrapper);
+	lua_register(L, "ScaleTo", LuaScaleToWrapper);
+	lua_register(L, "Endcommand", LuaEndCommand);
 	lua_register(L, "FollowObject", LuaFollowObject);
 	lua_register(L, "SpawnObject", LuaSpawnGameObject);
+	lua_register(L, "WaitForSeconds", LuaWaitForSeconds);
+	lua_register(L, "MoveAlongAxisWithTime", LuaMoveAlongAxis);
+	lua_register(L, "RotateAlongAxisWithTime", LuaRotateAlongAxis);
 
 }
 
@@ -261,6 +267,28 @@ int LuaManager::LuaOrientToWrapper(lua_State* L)
 	return 0;
 }
 
+int LuaManager::LuaScaleToWrapper(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	float x = static_cast<float>(lua_tonumber(L, 1));
+	float y = static_cast<float>(lua_tonumber(L, 2));
+	float z = static_cast<float>(lua_tonumber(L, 3));
+
+	glm::vec3 targetScale(x, y, z);
+
+	float time = static_cast<float>(lua_tonumber(L, 4));
+
+
+	Model* model = GetInstance().model;
+
+	Command* command = new ScaleTo(model, targetScale, time);
+
+	CommandManager::GetInstance().AddCommands(command);
+
+	return 0;
+}
+
 int LuaManager::LuaSetGameObject(lua_State* L)
 {
 	int paramLength = lua_gettop(L);
@@ -318,6 +346,58 @@ int LuaManager::LuaSpawnGameObject(lua_State* L)
 	
 
 	
+
+	return 0;
+}
+
+int LuaManager::LuaWaitForSeconds(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	float waitTime = static_cast<float>(lua_tonumber(L, 1));
+
+	Command* command = new WaitForSeconds(waitTime);
+	
+	CommandManager::GetInstance().AddCommands(command);
+	return 0;
+}
+
+int LuaManager::LuaMoveAlongAxis(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	int axis = lua_tonumber(L, 1);
+
+	float time = static_cast<float>(lua_tonumber(L, 2));
+	float speed = static_cast<float>(lua_tonumber(L, 3));
+
+	
+	Model* model = GetInstance().model;
+
+	Command* command = new MoveAlongAxisWithTime(model,axis,time,speed);
+
+	CommandManager::GetInstance().AddCommands(command);
+
+
+	return 0;
+}
+
+int LuaManager::LuaRotateAlongAxis(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	int axis = lua_tonumber(L, 1);
+
+	float time = static_cast<float>(lua_tonumber(L, 2));
+	float speed = static_cast<float>(lua_tonumber(L, 3));
+
+
+	Model* model = GetInstance().model;
+
+	Command* command = new RotateAlongAxisWithTime(model, axis, time, speed);
+
+	CommandManager::GetInstance().AddCommands(command);
+
 
 	return 0;
 }

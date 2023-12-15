@@ -198,6 +198,24 @@
     <ClCompile Include="src\WaitForSecond.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="src\AsteroidGroups.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MoveAlongOneAxisWithTime.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Asteroid.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FighterJet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScaleTo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RotateAlongAxisWithTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Shader.h">
@@ -362,6 +380,24 @@
     <ClInclude Include="src\WaitForSeconds.h">
       <Filter>Commands</Filter>
     </ClInclude>
+    <ClInclude Include="src\AsteroidGroups.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MoveAlongOneAxisWithTime.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Asteroid.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FighterJet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScaleTo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RotateAlongAxisWithTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Example.lua" />
@@ -419,8 +455,8 @@
     <None Include="Sphere.lua">
       <Filter>Lua\Lua Scripts</Filter>
     </None>
-    <None Include="World.lua">
-      <Filter>Lua\Lua Scripts</Filter>
-    </None>
+    <None Include="World.lua" />
+    <None Include="Shaders\StarDestroyer.frag" />
+    <None Include="Shaders\StarDestroyer.vert" />
   </ItemGroup>
 </Project>

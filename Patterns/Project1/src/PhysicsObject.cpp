@@ -140,9 +140,9 @@ bool PhysicsObject::checkCollision(PhysicsObject* other, std::vector<glm::vec3>&
 		{
 			if (other->isBvhActive)
 			{
-				return CollisionAABBVsMeshOfTriangles(UpdateAABB(), other->BvhAABBTree->root,
+			/*	return CollisionAABBVsMeshOfTriangles(UpdateAABB(), other->BvhAABBTree->root,
 					other->model->transform.GetModelMatrix(), other->GetModelTriangleList(),
-					collisionPoints, collisionNormals);
+					collisionPoints, collisionNormals);*/
 			}
 		}
 
@@ -165,9 +165,9 @@ bool PhysicsObject::checkCollision(PhysicsObject* other, std::vector<glm::vec3>&
 		{
 			if (other->isBvhActive)
 			{
-				cSphere* updatedSphere = new cSphere(UpdateSphere());
+			/*	cSphere* updatedSphere = new cSphere(UpdateSphere());
 				return CollisionSphereVsMeshOfTriangles(UpdateAABB(), updatedSphere, other->BvhAABBTree->root,
-					other->model->transform.GetModelMatrix(), other->GetModelTriangleList(), collisionPoints, collisionNormals);
+					other->model->transform.GetModelMatrix(), other->GetModelTriangleList(), collisionPoints, collisionNormals);*/
 			}
 
 			return CollisionSphereVsMeshOfTriangles(UpdateSphere(), other->model->transform.GetModelMatrix(),
@@ -329,7 +329,7 @@ void PhysicsObject::Initialize(PhysicsType physicsType, bool collision, ObjectMo
 	{
 		CalculateTriangle();
 
-		BvhAABBTree = new BvhTree(this);
+		//BvhAABBTree = new BvhTree(this);
 	}
 	
 }

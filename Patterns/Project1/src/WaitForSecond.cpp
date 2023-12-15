@@ -1,29 +1,30 @@
 #include "WaitForSeconds.h"
-
-WaitForSecond::WaitForSecond(float time)
+#include <iostream>
+WaitForSeconds::WaitForSeconds(float time)
 {
 	this->time = time;
 }
 
-WaitForSecond::~WaitForSecond()
+WaitForSeconds::~WaitForSeconds()
 {
 }
 
-void WaitForSecond::Start()
+void WaitForSeconds::Start()
 {
 	timeStep = 0;
+	
 }
 
-void WaitForSecond::Update(float deltatime)
+void WaitForSeconds::Update(float deltatime)
 {
 	timeStep += deltatime;
 }
 
-void WaitForSecond::SetStarted(bool isStarted)
+void WaitForSeconds::SetStarted(bool isStarted)
 {
 }
 
-bool WaitForSecond::IsComplete()
+bool WaitForSeconds::IsComplete()
 {
 	if (timeStep >= time)
 	{
@@ -32,7 +33,7 @@ bool WaitForSecond::IsComplete()
 	return false;
 }
 
-bool WaitForSecond::IsStarted()
+bool WaitForSeconds::IsStarted()
 {
-	return false;
+	return isStart;
 }
