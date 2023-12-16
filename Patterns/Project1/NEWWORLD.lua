@@ -88,16 +88,50 @@ BeginCommand("SERIES",3)
     FollowWithTime(6)
     AddPoint(0,-25,-120,    0,25,0)
     AddPoint(0,-30,120,    0,25,0)
-    SetLookAtBool(0)
-    --SetLookAtOffset(0,180,0)
+    AddPoint(120,-30,120,    0,25,0)
+    AddPoint(-120,25,120,    25,0,0)
+    AddPoint(-220,-25,120,    0,25,0)
+    AddPoint(100, 25,120,    0,-25,0)
+    AddPoint(200, -25,120,    0,25,0)
+    SetLookAtBool(1)
+    SetLookAtOffset(0,180,0)
 
    -- OrientTo(0,180,0,0);
 
-   
+
+Endcommand(2)
+
+SetGameObject("SHARK2")
+BeginCommand("SERIES",3)
+
+
+
+    FollowWithTime(6)
+    AddPoint(0,-25,-80,    0,25,0)
+    AddPoint(0,-30,80,    0,25,0)
+    AddPoint(120,-30,80,    0,25,0)
+    AddPoint(-120,25,80,    25,0,0)
+    AddPoint(-220,-25,80,    0,25,0)
+    AddPoint(100, 25,80,    0,-25,0)
+    AddPoint(200, -25,80,    0,25,0)
+    SetLookAtBool(1)
+    SetLookAtOffset(0,180,0)
+
+   -- OrientTo(0,180,0,0);
+
 
 Endcommand(2)
   
 
 
+SetGameObject("CAMERA")
+BeginCommand("SERIES",3)
+
+
+   --LookAt("SHARK",5)
+   
+
+
+Endcommand(2)
 
 

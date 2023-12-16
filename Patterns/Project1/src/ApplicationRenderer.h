@@ -27,7 +27,8 @@
 #include "../EnemyShip/WaterShipEnemy.h"
 #include "../Sea/Sea.h"
 #include "../Shark/Shark.h"
-
+#include "../Shark/SharkTwo.h"
+#include "CameraObject.h"
 
 #include "GameObject.h"
 struct ModelData
@@ -80,7 +81,10 @@ private:
 	WaterShipEnemy* enemyShip;
 	Sea* sea;
 	Shark* shark;
+	SharkTwo* sharkTWo;
 	
+	CameraObject* cameraObject;
+
 	GLFWwindow* window;
 
 	Camera camera;

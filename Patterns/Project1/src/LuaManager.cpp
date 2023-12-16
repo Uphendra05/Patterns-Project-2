@@ -10,6 +10,7 @@
 #include "RotateAlongAxisWithTime.h"
 #include "FollowCurveWithTime.h"
 #include "LookAt.h"
+#include "../Canon/Canon.h"
 
 LuaManager::LuaManager()
 {
@@ -129,6 +130,14 @@ void LuaManager::AddModelsInMap(Model* model)
 	if (model!=nullptr)
 	{
 		modelMap[model->id] = model;
+	}
+}
+
+void LuaManager::AddGetGamobjectMap(GameObject* gameobject)
+{
+	if (gameobject != nullptr)
+	{
+		gameObjectMap[gameObject->id] = gameobject;
 	}
 }
 
@@ -419,12 +428,11 @@ int LuaManager::LuaSpawnGameObject(lua_State* L)
 	int paramLength = lua_gettop(L);
 	std::string GameObjectName = lua_tostring(L, 1);
 
-	if (GameObjectName =="SphereTest")
+	if (GameObjectName =="CANON")
 	{
-		GameObject* gameObject = new SphereTest();
+		GameObject* gameObject = new Canon();
 		
-
-		GetInstance().AddModelsInMap(gameObject->model);
+		GetInstance().AddGetGamobjectMap(gameObject);
 	}
 
 

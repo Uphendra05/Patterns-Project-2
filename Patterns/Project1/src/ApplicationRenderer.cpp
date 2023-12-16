@@ -170,6 +170,11 @@ directionLightModel->isVisible = false;
      shark = new Shark();
      shark->Start();
 
+     sharkTWo = new SharkTwo();
+     sharkTWo->Start();
+
+     cameraObject = new CameraObject();
+     
  
 
      //LightRenderer

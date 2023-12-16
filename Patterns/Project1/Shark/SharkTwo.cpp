@@ -1,44 +1,41 @@
-#include "Shark.h"
+#include "SharkTwo.h"
 #include "../src/Singleton.h"
-
-Shark::Shark()
+SharkTwo::SharkTwo()
 {
+
 	this->render = Singleton::GetInstance().GetRenderer();
 	this->defaultshader = Singleton::GetInstance().GetDefaultShader();
 	this->engine = Singleton::GetInstance().GetPhysicsEngine();
 	Singleton::GetInstance().AddGameObject(this);
 
 
-
 }
 
-Shark::~Shark()
+SharkTwo::~SharkTwo()
 {
 }
 
-void Shark::Start()
+void SharkTwo::Start()
 {
+
 
 	model = new Model("Models/Shark/Shark.obj");
-	model->id = "SHARK";
+	model->id = "SHARK2";
 	SetGameObjectId(model->id);
-	model->transform.SetPosition(glm::vec3(0, -25, -120));
-	model->transform.SetScale(glm::vec3(12,10,12));
+	model->transform.SetPosition(glm::vec3(0, -25, -80));
+	model->transform.SetScale(glm::vec3(3, 3, 3));
 	render->AddModelsAndShader(model, defaultshader);
-
-
-
 }
 
-void Shark::Update()
+void SharkTwo::Update()
 {
 }
 
-void Shark::End()
+void SharkTwo::End()
 {
 }
 
-Transform* Shark::GetTransform()
+Transform* SharkTwo::GetTransform()
 {
 	return &model->transform;
 }

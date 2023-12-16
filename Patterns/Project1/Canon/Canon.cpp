@@ -1,44 +1,42 @@
-#include "Shark.h"
+#include "Canon.h"
 #include "../src/Singleton.h"
 
-Shark::Shark()
+Canon::Canon()
 {
+
 	this->render = Singleton::GetInstance().GetRenderer();
 	this->defaultshader = Singleton::GetInstance().GetDefaultShader();
 	this->engine = Singleton::GetInstance().GetPhysicsEngine();
 	Singleton::GetInstance().AddGameObject(this);
-
-
+	Start();
 
 }
 
-Shark::~Shark()
+Canon::~Canon()
 {
 }
 
-void Shark::Start()
+void Canon::Start()
 {
 
-	model = new Model("Models/Shark/Shark.obj");
-	model->id = "SHARK";
+	model = new Model("Models/Box/DefaultCube.fbx");
+	model->id = "CANON";
 	SetGameObjectId(model->id);
-	model->transform.SetPosition(glm::vec3(0, -25, -120));
-	model->transform.SetScale(glm::vec3(12,10,12));
+	model->transform.SetPosition(glm::vec3(0, 5, 0));
+	model->transform.SetScale(glm::vec3(1));
 	render->AddModelsAndShader(model, defaultshader);
 
-
-
 }
 
-void Shark::Update()
+void Canon::Update()
 {
 }
 
-void Shark::End()
+void Canon::End()
 {
 }
 
-Transform* Shark::GetTransform()
+Transform* Canon::GetTransform()
 {
-	return &model->transform;
+	return  &model->transform;
 }
