@@ -47,12 +47,16 @@ public:
     void SetTransparency(const bool& isTransparent);
     void SetCutOff(const bool& isCutOut);
     void TextureScrolling(const bool& isScroll);
+    void SetTileable(const bool& isTile);
 
     VertexBuffer* VBO;
     IndexBufferObject* IBO;
     VertexArray* VAO;
     VertexBufferLayout* layout;
     bool isWireFrame = false;
+    float tileX;
+    float tileY;
+
 
 private:
     
@@ -63,5 +67,6 @@ private:
     bool isTransparancy = false;
     bool isCutOut = false;
     bool isTextureScrolling = false;
+    bool isTileable = false;
 };
 #endif

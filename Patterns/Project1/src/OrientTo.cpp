@@ -131,10 +131,7 @@ void OrientTo::Start()
 
 	isAnimationCompleted = false;
 
-	if (!model->isVisible)
-	{
-		model->isVisible = true;
-	}
+	
 }
 
 void OrientTo::Update(float deltaTime)

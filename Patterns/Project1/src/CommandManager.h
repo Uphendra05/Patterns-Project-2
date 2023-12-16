@@ -20,8 +20,10 @@ public:
 
 
 
+	Command* CurrentCommand = nullptr;
 	bool isCommandExists(Command* command);
 private:
+
 
 	CommandGroup* currentCommandGroup = nullptr;
 	std::vector<CommandGroup*> commandGroupList;

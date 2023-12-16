@@ -117,7 +117,7 @@ void ApplicationRenderer::Start()
 
      Model* directionLightModel = new Model(*Sphere);
      directionLightModel->transform.SetPosition(glm::vec3(1.0f, 3.0f, 0.0f));
-     directionLightModel->transform.SetRotation(glm::vec3(-60, 0, 0));
+     directionLightModel->transform.SetRotation(glm::vec3(0, 0, 0));
      directionLightModel->transform.SetScale(glm::vec3(0.1f));
 
 
@@ -134,9 +134,9 @@ void ApplicationRenderer::Start()
 Light directionLight;
 directionLight.lightType = LightType::DIRECTION_LIGHT;
 directionLight.lightModel = directionLightModel;
-directionLight.ambient =  glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-directionLight.diffuse =  glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
-directionLight.specular = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+directionLight.ambient =  glm::vec4(0.9f, 0.9f, 0.9f, 1.0f);
+directionLight.diffuse =  glm::vec4(0.9f, 0.9f, 0.9f, 1.0f);
+directionLight.specular = glm::vec4(0.9f, 0.9f, 0.9f, 1.0f);
 directionLight.intensity = 0.5f;
 
 
@@ -157,9 +157,16 @@ directionLightModel->isVisible = false;
 
      render.AddModelsAndShader(directionLightModel, lightShader);
 
-
-
+     ship = new WaterShip();
+     ship->Start();
      
+     enemyShip = new WaterShipEnemy();
+     enemyShip->Start();
+
+     sea = new Sea();
+     sea->Start();
+
+ 
 
      //LightRenderer
      lightManager.AddNewLight(directionLight);
@@ -390,7 +397,14 @@ void ApplicationRenderer::ProcessInput(GLFWwindow* window)
 
              updateCommands = !updateCommands;
          }
+         if (key == GLFW_KEY_G && action == GLFW_PRESS)
+         {
+             
 
+             updateCommands = !updateCommands;
+         }
+
+       
          
  }
 

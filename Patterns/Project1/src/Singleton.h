@@ -13,17 +13,22 @@ public:
 
 	void SetRendererPhysicsEngineAndDefaultShader(GraphicsRender& render, Shader* defaultShader, PhysicsEngine& engine );
 	void SetCamera(Camera& camera);
+	void AddGameObject(GameObject* gameObject);
+	void SetDefaultSphere(Model* sphere);
+	void SetDefaultCube(Model* cube);
 
 	GraphicsRender* GetRenderer();
-
 	Shader* GetDefaultShader();
-
 	PhysicsEngine* GetPhysicsEngine();
-
 	Camera* GetCamera();
 
+	Model* GetDefaultCube();
+	Model* GetDefaultSphere();
+
 	std::vector<GameObject*> GetGameObjectList();
-	void AddGameObject(GameObject* gameObject);
+
+
+
 
 private:
 
@@ -33,6 +38,10 @@ private:
 	PhysicsEngine* physicsEngine;
 	Shader* defaultShader;
 	Camera* camera;
+
+	Model* defaultSphere;
+	Model* defaultCube;
+
 
 	std::vector<GameObject*> GameObejctsList;
 

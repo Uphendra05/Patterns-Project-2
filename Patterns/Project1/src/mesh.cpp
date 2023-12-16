@@ -89,6 +89,8 @@ void Mesh::meshDraw(Shader& shader)
 
         }
 
+       
+
      
 
         shader.setInt((name), i);
@@ -162,6 +164,17 @@ void Mesh::MeshDraw(Shader* shader)
             shader->setInt("opacity_Texture", 2);
             meshMaterial->alphaTexture->Bind();
         }
+
+        if (isTileable)
+        {
+            GLCALL(shader->setBool("isTileable", true));
+
+        }
+        else
+        {
+            GLCALL(shader->setBool("isTileable", false));
+
+        }
     }
     else if (shader->shaderType == ShaderType::SOLID)
     {
@@ -206,6 +219,11 @@ void Mesh::TextureScrolling(const bool& isScroll)
 
     this->isTextureScrolling = isScroll;
 
+}
+
+void Mesh::SetTileable(const bool& isTile)
+{
+    this->isTileable = isTile;
 }
 
 void Mesh::setupMesh()

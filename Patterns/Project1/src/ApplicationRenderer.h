@@ -23,6 +23,11 @@
 #include "Ball.h"
 
 
+#include "../Ship/WaterShip.h"
+#include "../EnemyShip/WaterShipEnemy.h"
+#include "../Sea/Sea.h"
+
+
 #include "GameObject.h"
 struct ModelData
 {
@@ -67,6 +72,13 @@ public:
 
 
 private:
+
+	
+
+	WaterShip* ship;
+	WaterShipEnemy* enemyShip;
+	Sea* sea;
+	
 	GLFWwindow* window;
 
 	Camera camera;

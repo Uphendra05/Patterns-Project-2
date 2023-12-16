@@ -16,6 +16,10 @@ uniform mat4 projection;
 uniform float time = 0;
 
 uniform bool isScrollingTexture;
+uniform bool isTileable;
+
+uniform float tileAmountx = -350;
+uniform float tileAmounty = -350;
 
 // function prototypes
 
@@ -29,9 +33,16 @@ void main()
 
 	  TextureCoordinates = aTexCoords + vec2(0.1* time , 0.2 );
 	}
-	else
+	else if(isTileable)
 	{	
+	  vec2 updated = vec2(aTexCoords.x *tileAmountx, aTexCoords.y*tileAmounty);
+	  TextureCoordinates = updated ;
+	}
+	else
+	{
+	 
 	  TextureCoordinates = aTexCoords;
+
 	}
 	 meshColour = aColor;
 	//gl_Position = projection * view * model;

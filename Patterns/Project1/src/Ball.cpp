@@ -6,12 +6,12 @@ Ball::Ball()
 {
 
 
-	this->render = Singleton::GetInstance().GetRenderer();
+	/*this->render = Singleton::GetInstance().GetRenderer();
 	this->defaultshader = Singleton::GetInstance().GetDefaultShader();
 	this->engine = Singleton::GetInstance().GetPhysicsEngine();
 	Singleton::GetInstance().AddGameObject(this);
 
-	LoadModel();
+	LoadModel();*/
 }
 
 Ball::~Ball()
@@ -20,11 +20,11 @@ Ball::~Ball()
 
 void Ball::LoadModel()
 {
-	model = new Model("Models/DefaultSphere/Sphere.ply");
+	/*model = new Model("Models/DefaultSphere/Sphere.ply");
 	model->id = "BALL";
 	SetGameObjectId(model->id);
 	model->transform.SetPosition(glm::vec3(0));
-	render->AddModelsAndShader(model, defaultshader);
+	render->AddModelsAndShader(model, defaultshader);*/
 
 
 	/*ballPhysics = new PhysicsObject(model);
