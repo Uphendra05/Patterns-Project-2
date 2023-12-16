@@ -146,7 +146,9 @@
     <ClCompile Include="src\Asteroid.cpp" />
     <ClCompile Include="src\AsteroidGroups.cpp" />
     <ClCompile Include="src\CameraObject.cpp" />
+    <ClCompile Include="src\CubicBezierCurve.cpp" />
     <ClCompile Include="src\FighterJet.cpp" />
+    <ClCompile Include="src\FollowCurveWithTime.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\MoveAlongOneAxisWithTime.cpp" />
     <ClCompile Include="src\RotateAlongAxisWithTime.cpp" />
@@ -205,8 +207,10 @@
     <ClInclude Include="src\Asteroid.h" />
     <ClInclude Include="src\AsteroidGroups.h" />
     <ClInclude Include="src\CameraObject.h" />
+    <ClInclude Include="src\CubicBezierCurve.h" />
     <ClInclude Include="src\EasingTechiques.h" />
     <ClInclude Include="src\FighterJet.h" />
+    <ClInclude Include="src\FollowCurveWithTime.h" />
     <ClInclude Include="src\GameObject.h" />
     <ClInclude Include="src\MoveAlongOneAxisWithTime.h" />
     <ClInclude Include="src\RotateAlongAxisWithTime.h" />

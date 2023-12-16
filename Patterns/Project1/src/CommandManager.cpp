@@ -31,10 +31,14 @@ void CommandManager::AddCommands( Command* command)
 	if (currentCommandGroup->groupType == SERIES)
 	{
 		currentCommandGroup->AddSerialCommand(command);
+		CurrentCommand = command;
+
+		//command->commandGroup = currentCommandGroup;
 	}
 	else
 	{
 		currentCommandGroup->AddParallelCommand(command);
+		CurrentCommand = command;
 	}
 }
 

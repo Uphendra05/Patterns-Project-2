@@ -89,6 +89,7 @@ MoveTo::MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const floa
 	this->time = time;
 	this->easeInTime = easeIn;
 	this->EaseIn_State = easInType;
+
 	this->model = nullptr;
 }
 

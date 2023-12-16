@@ -8,7 +8,7 @@
 #include "ScaleTo.h"
 #include "Sphere.h"
 #include "RotateAlongAxisWithTime.h"
-
+#include "FollowCurveWithTime.h"
 
 LuaManager::LuaManager()
 {
@@ -37,6 +37,8 @@ void LuaManager::RegisterCommands(lua_State* L)
 	lua_register(L, "WaitForSeconds", LuaWaitForSeconds);
 	lua_register(L, "MoveAlongAxisWithTime", LuaMoveAlongAxis);
 	lua_register(L, "RotateAlongAxisWithTime", LuaRotateAlongAxis);
+	lua_register(L, "FollowWithTime", LuaFollowWithTime);
+	lua_register(L, "AddPoint", LuaAddPoint);
 
 }
 
@@ -237,11 +239,14 @@ int LuaManager::LuaMoveToWrapper(lua_State* L)
 	float easeInTime;
 	float easeOutTime;
 
+	EaseType easeInType = EaseType::NONE;
+	EaseType easeOutType = EaseType::NONE;
+
 	Command* command = nullptr;
 
 	switch (paramLength)
 	{
-	case 4: 
+	case 4:
 		command = new MoveTo(GetInstance().gameObject, target, time);
 		break;
 	case 5:
@@ -253,6 +258,26 @@ int LuaManager::LuaMoveToWrapper(lua_State* L)
 		easeOutTime = static_cast<float>(lua_tonumber(L, 6));
 		command = new MoveTo(GetInstance().gameObject, target, time, easeInTime, easeOutTime);
 		break;
+
+	case 7:
+		easeInTime = static_cast<float>(lua_tonumber(L, 5));
+		easeOutTime = static_cast<float>(lua_tonumber(L, 6));
+
+		easeInType = GetEaseTypeWithName(lua_tostring(L, 7));
+
+		command = new MoveTo(GetInstance().gameObject, target, time, easeInTime, easeOutTime, easeInType,easeOutType);
+		break;
+
+	case 8:
+		easeInTime = static_cast<float>(lua_tonumber(L, 5));
+		easeOutTime = static_cast<float>(lua_tonumber(L, 6));
+
+		easeInType = GetEaseTypeWithName(lua_tostring(L, 7));
+		easeOutType = GetEaseTypeWithName(lua_tostring(L, 8));
+
+		command = new MoveTo(GetInstance().gameObject, target, time, easeInTime, easeOutTime, easeInType, easeOutType);
+		break;
+
 	}
 
 	CommandManager::GetInstance().AddCommands(command);  
@@ -453,6 +478,82 @@ int LuaManager::LuaRotateAlongAxis(lua_State* L)
 	Command* command = new RotateAlongAxisWithTime(model, axis, time, speed);
 
 	CommandManager::GetInstance().AddCommands(command);
+
+
+	return 0;
+}
+
+int LuaManager::LuaFollowWithTime(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	float time = static_cast<float>(lua_tonumber(L, 1));
+
+	GameObject* gameObject = GetInstance().gameObject;
+
+	FollowCurveWithTime* command = new FollowCurveWithTime(gameObject, time);
+
+	command->SetBezierCurve(new CubicBezierCurve());
+
+	CommandManager::GetInstance().AddCommands(command);
+
+
+	return 0;
+}
+
+int LuaManager::LuaAddPoint(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	FollowCurveWithTime* command = dynamic_cast<FollowCurveWithTime*>(CommandManager::GetInstance().CurrentCommand);
+
+
+	if (paramLength>= 9)
+	{
+		glm::vec3 point;
+		glm::vec3 controlPoint;
+		glm::vec3 rotationOffset;
+
+		point.x = luaL_checknumber(L, 1);
+		point.y = luaL_checknumber(L, 2);
+		point.z = luaL_checknumber(L, 3);
+
+		controlPoint.x = luaL_checknumber(L, 4) + point.x;
+		controlPoint.y = luaL_checknumber(L, 5) + point.y;
+		controlPoint.z = luaL_checknumber(L, 6) + point.z;
+
+		rotationOffset.x = luaL_checknumber(L, 7);
+		rotationOffset.y = luaL_checknumber(L, 8);
+		rotationOffset.z = luaL_checknumber(L, 9);
+
+		command->AddPoint(point, controlPoint, rotationOffset);
+
+
+		// Get Lookat
+		return 1;
+
+	}
+	else if (paramLength >= 6)
+	{
+		glm::vec3 point;
+		glm::vec3 controlPoint;
+		glm::vec3 rotationOffset = glm::vec3(0);
+
+		point.x = luaL_checknumber(L, 1);
+		point.y = luaL_checknumber(L, 2);
+		point.z = luaL_checknumber(L, 3);
+
+		controlPoint.x = luaL_checknumber(L, 4) + point.x;
+		controlPoint.y = luaL_checknumber(L, 5) + point.y;
+		controlPoint.z = luaL_checknumber(L, 6) + point.z;
+
+
+		command->AddPoint(point, controlPoint, rotationOffset);
+
+		//GetCurveTable(luaState);
+
+		return 1;
+	}
 
 
 	return 0;

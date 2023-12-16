@@ -88,6 +88,8 @@ private:
 	LuaHandler* WorldLuaHandler;
 
 	Model* defaultBox;
+	Model* defaultSphere;
+
 	Model* CityModel;
 
 

@@ -109,13 +109,16 @@ void ApplicationRenderer::Start()
 
     camera.transform.SetPosition(glm::vec3(0, 0, -20));
 
-    Model* Sphere = new Model((char*)"Models/DefaultSphere/Sphere.ply", true);
+     defaultSphere = new Model((char*)"Models/DefaultSphere/Sphere.ply", true);
      defaultBox = new Model("Models/Box/DefaultCube.fbx");
+
+     Singleton::GetInstance().SetDefaultSphere(defaultSphere);
+     Singleton::GetInstance().SetDefaultCube(defaultBox);
 
 
    
 
-     Model* directionLightModel = new Model(*Sphere);
+     Model* directionLightModel = new Model(*defaultSphere);
      directionLightModel->transform.SetPosition(glm::vec3(1.0f, 3.0f, 0.0f));
      directionLightModel->transform.SetRotation(glm::vec3(-60, 0, 0));
      directionLightModel->transform.SetScale(glm::vec3(0.1f));

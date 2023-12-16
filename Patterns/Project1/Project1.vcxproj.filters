@@ -219,6 +219,12 @@
     <ClCompile Include="src\CameraObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\FollowCurveWithTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CubicBezierCurve.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Shader.h">
@@ -405,6 +411,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\CameraObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FollowCurveWithTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CubicBezierCurve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
