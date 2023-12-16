@@ -9,7 +9,7 @@ public:
 	FollowObject();
 	FollowObject(float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset);
 	FollowObject(Model* currentModel, Model* followModel,float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset);
-	FollowObject(GameObject* currentGameObject, GameObject* followObject,float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset);
+	FollowObject(GameObject* currentGameObject, GameObject* followObject, float time ,float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset);
 	~FollowObject();
 
 	 void Start() override;
@@ -27,6 +27,8 @@ private:
 	float accelerationRange;
 	float decelerationRange;
 	float followDistance;
+	float time;
+	float timeStep;
 
 	glm::vec3 followOffset;
 
@@ -34,6 +36,7 @@ private:
 	glm::vec3 targetPosition;
 
 	GameObject* gameobject;
+	GameObject* FollowGameObject;
 	float CalculateFollowSpeed(float distanceToTarget);
 };
 

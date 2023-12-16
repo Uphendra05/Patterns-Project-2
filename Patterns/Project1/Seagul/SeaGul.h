@@ -1,18 +1,22 @@
 #pragma once
+
 #include "../src/PhysicsEngine.h"
 #include "../src/GraphicsRender.h"
 #include "../src/LuaManager.h"
 #include "../src/LuaHandler.h"
 #include "../src/GameObject.h"
-class Canon : public GameObject
+
+
+class SeaGul : public GameObject
 {
 
 
 
 public:
 
-	Canon();
-	~Canon();
+	SeaGul();
+	SeaGul(Model* model);
+	~SeaGul();
 
 	void Start();
 	void Update();
@@ -20,8 +24,10 @@ public:
 
 	PhysicsObject* ballPhysics;
 	Transform* GetTransform() override;
-
+	LuaHandler* m_LuaHandler;
+	Model* copyModel;
 private:
+
 
 	GraphicsRender* render;
 	Shader* defaultshader;
@@ -30,5 +36,6 @@ private:
 
 	glm::vec3 Direction = glm::vec3(0, 0, 0);
 	float speed = 20;
+
 };
 

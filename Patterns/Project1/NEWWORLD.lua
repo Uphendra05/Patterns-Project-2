@@ -11,7 +11,7 @@
 SetGameObject("SHIP")
 BeginCommand("SERIES",3)
 
-         MoveTo(50,-2.5,-12,4)
+         MoveTo(50,-2.5,-12,4,1,0.5,"SINE","QUAD")
 
         FollowWithTime(4)
         AddPoint(50,-2.5,-12,    20,0,0)
@@ -21,7 +21,7 @@ BeginCommand("SERIES",3)
 
         SetLookAtOffset(0,-90,0)
        
-        MoveTo(-30,-2.5,-32,4)
+        MoveTo(-30,-2.5,-32,4,1,1,"QUAD","QUAD")
        
         FollowWithTime(4)
         AddPoint(-30,-2.5,-32,      -20,0,0)
@@ -37,9 +37,9 @@ SetGameObject("SHIP")
 BeginCommand("PARALLEL",3)
 
 WaitForSeconds(0.8)
-OrientTo(15,180,0,0.4)
+OrientTo(15,180,0,0.4,0.01,0.01,"QUART","QUART")
 WaitForSeconds(0.5)
-OrientTo(0,180,0,0.4)
+OrientTo(0,180,0,0.4, 0.02,0.02,"QUINT","QUART")
 
 Endcommand(2)
   
@@ -47,7 +47,7 @@ Endcommand(2)
 SetGameObject("ENEMYSHIP")
 BeginCommand("SERIES",3)
 
-MoveTo(-50,-2.5,12,4)
+MoveTo(-50,-2.5,12,4,1,1,"EXPO","CIRC")
 
     FollowWithTime(4)
     AddPoint(-50,-2.5,12,    -20,0,0)
@@ -56,7 +56,7 @@ MoveTo(-50,-2.5,12,4)
 
     SetLookAtOffset(0,90,0)
 
-    MoveTo(30,-2.5,32,4)
+    MoveTo(30,-2.5,32,4,1,1,"CIRC","EXPO")
 
     FollowWithTime(4)
     AddPoint(30,-2.5,32,    20,0,0)
@@ -72,9 +72,9 @@ BeginCommand("PARALLEL",3)
 
 
 WaitForSeconds(0.8)
-OrientTo(15,0,0,0.4)
+OrientTo(15,0,0,0.4,0.01,0.01,"CIRC","EXPO")
 WaitForSeconds(0.5)
-OrientTo(0,0,0,0.4)
+OrientTo(0,0,0,0.4,0.02,0.02,"SINE","QUAD" )
 
 
 
@@ -85,35 +85,69 @@ BeginCommand("SERIES",3)
 
 
 
-    FollowWithTime(6)
-    AddPoint(0,-25,-120,    0,25,0)
-    AddPoint(0,-30,120,    0,25,0)
-    AddPoint(120,-30,120,    0,25,0)
-    AddPoint(-120,25,120,    25,0,0)
-    AddPoint(-220,-25,120,    0,25,0)
-    AddPoint(100, 25,120,    0,-25,0)
-    AddPoint(200, -25,120,    0,25,0)
-    SetLookAtBool(1)
+    FollowWithTime(15)
+    AddPoint(0,-25,-120,    0,27,0)
+    AddPoint(0,-30,120,    0,27,0)
+     SetLookAtBool(1)
     SetLookAtOffset(0,180,0)
+  
+   
 
    -- OrientTo(0,180,0,0);
 
 
 Endcommand(2)
 
+
+SetGameObject("Bullet")
+BeginCommand("SERIES",3)
+
+
+
+   --ScaleTo(1,1,1,0)
+
+   WaitForSeconds(0.9)
+   
+   FollowWithTime(1)
+    AddPoint(10,-4.5,12,    0,10,0)
+    AddPoint(10,-4.5,-12,    0,10,0)
+   
+
+   -- OrientTo(0,180,0,0);
+
+
+Endcommand(2)
+
+SetGameObject("Bullet2")
+BeginCommand("SERIES",3)
+
+
+
+   --ScaleTo(1,1,1,0)
+
+   WaitForSeconds(0.9)
+   
+   FollowWithTime(1)
+    AddPoint(-11,-4.5,-12,    0,10,0)
+    AddPoint(-11,-4.5,12,     0,10,0)
+   
+
+   -- OrientTo(0,180,0,0);
+
+
+Endcommand(2)
+
+
+
 SetGameObject("SHARK2")
 BeginCommand("SERIES",3)
 
 
 
-    FollowWithTime(6)
+    FollowWithTime(15)
     AddPoint(0,-25,-80,    0,25,0)
-    AddPoint(0,-30,80,    0,25,0)
-    AddPoint(120,-30,80,    0,25,0)
-    AddPoint(-120,25,80,    25,0,0)
-    AddPoint(-220,-25,80,    0,25,0)
-    AddPoint(100, 25,80,    0,-25,0)
-    AddPoint(200, -25,80,    0,25,0)
+    AddPoint(0,-30,120,    0,25,0)
+    
     SetLookAtBool(1)
     SetLookAtOffset(0,180,0)
 
@@ -125,13 +159,31 @@ Endcommand(2)
 
 
 SetGameObject("CAMERA")
-BeginCommand("SERIES",3)
+BeginCommand("PARALLEL",3)
 
-
-   --LookAt("SHARK",5)
+   MoveTo(91,13,-17,1)
+   LookAt("ENEMYSHIP",19)
    
 
 
 Endcommand(2)
 
+SetGameObject("Seagull")
+BeginCommand("SERIES",3)
 
+   FollowObject("SHIP",17, 20,2,1, 2,0,25,1)
+   --followGameObjectName,time,speed, acceleration, deceleration, distance, followOffsetX,followOffsetY,followOffsetZ
+
+  
+
+
+Endcommand(2)
+
+SetGameObject("SEAGUL2")
+BeginCommand("SERIES",3)
+
+   FollowObject("ENEMYSHIP",17, 20,2,1, 2,0,25,1)
+   --followGameObjectName,time,speed, acceleration, deceleration, distance, followOffsetX,followOffsetY,followOffsetZ
+
+
+Endcommand(2)

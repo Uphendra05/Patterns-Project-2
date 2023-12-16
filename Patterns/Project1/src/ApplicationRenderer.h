@@ -28,6 +28,9 @@
 #include "../Sea/Sea.h"
 #include "../Shark/Shark.h"
 #include "../Shark/SharkTwo.h"
+#include "../Seagul/SeaGul.h"
+#include "../Canon/Bullet.h"
+
 #include "CameraObject.h"
 
 #include "GameObject.h"
@@ -82,6 +85,10 @@ private:
 	Sea* sea;
 	Shark* shark;
 	SharkTwo* sharkTWo;
+	SeaGul* seaGul;
+	SeaGul* seaGul2;
+	Bullet* cannonBullet;
+	Bullet* cannonBullet2;
 	
 	CameraObject* cameraObject;
 

@@ -173,6 +173,23 @@ directionLightModel->isVisible = false;
      sharkTWo = new SharkTwo();
      sharkTWo->Start();
 
+     seaGul = new SeaGul();
+     seaGul->Start();
+
+     seaGul2 = new SeaGul();
+     seaGul2->Start();
+     seaGul2->model->id = "SEAGUL2";
+     seaGul2->SetGameObjectId(seaGul2->model->id);
+
+
+     cannonBullet = new Bullet();
+     cannonBullet->Start();
+
+     cannonBullet2 = new Bullet();
+     cannonBullet2->Start();
+     cannonBullet2->model->id = "Bullet2";
+     cannonBullet2->SetGameObjectId(cannonBullet2->model->id);
+    
      cameraObject = new CameraObject();
      
  
@@ -315,7 +332,7 @@ void ApplicationRenderer::PostRender()
 
     //spaceshipEntity->Update(deltaTime);
     //DrawDebugModelAABB(spaceshipEntity->SpaceShipPhysics->UpdateAABB());
-
+    std::cout << "Camera :" << camera.transform.position.x << " , " << camera.transform.position.y << " , " << camera.transform.position.z << std::endl;
     if (updateCommands)
     {
         CommandManager::GetInstance().Update(deltaTime);
