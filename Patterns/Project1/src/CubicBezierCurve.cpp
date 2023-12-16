@@ -91,8 +91,8 @@ void CubicBezierCurve::AddPoint(CubicBezierPoint point)
 
 
 	Model* cube = new Model(*defaultcube);
-
-	cube->transform.SetScale(glm::vec3(0.2f));
+	cube->transform.SetPosition(point.point);
+	cube->transform.SetScale(glm::vec3(0.5f));
 	//renderer->AddModelsAndShader(cube, shader);
 
 	listOfDebugCubeModels.push_back(cube);

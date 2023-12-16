@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependencies\glad\src\glad.c" />
+    <ClCompile Include="src\LookAt.cpp" />
     <ClCompile Include="src\Asteroid.cpp" />
     <ClCompile Include="src\AsteroidGroups.cpp" />
     <ClCompile Include="src\CameraObject.cpp" />
@@ -204,6 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="src\LookAt.h" />
     <ClInclude Include="src\Asteroid.h" />
     <ClInclude Include="src\AsteroidGroups.h" />
     <ClInclude Include="src\CameraObject.h" />

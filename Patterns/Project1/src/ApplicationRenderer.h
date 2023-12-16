@@ -21,7 +21,7 @@
 #include "CommandManager.h"
 #include "SpaceShip.h"
 #include "Ball.h"
-
+#include "CameraObject.h"
 
 #include "GameObject.h"
 struct ModelData

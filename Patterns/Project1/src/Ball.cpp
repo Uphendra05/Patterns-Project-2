@@ -27,7 +27,7 @@ void Ball::LoadModel()
 	model = new Model(*cube);
 	model->id = "BALL";
 	SetGameObjectId(model->id);
-	model->transform.SetPosition(glm::vec3(0));
+	model->transform.SetPosition(glm::vec3(1));
 	render->AddModelsAndShader(model, defaultshader);
 
 

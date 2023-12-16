@@ -154,7 +154,15 @@ directionLightModel->isVisible = false;
 
 
 
+     CameraObject* cameraObject = new CameraObject();
      Ball* ball = new Ball();
+
+     Ball* ball2 = new Ball();
+     ball2->SetGameObjectId("BALL2");
+     ball2->GetTransform()->SetPosition(camera.GetTransform()->position);
+
+
+
 
      render.selectedModel = nullptr;
 

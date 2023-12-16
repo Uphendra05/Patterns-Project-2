@@ -75,7 +75,6 @@ void FollowCurveWithTime::Update(float deltatime)
 	glm::vec3 rotationOffset = Lerp(startPos.rotationOffset, targetPos.rotationOffset, lerpValue);
 
 	curve->DrawCurve();
-	//Debugger::Print("Rotation		:", gameObject->GetTransform()->rotation);
 
 	if (!lookAtTangent) return;
 
@@ -86,11 +85,6 @@ void FollowCurveWithTime::Update(float deltatime)
 	totalRotation.x = gameObject->GetTransform()->rotation.x + lookAtOffset.x + rotationOffset.x;
 	totalRotation.y = gameObject->GetTransform()->rotation.y + lookAtOffset.y + rotationOffset.y;
 	totalRotation.z = gameObject->GetTransform()->rotation.z + lookAtOffset.z + rotationOffset.z;
-
-	/*Debugger::Print("LookAtOffset   :", lookAtOffset);
-	Debugger::Print("RotationOffset :", rotationOffset);
-	Debugger::Print("Total			:", totalRotation);
-	std::cout << std::endl;*/
 
 	gameObject->GetTransform()->SetRotation(totalRotation);
 }

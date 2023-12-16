@@ -9,6 +9,7 @@
 #include "Sphere.h"
 #include "RotateAlongAxisWithTime.h"
 #include "FollowCurveWithTime.h"
+#include "LookAt.h"
 
 LuaManager::LuaManager()
 {
@@ -39,6 +40,9 @@ void LuaManager::RegisterCommands(lua_State* L)
 	lua_register(L, "RotateAlongAxisWithTime", LuaRotateAlongAxis);
 	lua_register(L, "FollowWithTime", LuaFollowWithTime);
 	lua_register(L, "AddPoint", LuaAddPoint);
+	lua_register(L, "SetLookAtOffset", LuaSetLookAtOffset);
+	lua_register(L, "SetLookAtBool", LuaSetLookAtBool);
+	lua_register(L, "LookAt", LuatLookAt);
 
 }
 
@@ -528,8 +532,6 @@ int LuaManager::LuaAddPoint(lua_State* L)
 
 		command->AddPoint(point, controlPoint, rotationOffset);
 
-
-		// Get Lookat
 		return 1;
 
 	}
@@ -555,6 +557,59 @@ int LuaManager::LuaAddPoint(lua_State* L)
 		return 1;
 	}
 
+
+	return 0;
+}
+
+int LuaManager::LuaSetLookAtOffset(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	FollowCurveWithTime* command = dynamic_cast<FollowCurveWithTime*>(CommandManager::GetInstance().CurrentCommand);
+
+	float x = static_cast<float>(lua_tonumber(L, 1));
+	float y = static_cast<float>(lua_tonumber(L, 2));
+	float z = static_cast<float>(lua_tonumber(L, 3));
+
+	glm::vec3 lookAtOffset(x, y, z);
+
+
+	command->SetLookAtOffset(lookAtOffset);
+
+
+	return 0;
+}
+
+int LuaManager::LuaSetLookAtBool(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	FollowCurveWithTime* command = dynamic_cast<FollowCurveWithTime*>(CommandManager::GetInstance().CurrentCommand);
+
+	int boolValue = lua_tonumber(L, 1);
+
+	command->SetLookAtTangent((bool)boolValue);
+
+	return 0;
+}
+
+int LuaManager::LuatLookAt(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	std::string lookAtObjectName = lua_tostring(L, 1);
+	float time = static_cast<float>(lua_tonumber(L, 2));
+
+	GameObject* lookAtGameObject = GetInstance().FindGameObject(lookAtObjectName);
+
+	GameObject* currentGameObject = GetInstance().gameObject;
+
+	std::cout << "Current Object :" << currentGameObject->id << std::endl;
+	std::cout << "lookAtGameObject  :" << lookAtGameObject->id << std::endl;
+
+	Command* command = new LookAt(currentGameObject, lookAtGameObject, time);
+
+	CommandManager::GetInstance().AddCommands(command);
 
 	return 0;
 }
