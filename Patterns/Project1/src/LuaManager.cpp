@@ -390,23 +390,26 @@ int LuaManager::LuaFollowObject(lua_State* L)
 	int paramLength = lua_gettop(L);
 
 	std::string followObjectName = lua_tostring(L, 1);
+	float time = lua_tonumber(L, 2);
 
-	float speed = static_cast<float>(lua_tonumber(L, 2));
-	float acceleration = static_cast<float>(lua_tonumber(L, 3));
-	float deceleration = static_cast<float>(lua_tonumber(L, 4));
-	float distance = static_cast<float>(lua_tonumber(L, 5));
+	float speed = static_cast<float>(lua_tonumber(L, 3));
+	float acceleration = static_cast<float>(lua_tonumber(L, 4));
+	float deceleration = static_cast<float>(lua_tonumber(L, 5));
+	float distance = static_cast<float>(lua_tonumber(L, 6));
 
-	float x = static_cast<float>(lua_tonumber(L, 6));
-	float y = static_cast<float>(lua_tonumber(L, 7));
-	float z = static_cast<float>(lua_tonumber(L, 8));
+	float x = static_cast<float>(lua_tonumber(L, 7));
+	float y = static_cast<float>(lua_tonumber(L, 8));
+	float z = static_cast<float>(lua_tonumber(L, 9));
 
 	glm::vec3 followOffset{ x,y,z };
 
 	Model* targetModel = GetInstance().FindModel(followObjectName);
 
+	GameObject* followGameObject = GetInstance().FindGameObject(followObjectName);
+
 	Command* command = nullptr;
 
-	command = new FollowObject(GetInstance().model, targetModel, speed, acceleration, deceleration, distance, followOffset);
+	command = new FollowObject(GetInstance().gameObject, followGameObject,time,speed, acceleration, deceleration, distance, followOffset);
 
 	CommandManager::GetInstance().AddCommands(command);
 

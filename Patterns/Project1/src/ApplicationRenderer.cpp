@@ -330,7 +330,7 @@ void ApplicationRenderer::ProcessInput(GLFWwindow* window)
 
   //  if (!updateCommands)
     {
-        float cameraSpeed = 20;
+        float cameraSpeed = 50;
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         {
             camera.ProcessKeyboard(FORWARD, deltaTime * cameraSpeed);

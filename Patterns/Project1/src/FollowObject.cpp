@@ -27,9 +27,17 @@ FollowObject::FollowObject(Model* currentModel, Model* followModel, float maxFol
     this->FollowModel = followModel;
 }
 
-FollowObject::FollowObject(GameObject* currentGameObject, GameObject* followObject, float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset)
+FollowObject::FollowObject(GameObject* currentGameObject, GameObject* followObject, float time, float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset)
 {
-   // this
+    this->gameobject = currentGameObject;
+    this->FollowGameObject = followObject;
+
+    this->maxFollowSpeed = maxFollowSpeed;
+    this->accelerationRange = accelerationRange;
+    this->decelerationRange = decelerationRange;
+    this->followDistance = followDistance;
+    this->followOffset = followOffset;
+    this->time = time;
 }
 
 FollowObject::~FollowObject()
@@ -38,29 +46,29 @@ FollowObject::~FollowObject()
 
 void FollowObject::Start()
 {
-    glm::vec3 direction = (FollowModel->transform.position - model->transform.position);
-    model->transform.SetPosition(followOffset + direction * followDistance);
+    glm::vec3 direction = (FollowGameObject->GetTransform()->position - gameobject->GetTransform()->position);
+
+    gameobject->GetTransform()->SetPosition(followOffset + direction * followDistance);
+    timeStep = 0;
 }
 
 void FollowObject::Update(float deltatime)
 {
-    if (!isStart) {
-        return; 
-    }
+    timeStep += deltatime;
 
-    glm::vec3 direction = glm::normalize(FollowModel->transform.position - model->transform.position);
-    float distanceToTarget = glm::length(FollowModel->transform.position - model->transform.position);
+    glm::vec3 direction = glm::normalize(FollowGameObject->GetTransform()->position - gameobject->GetTransform()->position);
+    float distanceToTarget = glm::length(FollowGameObject->GetTransform()->position - gameobject->GetTransform()->position);
     float followSpeed = CalculateFollowSpeed(distanceToTarget);
 
-    glm::vec3 newPosition = model->transform.position + direction * followSpeed * deltatime;
+    glm::vec3 newPosition = gameobject->GetTransform()->position + direction * followSpeed * deltatime;
 
-    glm::vec3 followPosition = FollowModel->transform.position - direction * followDistance + followOffset;
+    glm::vec3 followPosition = FollowGameObject->GetTransform()->position - direction * followDistance + followOffset;
 
   //float smoothingFactor = glm::clamp(deltatime * 1, 0.0f, 1.0f);
 
     newPosition = glm::mix(newPosition, followPosition, deltatime * 1);
 
-    model->transform.SetPosition(newPosition);
+    gameobject->GetTransform()->SetPosition(newPosition);
 }
 
 void FollowObject::SetStarted(bool isStarted)
@@ -70,6 +78,10 @@ void FollowObject::SetStarted(bool isStarted)
 
 bool FollowObject::IsComplete()
 {
+    if (timeStep>= time)
+    {
+        return true;
+    }
 	return false;
 }
 

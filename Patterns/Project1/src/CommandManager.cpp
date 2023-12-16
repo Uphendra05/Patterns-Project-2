@@ -85,7 +85,11 @@ void CommandManager::Update(float deltatime)
 		for (size_t i = 0; i < commandGroupList.size(); i++)
 		{
 
-			commandGroupList[i]->Update(deltatime);
+			if (commandGroupList[i]->isCollisionTrigger)
+			{
+				commandGroupList[i]->Update(deltatime);
+			}
+			
 
 			if (commandGroupList[i]->isDone())
 			{

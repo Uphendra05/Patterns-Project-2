@@ -14,7 +14,9 @@
   
 
      SetGameObject("BALL2")
-        BeginCommand("SERIES", 2)
+        BeginCommand("PARALLEL", 2)
        
+        FollowObject("BALL",7, 20,2,1, 2,0,0,1)
         LookAt("BALL",7)
+        --followGameObjectName,time,speed, acceleration, deceleration, distance, followOffsetX,followOffsetY,followOffsetZ
         Endcommand(2) 
