@@ -1,0 +1,11 @@
+Model Information:
+* title:	Lowpoly handpainted stylized shark
+* source:	https://sketchfab.com/3d-models/lowpoly-handpainted-stylized-shark-e5118d7d84da4ac9986c0ae8c92eaf49
+* author:	danieljin (https://sketchfab.com/danieljin)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Lowpoly handpainted stylized shark" (https://sketchfab.com/3d-models/lowpoly-handpainted-stylized-shark-e5118d7d84da4ac9986c0ae8c92eaf49) by danieljin (https://sketchfab.com/danieljin) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

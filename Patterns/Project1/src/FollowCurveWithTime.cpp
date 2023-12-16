@@ -82,6 +82,7 @@ void FollowCurveWithTime::Update(float deltatime)
 	if (currentPointIndex >= curve->GetCurveCount() - 2) return;
 
 	gameObject->GetTransform()->SetOrientationFromDirections(up, right);
+	//lookAtOffset = glm::vec3(0, -90, 0);
 	glm::vec3 totalRotation;
 	totalRotation.x = gameObject->GetTransform()->rotation.x + lookAtOffset.x + rotationOffset.x;
 	totalRotation.y = gameObject->GetTransform()->rotation.y + lookAtOffset.y + rotationOffset.y;
@@ -91,6 +92,8 @@ void FollowCurveWithTime::Update(float deltatime)
 	Debugger::Print("RotationOffset :", rotationOffset);
 	Debugger::Print("Total			:", totalRotation);
 	std::cout << std::endl;*/
+	
+	
 
 	gameObject->GetTransform()->SetRotation(totalRotation);
 }

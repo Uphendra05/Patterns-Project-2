@@ -112,7 +112,8 @@ void ApplicationRenderer::Start()
     Model* Sphere = new Model((char*)"Models/DefaultSphere/Sphere.ply", true);
      defaultBox = new Model("Models/Box/DefaultCube.fbx");
 
-
+     Singleton::GetInstance().SetDefaultCube(defaultBox);
+     Singleton::GetInstance().SetDefaultSphere(Sphere);
    
 
      Model* directionLightModel = new Model(*Sphere);
@@ -165,6 +166,9 @@ directionLightModel->isVisible = false;
 
      sea = new Sea();
      sea->Start();
+
+     shark = new Shark();
+     shark->Start();
 
  
 
@@ -326,7 +330,7 @@ void ApplicationRenderer::ProcessInput(GLFWwindow* window)
 
   //  if (!updateCommands)
     {
-        float cameraSpeed = 20;
+        float cameraSpeed = 50;
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         {
             camera.ProcessKeyboard(FORWARD, deltaTime * cameraSpeed);

@@ -26,6 +26,7 @@
 #include "../Ship/WaterShip.h"
 #include "../EnemyShip/WaterShipEnemy.h"
 #include "../Sea/Sea.h"
+#include "../Shark/Shark.h"
 
 
 #include "GameObject.h"
@@ -78,6 +79,7 @@ private:
 	WaterShip* ship;
 	WaterShipEnemy* enemyShip;
 	Sea* sea;
+	Shark* shark;
 	
 	GLFWwindow* window;
 

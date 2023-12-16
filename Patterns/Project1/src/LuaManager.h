@@ -21,7 +21,7 @@ class ScaleTo;
 class RotateAlongAxisWithTime;
 class FollowCurveWithTime;
 class SphereTest;
-
+class LookAt;
 class LuaManager
 {
 public:
@@ -81,6 +81,11 @@ private:
 
 	static  int LuaFollowWithTime(lua_State* L);
 	static  int LuaAddPoint(lua_State* L);
+
+	static  int LuaSetLookAtOffset(lua_State* L);
+	static  int LuaSetLookAtBool(lua_State* L);
+
+	static  int LuatLookAt(lua_State* L);
 
 	Model* model;
 	GameObject* gameObject;

@@ -22,7 +22,7 @@ void WaterShip::Start()
 	model = new Model("Models/Ship/Ship.obj");
 	model->id = "SHIP";
 	SetGameObjectId(model->id);
-	model->transform.SetPosition(glm::vec3(-10, -2.5, -12));
+	model->transform.SetPosition(glm::vec3(-30, -2.5, -12));
 	model->transform.SetRotation(glm::vec3(0,180,0));
 	render->AddModelsAndShader(model, defaultshader);
 

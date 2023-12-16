@@ -1,39 +1,41 @@
-#include "WaterShipEnemy.h"
+#include "Shark.h"
 #include "../src/Singleton.h"
 
-
-WaterShipEnemy::WaterShipEnemy()
+Shark::Shark()
 {
-
 	this->render = Singleton::GetInstance().GetRenderer();
 	this->defaultshader = Singleton::GetInstance().GetDefaultShader();
 	this->engine = Singleton::GetInstance().GetPhysicsEngine();
 	Singleton::GetInstance().AddGameObject(this);
+
+
+
 }
 
-WaterShipEnemy::~WaterShipEnemy()
+Shark::~Shark()
 {
 }
 
-void WaterShipEnemy::Start()
+void Shark::Start()
 {
 
-	model = new Model("Models/Ship/Ship2.obj");
-	model->id = "ENEMYSHIP";
+	model = new Model("Models/Shark/Shark.obj");
+	model->id = "SHARK";
 	SetGameObjectId(model->id);
-	model->transform.SetPosition(glm::vec3(30,-2.5,12));
+	model->transform.SetPosition(glm::vec3(0, -25, -120));
+	model->transform.SetScale(glm::vec3(12,10,12));
 	render->AddModelsAndShader(model, defaultshader);
 }
 
-void WaterShipEnemy::Update()
+void Shark::Update()
 {
 }
 
-void WaterShipEnemy::End()
+void Shark::End()
 {
 }
 
-Transform* WaterShipEnemy::GetTransform()
+Transform* Shark::GetTransform()
 {
 	return &model->transform;
 }
