@@ -38,6 +38,8 @@ public:
 
 	bool isDone();
 
+	bool isCollisionTrigger = true;
+
 	CommandGroupType groupType = SERIES;
 	
 

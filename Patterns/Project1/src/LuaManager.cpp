@@ -10,6 +10,9 @@
 #include "RotateAlongAxisWithTime.h"
 #include "FollowCurveWithTime.h"
 #include "LookAt.h"
+#include "Ball.h"
+#include "SpawnObject.h"
+#include "../Barrel/Barrel.h"
 
 LuaManager::LuaManager()
 {
@@ -43,6 +46,7 @@ void LuaManager::RegisterCommands(lua_State* L)
 	lua_register(L, "SetLookAtOffset", LuaSetLookAtOffset);
 	lua_register(L, "SetLookAtBool", LuaSetLookAtBool);
 	lua_register(L, "LookAt", LuatLookAt);
+	lua_register(L, "SetCollisionTrigger", LuaSetCollisionTrigger);
 
 }
 
@@ -129,6 +133,14 @@ void LuaManager::AddModelsInMap(Model* model)
 	if (model!=nullptr)
 	{
 		modelMap[model->id] = model;
+	}
+}
+
+void LuaManager::AddGameObjectInMap(GameObject* gameObject , const std::string& tag)
+{
+	if (gameObject != nullptr)
+	{
+		gameObjectMap[tag] = gameObject;
 	}
 }
 
@@ -361,11 +373,11 @@ int LuaManager::LuaScaleToWrapper(lua_State* L)
 	float time = static_cast<float>(lua_tonumber(L, 4));
 
 
-	Model* model = GetInstance().model;
+	//Model* model = GetInstance().model;
 
 	GameObject* gameObject = GetInstance().gameObject;
 
-	Command* command = new ScaleTo(model, targetScale, time);
+	Command* command = new ScaleTo(gameObject, targetScale, time);
 
 	CommandManager::GetInstance().AddCommands(command);
 
@@ -421,13 +433,45 @@ int LuaManager::LuaSpawnGameObject(lua_State* L)
 {
 	int paramLength = lua_gettop(L);
 	std::string GameObjectName = lua_tostring(L, 1);
+	float time = static_cast<float>(lua_tonumber(L, 2));
 
 	if (GameObjectName =="SphereTest")
 	{
-		GameObject* gameObject = new SphereTest();
 		
+		
+		
+	}
+	if (GameObjectName == "BARREL")
+	{
+		//GameObject* gameObject = new Barrel();
 
-		GetInstance().AddModelsInMap(gameObject->model);
+		Barrel*barrel = new Barrel();
+		barrel->Start();
+		barrel->model->transform.SetPosition(glm::vec3(20, -3, 5));
+		barrel->model->isVisible = false;
+
+		GetInstance().AddGameObjectInMap(barrel, "BARREL");
+
+		Command* command = new SpawnObject(barrel, time);
+
+		CommandManager::GetInstance().AddCommands(command);
+
+	}
+	else if(GameObjectName == "BARREL2")
+	{
+		Barrel* barrel2 = new Barrel();
+		barrel2->Start();
+		barrel2->model->id = "BARREL2";
+		barrel2->SetGameObjectId(barrel2->model->id);
+		barrel2->model->transform.SetPosition(glm::vec3(-20, -3, 5));
+		barrel2->model->isVisible = false;
+
+		GetInstance().AddGameObjectInMap(barrel2, "BARREL2");
+
+		Command* command = new SpawnObject(barrel2, time);
+
+		CommandManager::GetInstance().AddCommands(command);
+
 	}
 
 
@@ -613,6 +657,22 @@ int LuaManager::LuatLookAt(lua_State* L)
 	Command* command = new LookAt(currentGameObject, lookAtGameObject, time);
 
 	CommandManager::GetInstance().AddCommands(command);
+
+	return 0;
+}
+
+int LuaManager::LuaSetCollisionTrigger(lua_State* L)
+{
+	int paramLength = lua_gettop(L);
+
+	int isTriggerTrue = lua_tonumber(L, 1);
+
+	CommandGroup* currentGroup = CommandManager::GetInstance().currentCommandGroup;
+
+	if (currentGroup!=nullptr)
+	{
+		currentGroup->isCollisionTrigger = false;
+	}
 
 	return 0;
 }

@@ -21,11 +21,15 @@ public:
 
 
 	Command* CurrentCommand = nullptr;
+	CommandGroup* currentCommandGroup = nullptr;
+
+	CommandGroup* GetLastCommandGroup();
+
 	bool isCommandExists(Command* command);
 private:
 
 
-	CommandGroup* currentCommandGroup = nullptr;
+	
 	std::vector<CommandGroup*> commandGroupList;
 	
 };

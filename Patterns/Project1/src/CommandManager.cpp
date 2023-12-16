@@ -85,7 +85,11 @@ void CommandManager::Update(float deltatime)
 		for (size_t i = 0; i < commandGroupList.size(); i++)
 		{
 
-			commandGroupList[i]->Update(deltatime);
+			if (commandGroupList[i]->isCollisionTrigger)
+			{
+				commandGroupList[i]->Update(deltatime);
+			}
+			
 
 			if (commandGroupList[i]->isDone())
 			{
@@ -93,6 +97,11 @@ void CommandManager::Update(float deltatime)
 			}
 		}
 	}
+}
+
+CommandGroup* CommandManager::GetLastCommandGroup()
+{
+	return commandGroupList[commandGroupList.size() - 1];
 }
 
 bool CommandManager::isCommandExists(Command* command)

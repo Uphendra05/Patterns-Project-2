@@ -1,37 +1,38 @@
-#include "Bullet.h"
+#include "Barrel.h"
 #include "../src/Singleton.h"
-Bullet::Bullet()
+
+Barrel::Barrel()
 {
+
 	this->render = Singleton::GetInstance().GetRenderer();
 	this->defaultshader = Singleton::GetInstance().GetDefaultShader();
 	this->engine = Singleton::GetInstance().GetPhysicsEngine();
 	Singleton::GetInstance().AddGameObject(this);
 }
 
-Bullet::~Bullet()
+Barrel::~Barrel()
 {
 }
 
-void Bullet::Start()
+void Barrel::Start()
 {
-
-	model = new Model("Models/Bullet/Bullet.obj");
-	model->id = "Bullet";
+	model = new Model("Models/Barrel/Barrel.obj");
+	model->id = "BARREL";
 	SetGameObjectId(model->id);
-	model->transform.SetPosition(glm::vec3(30, 6.5, 12));
-	model->transform.SetScale(glm::vec3(0));
+	model->transform.SetPosition(glm::vec3(0, 0, 0));
+	model->transform.SetScale(glm::vec3(2));
 	render->AddModelsAndShader(model, defaultshader);
 }
 
-void Bullet::Update()
+void Barrel::Update()
 {
 }
 
-void Bullet::End()
+void Barrel::End()
 {
 }
 
-Transform* Bullet::GetTransform()
+Transform* Barrel::GetTransform()
 {
-    return &model->transform;
+	return &model->transform;
 }

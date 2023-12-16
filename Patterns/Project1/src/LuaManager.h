@@ -22,7 +22,8 @@ class RotateAlongAxisWithTime;
 class FollowCurveWithTime;
 class SphereTest;
 class LookAt;
-class Canon;
+class Ball;
+class Barrel;
 
 class LuaManager
 {
@@ -46,7 +47,7 @@ public:
 	void FindModelBasedOnName(const std::string& name);
 	void FindGameObjectBasedOnName(const std::string& name);
 	void AddModelsInMap(Model* model);
-	void AddGetGamobjectMap(GameObject* gameobject);
+	void AddGameObjectInMap(GameObject* model, const std::string& tag);
 
 	bool CheckLua(lua_State* L, int r);
 
@@ -89,6 +90,10 @@ private:
 	static  int LuaSetLookAtBool(lua_State* L);
 
 	static  int LuatLookAt(lua_State* L);
+
+	static  int LuaSetCollisionTrigger(lua_State* L);
+
+
 
 	Model* model;
 	GameObject* gameObject;

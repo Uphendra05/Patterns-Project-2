@@ -30,6 +30,7 @@
 #include "../Shark/SharkTwo.h"
 #include "../Seagul/SeaGul.h"
 #include "../Canon/Bullet.h"
+#include "../Barrel/Barrel.h"
 
 #include "CameraObject.h"
 
@@ -89,6 +90,7 @@ private:
 	SeaGul* seaGul2;
 	Bullet* cannonBullet;
 	Bullet* cannonBullet2;
+	Barrel* barrel;
 	
 	CameraObject* cameraObject;
 

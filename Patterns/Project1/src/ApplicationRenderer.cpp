@@ -160,9 +160,11 @@ directionLightModel->isVisible = false;
 
      ship = new WaterShip();
      ship->Start();
+     ship->AddPhysics();
      
      enemyShip = new WaterShipEnemy();
      enemyShip->Start();
+     enemyShip->AddPhysics();
 
      sea = new Sea();
      sea->Start();
@@ -189,11 +191,54 @@ directionLightModel->isVisible = false;
      cannonBullet2->Start();
      cannonBullet2->model->id = "Bullet2";
      cannonBullet2->SetGameObjectId(cannonBullet2->model->id);
-    
+
+     //barrel = new Barrel();
+     //barrel->Start();
+     //barrel->model->transform.SetPosition(glm::vec3(2, -3, 0));
+
+
+     //Barrel* barrel2 = new Barrel();
+     //barrel2->Start();
+     //barrel2->model->id = "BARREL2";
+     //barrel2->SetGameObjectId(barrel2->model->id);
+     //barrel2->model->transform.SetPosition(glm::vec3(0, -3, 2));
+
      cameraObject = new CameraObject();
      
- 
+     Model* Box1Trigger = new Model(*defaultBox);
+     
+     Box1Trigger->transform.SetPosition(glm::vec3(10, -4.5, -12));
+     Box1Trigger->transform.SetScale(glm::vec3(3));
 
+     render.AddModelsAndShader(Box1Trigger, defaultShader);
+
+     PhysicsObject* box1Phy = new PhysicsObject(Box1Trigger);
+     box1Phy->Initialize(AABB, true, DYNAMIC);
+     box1Phy->gravityValue = 0;
+
+         box1Phy->DoCollisionCall([this](PhysicsObject* other)
+         {
+             if (other->model->id == "SHIP" || other->model->id == "ENEMYSHIP")
+             {
+               
+                 if (!CommandManager::GetInstance().GetLastCommandGroup()->isCollisionTrigger)
+                 {
+                     CommandManager::GetInstance().GetLastCommandGroup()->isCollisionTrigger = true;
+                 }
+             }
+
+         });
+
+         PhysicsEngine.AddPhysicsObjects(box1Phy);
+
+
+
+     Model* Box2Trigger = new Model(*defaultBox);
+
+     Box2Trigger->transform.SetPosition(glm::vec3(-11, -4.5, 12));
+     Box2Trigger->transform.SetScale(glm::vec3(3));
+
+     render.AddModelsAndShader(Box2Trigger, defaultShader);
      //LightRenderer
      lightManager.AddNewLight(directionLight);
 
@@ -332,7 +377,7 @@ void ApplicationRenderer::PostRender()
 
     //spaceshipEntity->Update(deltaTime);
     //DrawDebugModelAABB(spaceshipEntity->SpaceShipPhysics->UpdateAABB());
-    std::cout << "Camera :" << camera.transform.position.x << " , " << camera.transform.position.y << " , " << camera.transform.position.z << std::endl;
+    //std::cout << "Camera :" << camera.transform.position.x << " , " << camera.transform.position.y << " , " << camera.transform.position.z << std::endl;
     if (updateCommands)
     {
         CommandManager::GetInstance().Update(deltaTime);

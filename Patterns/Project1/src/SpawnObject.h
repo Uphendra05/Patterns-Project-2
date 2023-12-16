@@ -1,12 +1,13 @@
 #pragma once
-#include "model.h"
-#include "GraphicsRender.h"
 
+
+#include "GameObject.h"
 #include "Command.h"
+
 class SpawnObject :public Command
 {
 public:
-	SpawnObject();
+	SpawnObject(GameObject* gameObject, float time);
 	~SpawnObject();
 
 	SpawnObject(Model* model);
@@ -23,5 +24,11 @@ public:
 private:
 
 	Model* model;
+
+	GameObject* gameObject;
+
+	float time;
+	float timeStep;
+
 };
 

@@ -11,7 +11,7 @@ public:
 	~Ball();
 
 	
-	PhysicsObject* ballPhysics;
+	PhysicsObject* shipPhysics;
 
 	void LoadModel();
 

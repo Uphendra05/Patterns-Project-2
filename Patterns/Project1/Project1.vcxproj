@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependencies\glad\src\glad.c" />
+    <ClCompile Include="Barrel\Barrel.cpp" />
     <ClCompile Include="Canon\Bullet.cpp" />
     <ClCompile Include="Seagul\SeaGul.cpp" />
     <ClCompile Include="Sea\Sea.cpp" />
@@ -213,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\stb_image.h" />
+    <ClInclude Include="Barrel\Barrel.h" />
     <ClInclude Include="Canon\Bullet.h" />
     <ClInclude Include="Seagul\SeaGul.h" />
     <ClInclude Include="Sea\Sea.h" />

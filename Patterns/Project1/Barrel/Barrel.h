@@ -5,14 +5,14 @@
 #include "../src/LuaHandler.h"
 #include "../src/GameObject.h"
 
-class Shark : public GameObject
+class Barrel : public GameObject
 {
-
-
 public:
 
-	Shark();
-	~Shark();
+
+	Barrel();
+	~Barrel();
+
 
 	void Start();
 	void Update();
@@ -32,5 +32,8 @@ private:
 
 	glm::vec3 Direction = glm::vec3(0, 0, 0);
 	float speed = 20;
+
+
+
 };
 

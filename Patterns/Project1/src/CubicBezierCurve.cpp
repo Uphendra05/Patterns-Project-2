@@ -31,7 +31,7 @@ void CubicBezierCurve::CalculateCurve()
 		Model* sphere = new Model(*defaultSphere);
 
 		sphere->transform.SetPosition(point.point);
-		sphere->transform.SetScale(glm::vec3(1.1f));
+		sphere->transform.SetScale(glm::vec3(.5f));
 
 		//renderer->AddModelsAndShader(sphere, shader);
 
@@ -92,7 +92,8 @@ void CubicBezierCurve::AddPoint(CubicBezierPoint point)
 
 	Model* cube = new Model(*defaultcube);
 	cube->transform.SetPosition(point.point);
-	cube->transform.SetScale(glm::vec3(1.1f));
+	
+	cube->transform.SetScale(glm::vec3(.6f));
 	//renderer->AddModelsAndShader(cube, shader);
 
 	listOfDebugCubeModels.push_back(cube);

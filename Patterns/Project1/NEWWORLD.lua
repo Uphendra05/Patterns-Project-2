@@ -93,9 +93,6 @@ BeginCommand("SERIES",3)
   
    
 
-   -- OrientTo(0,180,0,0);
-
-
 Endcommand(2)
 
 
@@ -104,16 +101,13 @@ BeginCommand("SERIES",3)
 
 
 
-   --ScaleTo(1,1,1,0)
-
    WaitForSeconds(0.9)
+   ScaleTo(0.9,0.9,0.9,0)
    
    FollowWithTime(1)
     AddPoint(10,-4.5,12,    0,10,0)
     AddPoint(10,-4.5,-12,    0,10,0)
    
-
-   -- OrientTo(0,180,0,0);
 
 
 Endcommand(2)
@@ -122,18 +116,13 @@ SetGameObject("Bullet2")
 BeginCommand("SERIES",3)
 
 
-
-   --ScaleTo(1,1,1,0)
-
    WaitForSeconds(0.9)
+   ScaleTo(0.9,0.9,0.9,0)
    
    FollowWithTime(1)
     AddPoint(-11,-4.5,-12,    0,10,0)
     AddPoint(-11,-4.5,12,     0,10,0)
-   
-
-   -- OrientTo(0,180,0,0);
-
+ 
 
 Endcommand(2)
 
@@ -151,9 +140,6 @@ BeginCommand("SERIES",3)
     SetLookAtBool(1)
     SetLookAtOffset(0,180,0)
 
-   -- OrientTo(0,180,0,0);
-
-
 Endcommand(2)
   
 
@@ -161,11 +147,9 @@ Endcommand(2)
 SetGameObject("CAMERA")
 BeginCommand("PARALLEL",3)
 
-   MoveTo(91,13,-17,1)
+  MoveTo(91,13,-17,1)
    LookAt("ENEMYSHIP",19)
    
-
-
 Endcommand(2)
 
 SetGameObject("Seagull")
@@ -173,8 +157,6 @@ BeginCommand("SERIES",3)
 
    FollowObject("SHIP",17, 20,2,1, 2,0,25,1)
    --followGameObjectName,time,speed, acceleration, deceleration, distance, followOffsetX,followOffsetY,followOffsetZ
-
-  
 
 
 Endcommand(2)
@@ -185,5 +167,19 @@ BeginCommand("SERIES",3)
    FollowObject("ENEMYSHIP",17, 20,2,1, 2,0,25,1)
    --followGameObjectName,time,speed, acceleration, deceleration, distance, followOffsetX,followOffsetY,followOffsetZ
 
+Endcommand(2)
+
+
+SetGameObject("BARREL")
+BeginCommand("SERIES",3)
+
+SetCollisionTrigger(0)
+SpawnObject("BARREL",0.1)
+SpawnObject("BARREL2",0.1)
+SetGameObject("BARREL2")
+--MoveTo(-20,-2,5,0)
+OrientTo(90,0,0,5);
+SetGameObject("BARREL")
+OrientTo(90,0,0,5);  
 
 Endcommand(2)

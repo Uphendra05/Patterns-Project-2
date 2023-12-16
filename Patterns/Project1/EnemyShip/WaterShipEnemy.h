@@ -16,7 +16,10 @@ public:
 	void Update();
 	void End();
 
-	PhysicsObject* ballPhysics;
+	void AddPhysics();
+
+
+	PhysicsObject* shipPhysics;
 	Transform* GetTransform() override;
 	LuaHandler* m_LuaHandler;
 

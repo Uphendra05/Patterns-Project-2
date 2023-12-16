@@ -15,6 +15,19 @@ WaterShipEnemy::~WaterShipEnemy()
 {
 }
 
+void WaterShipEnemy::AddPhysics()
+{
+	shipPhysics = new PhysicsObject(model);
+
+	shipPhysics->Initialize(AABB, false, STATIC);
+
+	shipPhysics->gravityValue = 0;
+
+	engine->AddPhysicsObjects(shipPhysics);
+
+
+}
+
 void WaterShipEnemy::Start()
 {
 
