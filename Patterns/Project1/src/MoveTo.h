@@ -1,16 +1,28 @@
 #pragma once
 
-#include "model.h"
+
+#include "GameObject.h"
+#include "EasingTechiques.h"
 #include "Command.h"
 
 class MoveTo : public Command
 {
 public:
 	MoveTo();
-	MoveTo(Model*& model, const glm::vec3& targetPosition);
-	MoveTo(Model*& model, const glm::vec3& targetPosition, const float& time);
-	MoveTo(Model*& model, const glm::vec3& targetPosition, const float& time, const float& easeIn);
-	MoveTo(Model*& model, const glm::vec3& targetPosition, const float& time, const float& easeIn, const float& easeOut);
+	MoveTo(Model*& model, const glm::vec3& endPosition);
+	MoveTo(Model*& model, const glm::vec3& endPosition, const float& time);
+	MoveTo(Model*& model, const glm::vec3& endPosition, const float& time, const float& easeIn);
+	MoveTo(Model*& model, const glm::vec3& endPosition, const float& time, const float& easeIn, const float& easeOut);
+
+
+	MoveTo(GameObject*& gameObject, const glm::vec3& endPosition);
+	MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time);
+	MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time, const float& easeIn);
+	MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time, const float& easeIn, const float& easeOut);
+
+	MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time, const float& easeIn,EaseType& easInType);
+	MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time, const float& easeIn, const float& easeOut,EaseType& easInType,  EaseType& easOutType);
+
 	 ~MoveTo();
 
 	void SetModel(Model& model);
@@ -27,13 +39,15 @@ public:
 	 glm::vec3 LerpObject(const glm::vec3& a, const glm::vec3& b, float t);
 
 
+	 EaseType EaseIn_State = EaseType::NONE;
+	 EaseType EaseOut_State = EaseType::NONE;
 
-	 static float EaseIn(float time);
-	 static float EaseOut(float time);
 
 private:
 	
-	Model* model;
+	Model* model = nullptr;
+
+	GameObject* gameObject;
 
 	bool isAnimationCompleted = false;
 

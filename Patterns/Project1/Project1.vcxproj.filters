@@ -398,6 +398,9 @@
     <ClInclude Include="src\RotateAlongAxisWithTime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\EasingTechiques.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Example.lua" />
@@ -458,5 +461,6 @@
     <None Include="World.lua" />
     <None Include="Shaders\StarDestroyer.frag" />
     <None Include="Shaders\StarDestroyer.vert" />
+    <None Include="NEWWORLD.lua" />
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@
 #include "model.h"
 #include "GraphicsRender.h"
 #include "PhysicsEngine.h"
-
+#include "EasingTechiques.h"
 
 class MoveTo;
 class OrientTo;
@@ -41,12 +41,16 @@ public:
 	
 
 	void FindModelBasedOnName(const std::string& name);
+	void FindGameObjectBasedOnName(const std::string& name);
 	void AddModelsInMap(Model* model);
 
 	bool CheckLua(lua_State* L, int r);
 
 	Model* FindModel(const std::string& name);
+	GameObject* FindGameObject(const std::string& name);
 	 Model* GetModel();
+
+
 
 	 std::map<std::string, Model*> modelMap;
 
@@ -75,6 +79,7 @@ private:
 	static  int LuaRotateAlongAxis(lua_State* L);
 
 	Model* model;
+	GameObject* gameObject;
 
 	GraphicsRender* renderer;
 	Shader* shader;

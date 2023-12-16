@@ -10,6 +10,9 @@ public:
 	~SphereTest();
 
 	void LoadModel();
+
+	Transform* GetTransform() override;
+
 private:
 
 	GraphicsRender* renderer;

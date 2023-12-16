@@ -9,6 +9,14 @@ MoveAlongAxisWithTime::MoveAlongAxisWithTime(Model* model, int Axis, float time,
 	this->speed = speed;
 }
 
+MoveAlongAxisWithTime::MoveAlongAxisWithTime(GameObject* gameObject, int Axis, float time, float speed)
+{
+	this->gameObject = gameObject;
+	this->axis = Axis;
+	this->time = time;
+	this->speed = speed;
+}
+
 MoveAlongAxisWithTime::~MoveAlongAxisWithTime()
 {
 }

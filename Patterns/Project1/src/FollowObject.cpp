@@ -27,6 +27,11 @@ FollowObject::FollowObject(Model* currentModel, Model* followModel, float maxFol
     this->FollowModel = followModel;
 }
 
+FollowObject::FollowObject(GameObject* currentGameObject, GameObject* followObject, float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset)
+{
+   // this
+}
+
 FollowObject::~FollowObject()
 {
 }

@@ -33,3 +33,8 @@ void SphereTest::LoadModel()
 	luaHandler->ExecuteScirpt(model);
 
 }
+
+Transform* SphereTest::GetTransform()
+{
+	return &model->transform;
+}

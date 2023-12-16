@@ -36,3 +36,13 @@ PhysicsEngine* Singleton::GetPhysicsEngine()
 {
 	return physicsEngine;
 }
+
+std::vector<GameObject*> Singleton::GetGameObjectList()
+{
+	return GameObejctsList;
+}
+
+void Singleton::AddGameObject(GameObject* gameObject)
+{
+	GameObejctsList.push_back(gameObject);
+}

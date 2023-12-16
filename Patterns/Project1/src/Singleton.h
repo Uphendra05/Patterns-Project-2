@@ -1,6 +1,7 @@
 #pragma once
 #include "GraphicsRender.h"
 #include "PhysicsEngine.h"
+#include "GameObject.h"
 
 class Singleton
 {
@@ -18,6 +19,8 @@ public:
 
 	PhysicsEngine* GetPhysicsEngine();
 
+	std::vector<GameObject*> GetGameObjectList();
+	void AddGameObject(GameObject* gameObject);
 
 private:
 
@@ -26,6 +29,7 @@ private:
 	GraphicsRender* renderer;
 	PhysicsEngine* physicsEngine;
 	Shader* defaultShader;
+	std::vector<GameObject*> GameObejctsList;
 
 };
 

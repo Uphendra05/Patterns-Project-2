@@ -3,19 +3,21 @@
 #include "GraphicsRender.h"
 #include "LuaManager.h"
 #include "LuaHandler.h"
-
-class Ball
+#include "GameObject.h"
+class Ball  :  public GameObject
 {
 public:
-	Ball(GraphicsRender& render, Shader* shader, PhysicsEngine& engine);
+	Ball();
 	~Ball();
 
-	Model* model;
+	
 	PhysicsObject* ballPhysics;
 
 	void LoadModel();
 
-	void Update(float deltaTime);
+	//void Update(float deltaTime);
+
+	Transform* GetTransform() override;
 
 	LuaHandler* m_LuaHandler;
 

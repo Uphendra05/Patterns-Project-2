@@ -1,13 +1,14 @@
 #pragma once
 
 
-#include "model.h"
+#include "GameObject.h"
 #include "Command.h"
 
 class MoveAlongAxisWithTime : public Command
 {
 public:
 	MoveAlongAxisWithTime(Model* model, int Axis, float time, float speed);
+	MoveAlongAxisWithTime(GameObject* gameObject, int Axis, float time, float speed);
 	~MoveAlongAxisWithTime();
 
 	void Start() override;
@@ -20,6 +21,7 @@ public:
 private:
 
 	Model* model;
+	GameObject* gameObject;
 
 	int axis;
 

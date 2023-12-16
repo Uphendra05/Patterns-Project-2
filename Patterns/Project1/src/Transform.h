@@ -12,7 +12,7 @@ public:
     Transform(const Transform& transform);
 
 
-    glm::vec3 position;
+    glm::vec3 position = glm::vec3(0);
     glm::vec3 scale;
     glm::vec3 rotation;
     glm::quat quaternionRotation;

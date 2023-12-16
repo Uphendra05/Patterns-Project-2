@@ -43,6 +43,71 @@ OrientTo::OrientTo(Model*& model, const glm::vec3& endRotation, const float& tim
 	this->easeOutStart = easeOut;
 }
 
+OrientTo::OrientTo(GameObject*& gameobject, const glm::vec3& endRotation)
+{
+
+	this->gameObject = gameobject;
+	this->endRotation = endRotation;
+}
+
+OrientTo::OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time)
+{
+	this->gameObject = gameobject;
+	this->endRotation = endRotation;
+	this->time = time;
+
+
+}
+
+OrientTo::OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time, const float& easeIn)
+{
+	this->gameObject = gameobject;
+	this->endRotation = endRotation;
+	this->time = time;
+
+	this->easeInTime =easeIn;
+
+	
+}
+
+OrientTo::OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time, const float& easeIn, const float& easeOut)
+{
+	this->gameObject = gameobject;
+	this->endRotation = endRotation;
+	this->time = time;
+
+	this->easeInTime - easeIn;
+	this->easeOutTime = easeOut;
+}
+
+OrientTo::OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time, const float& easeIn, const float& easeOut, EaseType& easeInType)
+{
+	this->gameObject = gameobject;
+	this->endRotation = endRotation;
+	this->time = time;
+
+	this->easeInTime - easeIn;
+	this->easeOutTime = easeOut;
+
+	//Ease type
+	this->EaseIn_State = easeInType;
+}
+
+OrientTo::OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time, const float& easeIn, const float& easeOut, EaseType& easeInType, EaseType& easeOutType)
+{
+	this->gameObject = gameobject;
+	this->endRotation = endRotation;
+	this->time = time;
+
+	this->easeInTime - easeIn;
+	this->easeOutTime = easeOut;
+
+	//Ease type
+	this->EaseIn_State = easeInType;
+	this->EaseOut_State = easeOutType;
+
+}
+
 OrientTo::~OrientTo()
 {
 
@@ -88,12 +153,12 @@ void OrientTo::Update(float deltaTime)
 	}
 	else if (easeInTime != 0 && timeStep <= easeInRatio)
 	{
-		lerpValue = EaseIn(timeStep / easeInRatio);
+		lerpValue = EaseIn(EaseIn_State,timeStep / easeInRatio);
 		lerpValue *= easeInRatio;
 	}
 	else if (easeOutTime != 0 && timeStep >= easeOutStart)
 	{
-		lerpValue = EaseOut((timeStep - easeOutStart) / easeOutRatio);
+		lerpValue = EaseOut(EaseOut_State,(timeStep - easeOutStart) / easeOutRatio);
 		lerpValue *= easeOutRatio;
 		lerpValue += easeOutStart;
 	}
@@ -101,7 +166,12 @@ void OrientTo::Update(float deltaTime)
 	{
 		lerpValue = timeStep;
 	}
-	model->transform.SetRotation(LerpObject(StartRotation, endRotation, lerpValue));
+
+
+	gameObject->GetTransform()->SetRotation(LerpObject(StartRotation, endRotation, lerpValue));
+
+
+//	gameObject->model->transform.SetRotation(LerpObject(StartRotation, endRotation, lerpValue));
 }
 
 void OrientTo::SetStarted(bool isStarted)
@@ -130,7 +200,8 @@ bool OrientTo::IsStarted()
 
 glm::vec3 OrientTo::GetModelRotaion()
 {
-	return model->transform.rotation;
+	//return model->transform.rotation;
+	return gameObject->GetTransform()->rotation;
 }
 
 glm::vec3 OrientTo::LerpObject(const glm::vec3& a, const glm::vec3& b, float t)
@@ -140,30 +211,3 @@ glm::vec3 OrientTo::LerpObject(const glm::vec3& a, const glm::vec3& b, float t)
 	return a + t * (b - a);
 }
 
-float OrientTo::EaseIn(float time)
-{
-	if (time < 0.0f)
-	{
-		time = 0;
-	}
-	else if (time > 1.0f)
-	{
-		time = 1.0f;
-	}
-
-	return 1 - std::cos((time * 3.14) / 2);
-}
-
-float OrientTo::EaseOut(float time)
-{
-	if (time < 0.0f)
-	{
-		time = 0;
-	}
-	else if (time > 1.0f)
-	{
-		time = 1.0f;
-	}
-
-	return std::sin((time * 3.14) / 2);
-}

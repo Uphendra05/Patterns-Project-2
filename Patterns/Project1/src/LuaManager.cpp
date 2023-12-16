@@ -9,6 +9,7 @@
 #include "Sphere.h"
 #include "RotateAlongAxisWithTime.h"
 
+
 LuaManager::LuaManager()
 {
 }
@@ -99,6 +100,22 @@ void LuaManager::FindModelBasedOnName(const std::string& name)
 	{
 		model = modelMap[name];
 	}
+	else
+	{
+		std::cout << " Cannot find Model with name " << name << std::endl;
+	}
+}
+
+void LuaManager::FindGameObjectBasedOnName(const std::string& name)
+{
+	if (!name.empty())
+	{
+		gameObject = gameObjectMap[name];
+	}
+	else
+	{
+		std::cout << " Cannot find game object with name " << name << std::endl;
+	}
 }
 
 void LuaManager::AddModelsInMap(Model* model)
@@ -117,10 +134,21 @@ Model* LuaManager::FindModel(const std::string& name)
 	}
 	else
 	{
-		std::cout << "Follow model is null" << std::endl;
+		std::cout << "Model is null (LUA MANAGER)" << std::endl;
 		return nullptr;
 	}
 	
+}
+
+GameObject* LuaManager::FindGameObject(const std::string& name)
+{
+	if (!name.empty())
+	{
+		return  gameObjectMap[name];
+	}
+
+	std::cout << "GAMEOBJECT is null (LUA MANAGER)" << std::endl;
+	return nullptr;
 }
 
 bool LuaManager::CheckLua(lua_State* L, int r)
@@ -139,6 +167,7 @@ bool LuaManager::CheckLua(lua_State* L, int r)
 	
 	return model;
 }
+
 
 
 
@@ -213,16 +242,16 @@ int LuaManager::LuaMoveToWrapper(lua_State* L)
 	switch (paramLength)
 	{
 	case 4: 
-		command = new MoveTo(GetInstance().model, target, time);
+		command = new MoveTo(GetInstance().gameObject, target, time);
 		break;
 	case 5:
 		easeInTime = static_cast<float>(lua_tonumber(L, 5));
-		command = new MoveTo(GetInstance().model, target, time, easeInTime);
+		command = new MoveTo(GetInstance().gameObject, target, time, easeInTime);
 		break;
 	case 6:
 		easeInTime = static_cast<float>(lua_tonumber(L, 5));
 		easeOutTime = static_cast<float>(lua_tonumber(L, 6));
-		command = new MoveTo(GetInstance().model, target, time, easeInTime, easeOutTime);
+		command = new MoveTo(GetInstance().gameObject, target, time, easeInTime, easeOutTime);
 		break;
 	}
 
@@ -244,23 +273,46 @@ int LuaManager::LuaOrientToWrapper(lua_State* L)
 	float time = static_cast<float>(lua_tonumber(L, 4));
 	float easeInTime;
 	float easeOutTime;
+	
+	EaseType easeInType = EaseType::NONE;
+	EaseType easeOutType = EaseType::NONE;
 
 	Command* command = nullptr;
 
 	switch (paramLength)
 	{
 	case 4:
-		command = new OrientTo(GetInstance().model, targetRotation, time);
+		command = new OrientTo(GetInstance().gameObject, targetRotation, time);
 		break;
 	case 5:
 		easeInTime = static_cast<float>(lua_tonumber(L, 5));
-		command = new OrientTo(GetInstance().model, targetRotation, time, easeInTime);
+		command = new OrientTo(GetInstance().gameObject, targetRotation, time, easeInTime);
 		break;
 	case 6:
 		easeInTime = static_cast<float>(lua_tonumber(L, 5));
 		easeOutTime = static_cast<float>(lua_tonumber(L, 6));
-		command = new OrientTo(GetInstance().model, targetRotation, time, easeInTime, easeOutTime);
+		command = new OrientTo(GetInstance().gameObject, targetRotation, time, easeInTime, easeOutTime);
 		break;
+
+	case 7:
+		easeInTime = static_cast<float>(lua_tonumber(L, 5));
+		easeOutTime = static_cast<float>(lua_tonumber(L, 6));
+
+		 easeInType = GetEaseTypeWithName(lua_tostring(L, 7));
+	
+		 command = new OrientTo(GetInstance().gameObject, targetRotation, time, easeInTime, easeOutTime, easeInType);
+		break;
+
+	case 8:
+		easeInTime = static_cast<float>(lua_tonumber(L, 5));
+		easeOutTime = static_cast<float>(lua_tonumber(L, 6));
+
+		easeInType = GetEaseTypeWithName(lua_tostring(L, 7));
+		easeOutType = GetEaseTypeWithName(lua_tostring(L, 8));
+
+		command = new OrientTo(GetInstance().gameObject, targetRotation, time, easeInTime, easeOutTime, easeInType, easeOutType);
+		break;
+
 	}
 
 	CommandManager::GetInstance().AddCommands(command);
@@ -282,6 +334,8 @@ int LuaManager::LuaScaleToWrapper(lua_State* L)
 
 	Model* model = GetInstance().model;
 
+	GameObject* gameObject = GetInstance().gameObject;
+
 	Command* command = new ScaleTo(model, targetScale, time);
 
 	CommandManager::GetInstance().AddCommands(command);
@@ -295,7 +349,9 @@ int LuaManager::LuaSetGameObject(lua_State* L)
 
 	std::string gameObjectName = lua_tostring(L, 1);
 	std::cout << "GameObject name :" << gameObjectName << std::endl;
-	GetInstance().FindModelBasedOnName(gameObjectName);
+
+	GetInstance().FindModelBasedOnName(gameObjectName);          // ModelName
+	GetInstance().FindGameObjectBasedOnName(gameObjectName);     // GameObject
 
 	return 0;
 }

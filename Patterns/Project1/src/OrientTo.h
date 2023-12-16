@@ -1,6 +1,8 @@
 #pragma once
 #include "model.h"
+#include "GameObject.h"
 #include "Command.h"
+#include "EasingTechiques.h"
 class OrientTo : public Command
 {
 public:
@@ -12,6 +14,17 @@ public:
 	OrientTo(Model*& model, const glm::vec3& endRotation, const float& time);
 	OrientTo(Model*& model, const glm::vec3& endRotation, const float& time, const float& easeIn);
 	OrientTo(Model*& model, const glm::vec3& endRotation, const float& time, const float& easeIn, const float& easeOut);
+
+
+	OrientTo(GameObject*& gameobject, const glm::vec3& endRotation);
+	OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time);
+	OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time, const float& easeIn);
+	OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time, const float& easeIn, const float& easeOut);
+	OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time, const float& easeIn, const float& easeOut,
+		EaseType &easeInType);
+
+	OrientTo(GameObject*& gameobject, const glm::vec3& endRotation, const float& time, const float& easeIn, const float& easeOut,
+		EaseType& easeInType, EaseType& easeOutType);
 
 	void SetModel(Model& model);
 
@@ -26,15 +39,14 @@ public:
 	glm::vec3 GetModelRotaion();
 	glm::vec3 LerpObject(const glm::vec3& a, const glm::vec3& b, float t);
 
+	EaseType EaseIn_State = EaseType::NONE;
+	EaseType EaseOut_State = EaseType::NONE;
 
-
-	static float EaseIn(float time);
-	static float EaseOut(float time);
 
 private:
 
 	Model* model;
-
+	GameObject* gameObject;
 	bool isAnimationCompleted = false;
 
 	float easeInTime = 0;

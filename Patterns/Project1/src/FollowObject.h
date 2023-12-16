@@ -1,6 +1,7 @@
 #pragma once
-#include "model.h"
+//#include "model.h"
 #include "Command.h"
+#include "GameObject.h"
 
 class FollowObject : public Command
 {
@@ -8,6 +9,7 @@ public:
 	FollowObject();
 	FollowObject(float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset);
 	FollowObject(Model* currentModel, Model* followModel,float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset);
+	FollowObject(GameObject* currentGameObject, GameObject* followObject,float maxFollowSpeed, float accelerationRange, float decelerationRange, float followDistance, glm::vec3 followOffset);
 	~FollowObject();
 
 	 void Start() override;
@@ -31,6 +33,7 @@ private:
 	glm::vec3 currentPosition;
 	glm::vec3 targetPosition;
 
+	GameObject* gameobject;
 	float CalculateFollowSpeed(float distanceToTarget);
 };
 

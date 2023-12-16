@@ -8,39 +8,103 @@ MoveTo::MoveTo() : model(nullptr)
 	this->endPosition = glm::vec3(0);
 }
 
-MoveTo::MoveTo( Model*& model , const glm::vec3& targetPosition)
+MoveTo::MoveTo( Model*& model , const glm::vec3& endPosition)
 {
 	this->model = model;
 	this->StartPosition = glm::vec3(0);
-	this->endPosition = targetPosition;
+	this->endPosition = endPosition;
 
 }
 
-MoveTo::MoveTo(Model*& model, const glm::vec3& targetPosition, const float& time)
+MoveTo::MoveTo(Model*& model, const glm::vec3& endPosition, const float& time)
 {
     this->model = model;
     this->StartPosition = glm::vec3(0);
-    this->endPosition = targetPosition;
+    this->endPosition = endPosition;
     this->time = time;
 }
 
-MoveTo::MoveTo(Model*& model, const glm::vec3& targetPosition, const float& time, const float& easeIn)
+MoveTo::MoveTo(Model*& model, const glm::vec3& endPosition, const float& time, const float& easeIn)
 {
 	this->model = model;
 	this->StartPosition = glm::vec3(0);
-	this->endPosition = targetPosition;
+	this->endPosition = endPosition;
 	this->time = time;
 	this->easeInTime = easeIn;
 }
 
-MoveTo::MoveTo(Model*& model, const glm::vec3& targetPosition, const float& time, const float& easeIn, const float& easeOut)
+MoveTo::MoveTo(Model*& model, const glm::vec3& endPosition, const float& time, const float& easeIn, const float& easeOut)
 {
 	this->model = model;
 	this->StartPosition = glm::vec3(0);
-	this->endPosition = targetPosition;
+	this->endPosition = endPosition;
 	this->time = time;
 	this->easeInTime = easeIn;
 	this->easeOutStart = easeOut;
+}
+
+MoveTo::MoveTo(GameObject*& gameObject, const glm::vec3& endPosition)
+{
+	this->gameObject = gameObject;
+	this->StartPosition = glm::vec3(0);
+	this->endPosition = endPosition;
+}
+
+MoveTo::MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time)
+{
+	this->gameObject = gameObject;
+	this->StartPosition = glm::vec3(0);
+	this->endPosition = endPosition;
+	this->time = time;
+}
+
+MoveTo::MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time, const float& easeIn)
+{
+	this->gameObject = gameObject;
+	this->StartPosition = glm::vec3(0);
+	this->endPosition = endPosition;
+	this->time = time;
+	this->easeInTime = easeIn;
+
+	this->model = nullptr;
+
+}
+
+MoveTo::MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time, const float& easeIn, const float& easeOut)
+{
+	this->gameObject = gameObject;
+	this->StartPosition = glm::vec3(0);
+	this->endPosition = endPosition;
+	this->time = time;
+	this->easeInTime = easeIn;
+	this->easeOutTime = easeOut;
+	this->model = nullptr;
+}
+
+MoveTo::MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time, const float& easeIn, EaseType& easInType)
+{
+	this->gameObject = gameObject;
+	this->StartPosition = glm::vec3(0);
+	this->endPosition = endPosition;
+	this->time = time;
+	this->easeInTime = easeIn;
+	this->EaseIn_State = easInType;
+	this->model = nullptr;
+}
+
+MoveTo::MoveTo(GameObject*& gameObject, const glm::vec3& endPosition, const float& time, const float& easeIn, const float& easeOut, EaseType& easInType, EaseType& easOutType)
+{
+	this->gameObject = gameObject;
+	this->StartPosition = glm::vec3(0);
+	this->endPosition = endPosition;
+	this->time = time;
+	this->easeInTime = easeIn;
+	this->easeOutTime = easeOut;
+
+	this->EaseIn_State = easInType;
+	this->EaseOut_State = easOutType;
+
+	this->model = nullptr;
 }
 
 MoveTo::~MoveTo()
@@ -66,10 +130,10 @@ void MoveTo::Start()
 
 	isAnimationCompleted = false;
 	std::cout << "MOVE to start" << std::endl;
-	if (!model->isVisible)
-	{
-		model->isVisible = true;
-	}
+	//if (!model->isVisible)
+	//{
+	//	model->isVisible = true;
+	//}
 }
 
 void MoveTo::Update(float deltaTime)
@@ -88,12 +152,12 @@ void MoveTo::Update(float deltaTime)
 	}
 	else if (easeInTime != 0 && timeStep <= easeInRatio)
 	{
-		lerpValue = EaseIn(timeStep / easeInRatio);
+		lerpValue = EaseIn( EaseIn_State, timeStep / easeInRatio);
 		lerpValue *= easeInRatio;
 	}
 	else if (easeOutTime != 0 && timeStep >= easeOutStart)
 	{
-		lerpValue = EaseOut((timeStep - easeOutStart) / easeOutRatio);
+		lerpValue = EaseOut(EaseOut_State,(timeStep - easeOutStart) / easeOutRatio);
 		lerpValue *= easeOutRatio;
 		lerpValue += easeOutStart;
 	}
@@ -101,7 +165,9 @@ void MoveTo::Update(float deltaTime)
 	{
 		lerpValue = timeStep;
 	}
-	model->transform.SetPosition(LerpObject(StartPosition, endPosition, lerpValue));
+	//model->transform.SetPosition(LerpObject(StartPosition, endPosition, lerpValue));
+
+	gameObject->GetTransform()->SetPosition(LerpObject(StartPosition, endPosition, lerpValue));
 }
 
 void MoveTo::SetStarted(bool isStarted)
@@ -130,7 +196,7 @@ bool MoveTo::IsStarted()
 
 glm::vec3 MoveTo::GetModelPosition()
 {
-	return model->transform.position;
+	return gameObject->GetTransform()->position;
 }
 
 glm::vec3 MoveTo::LerpObject(const glm::vec3& a, const glm::vec3& b, float t)
@@ -140,30 +206,5 @@ glm::vec3 MoveTo::LerpObject(const glm::vec3& a, const glm::vec3& b, float t)
 	return a + t * (b - a);
 }
 
-float MoveTo::EaseIn(float time)
-{
-	if (time < 0.0f)
-	{
-		time = 0;
-	}
-	else if (time > 1.0f)
-	{
-		time = 1.0f;
-	}
 
-	return 1 - std::cos((time * 3.14) / 2);
-}
 
-float MoveTo::EaseOut(float time)
-{
-	if (time < 0.0f)
-	{
-		time = 0;
-	}
-	else if (time > 1.0f)
-	{
-		time = 1.0f;
-	}
-
-	return std::sin((time * 3.14) / 2);
-}

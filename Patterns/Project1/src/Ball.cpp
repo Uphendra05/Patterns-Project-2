@@ -1,14 +1,17 @@
 
 #include "Ball.h"
+#include "Singleton.h"
 
-Ball::Ball(GraphicsRender& render, Shader* shader, PhysicsEngine& engine)
+Ball::Ball()
 {
-	this->render = &render;
-	this->defaultshader = shader;
-	this->engine = &engine;
 
-	m_LuaHandler = new LuaHandler("Sphere.lua");
-	m_LuaHandler->RegisterFunctionInScript();
+
+	this->render = Singleton::GetInstance().GetRenderer();
+	this->defaultshader = Singleton::GetInstance().GetDefaultShader();
+	this->engine = Singleton::GetInstance().GetPhysicsEngine();
+	Singleton::GetInstance().AddGameObject(this);
+
+	LoadModel();
 }
 
 Ball::~Ball()
@@ -18,12 +21,13 @@ Ball::~Ball()
 void Ball::LoadModel()
 {
 	model = new Model("Models/DefaultSphere/Sphere.ply");
-	model->id = "Ball";
-	model->transform.SetPosition(glm::vec3(0, 0, 0));
+	model->id = "BALL";
+	SetGameObjectId(model->id);
+	model->transform.SetPosition(glm::vec3(0));
 	render->AddModelsAndShader(model, defaultshader);
 
 
-	ballPhysics = new PhysicsObject(model);
+	/*ballPhysics = new PhysicsObject(model);
 
 	ballPhysics->Initialize(SPHERE, true, DYNAMIC);
 	ballPhysics->gravityValue = 0;
@@ -33,8 +37,13 @@ void Ball::LoadModel()
 
 		});
 
-	engine->AddPhysicsObjects(ballPhysics);
+	engine->AddPhysicsObjects(ballPhysics);*/
 
 
-	m_LuaHandler->ExecuteScirpt(model);  // Executing Lua 
+	//m_LuaHandler->ExecuteScirpt(model);  // Executing Lua 
+}
+
+Transform* Ball::GetTransform()
+{
+	return &model->transform;
 }

@@ -21,9 +21,9 @@
 #include "CommandManager.h"
 #include "SpaceShip.h"
 #include "Ball.h"
-#include "AsteroidGroups.h"
-#include "Asteroid.h"
-#include "FighterJet.h"
+
+
+#include "GameObject.h"
 struct ModelData
 {
 
@@ -90,10 +90,11 @@ private:
 	Model* defaultBox;
 	Model* CityModel;
 
-	LoadModelsExternal m_loadModels;
 
 	PhysicsEngine PhysicsEngine;
 	PhysicsObject* cityPhysics;
+
+	std::vector<GameObject*> GameObjectList;
 
 
 	SpaceShip* spaceshipEntity;
