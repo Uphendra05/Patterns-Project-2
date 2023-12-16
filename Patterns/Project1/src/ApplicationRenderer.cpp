@@ -104,6 +104,7 @@ void ApplicationRenderer::Start()
 
     Singleton::GetInstance().SetRendererPhysicsEngineAndDefaultShader(render, defaultShader, PhysicsEngine);
 
+    Singleton::GetInstance().SetCamera(camera);
    
 
     camera.transform.SetPosition(glm::vec3(0, 0, -20));

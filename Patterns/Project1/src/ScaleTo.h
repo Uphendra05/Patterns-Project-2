@@ -1,11 +1,12 @@
 #pragma once
 #include "Command.h"
-#include "model.h"
+#include "GameObject.h"
 
 class ScaleTo :public Command
 {
 public:
 	ScaleTo(Model*& model, const glm::vec3& Scale, const float& time);
+	ScaleTo(GameObject*& gameobject, const glm::vec3& Scale, const float& time);
 	~ScaleTo();
 
 
@@ -20,6 +21,7 @@ public:
 private:
 
 	Model* model;
+	GameObject* gameObjectt;
 	glm::vec3 targetScale;
 	float time;
 

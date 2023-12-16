@@ -145,6 +145,7 @@
     <ClCompile Include="..\Dependencies\glad\src\glad.c" />
     <ClCompile Include="src\Asteroid.cpp" />
     <ClCompile Include="src\AsteroidGroups.cpp" />
+    <ClCompile Include="src\CameraObject.cpp" />
     <ClCompile Include="src\FighterJet.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\MoveAlongOneAxisWithTime.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="..\stb_image.h" />
     <ClInclude Include="src\Asteroid.h" />
     <ClInclude Include="src\AsteroidGroups.h" />
+    <ClInclude Include="src\CameraObject.h" />
     <ClInclude Include="src\EasingTechiques.h" />
     <ClInclude Include="src\FighterJet.h" />
     <ClInclude Include="src\GameObject.h" />

@@ -22,6 +22,11 @@ void Singleton::SetRendererPhysicsEngineAndDefaultShader(GraphicsRender& render,
 
 }
 
+void Singleton::SetCamera(Camera& camera)
+{
+	this->camera = &camera;
+}
+
 GraphicsRender* Singleton::GetRenderer()
 {
 	return renderer;
@@ -35,6 +40,11 @@ Shader* Singleton::GetDefaultShader()
 PhysicsEngine* Singleton::GetPhysicsEngine()
 {
 	return physicsEngine;
+}
+
+Camera* Singleton::GetCamera()
+{
+	return camera;
 }
 
 std::vector<GameObject*> Singleton::GetGameObjectList()

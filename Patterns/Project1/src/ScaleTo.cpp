@@ -7,6 +7,13 @@ ScaleTo::ScaleTo(Model*& model, const glm::vec3& Scale, const float& time)
 	this->time = time;
 }
 
+ScaleTo::ScaleTo(GameObject*& gameobject, const glm::vec3& Scale, const float& time)
+{
+	this->gameObjectt = gameobject;
+	this->targetScale = Scale;
+	this->time = time;
+}
+
 ScaleTo::~ScaleTo()
 {
 }
@@ -14,7 +21,7 @@ ScaleTo::~ScaleTo()
 void ScaleTo::Start()
 {
 	timeStep = 0;
-	model->transform.SetScale(targetScale);
+	gameObjectt->GetTransform()->SetScale(targetScale);
 }
 
 void ScaleTo::Update(float deltatime)
@@ -43,7 +50,8 @@ void ScaleTo::Update(float deltatime)
 	//}
 	//model->transform.SetScale(LerpObject(currentScale, targetScale, lerpValue));
 
-	model->transform.SetScale(targetScale);
+	//model->transform.SetScale(targetScale);
+	gameObjectt->GetTransform()->SetScale(targetScale);
 }
 
 void ScaleTo::SetStarted(bool isStarted)
@@ -52,7 +60,7 @@ void ScaleTo::SetStarted(bool isStarted)
 
 bool ScaleTo::IsComplete()
 {
-	if (model->transform.scale == targetScale)
+	if (gameObjectt->GetTransform()->scale == targetScale)
 	{
 		return true;
 	}

@@ -2,7 +2,7 @@
 #include "GraphicsRender.h"
 #include "PhysicsEngine.h"
 #include "GameObject.h"
-
+#include "Camera.h"
 class Singleton
 {
 public:
@@ -12,12 +12,15 @@ public:
 	static Singleton& GetInstance();
 
 	void SetRendererPhysicsEngineAndDefaultShader(GraphicsRender& render, Shader* defaultShader, PhysicsEngine& engine );
-	
+	void SetCamera(Camera& camera);
+
 	GraphicsRender* GetRenderer();
 
 	Shader* GetDefaultShader();
 
 	PhysicsEngine* GetPhysicsEngine();
+
+	Camera* GetCamera();
 
 	std::vector<GameObject*> GetGameObjectList();
 	void AddGameObject(GameObject* gameObject);
@@ -29,6 +32,8 @@ private:
 	GraphicsRender* renderer;
 	PhysicsEngine* physicsEngine;
 	Shader* defaultShader;
+	Camera* camera;
+
 	std::vector<GameObject*> GameObejctsList;
 
 };
